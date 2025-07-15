@@ -16,7 +16,7 @@ const routes: Routes = [
         ]
     },
     { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
-    { path: '**', redirectTo: '/auth/login' },
+    { path: '**', redirectTo: '/imagerefer' },
 ]
 
 @NgModule({
