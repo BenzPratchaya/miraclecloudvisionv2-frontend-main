@@ -1,0 +1,956 @@
+
+
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<div class="grid">
+				<div class="col-12 md:col-10">
+				  <h3>User List</h3>
+				</div>
+				<div class="col-12 md:col-2">
+				  <p-button class="" label="Add New User" icon="fa fa-plus" (click)="addNewUser()"></p-button>
+				</div>
+			  </div>
+			<!-- <h5>User List</h5> -->
+			<p-table #dt1 [value]="userList" dataKey="id" [rows]="10" [rowHover]="true" styleClass="p-datatable-gridlines"
+       [paginator]="true" [globalFilterFields]="['FullName','EmailOfficial','OrgName','OrgType','ParentOrgName','HospitalType','PhoneMobile','Status','JobTypeName']" 
+       responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Full Name
+								<p-columnFilter type="text" field="FullName" display="menu" placeholder="Search by Full Name"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Email
+								<p-columnFilter type="text" field="EmailOfficial" display="menu" placeholder="Search by Email"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Org Name
+								<p-columnFilter type="text" field="EmailOfficial" display="menu" placeholder="Search by Org Name"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Org Type
+								<p-columnFilter type="text" field="OrgType" display="menu" placeholder="Search by Parent Org Type"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Parent Org
+								<p-columnFilter type="text" field="ParentOrgName" display="menu" placeholder="Search by Parent Org"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Hospital Type
+								<p-columnFilter type="text" field="HospitalType" display="menu" placeholder="Search by  Hospital Type"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Mobile No
+								<p-columnFilter type="text" field="PhoneMobile" display="menu" placeholder="Search by Mobile No"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Created On
+								<!-- <p-columnFilter type="text" field="CreatedOn" display="menu" placeholder="Search by Org Prefix"></p-columnFilter> -->
+							</div>
+						</th>
+            <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Status
+								<p-columnFilter type="text" field="Status" display="menu" placeholder="Search by Org Prefix"></p-columnFilter>
+							</div>
+						</th>
+            <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                Role Name
+								<p-columnFilter type="text" field="JobTypeName" display="menu" placeholder="Search by Org Prefix"></p-columnFilter>
+							</div>
+						</th>
+            <th [style.width.px]="120">Action</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-org>
+					<tr>
+						<td>
+							{{org.FullName}}
+						</td>
+						<td>
+							{{org.EmailOfficial}}
+						</td>
+						<td>
+							{{org.OrgName}}
+						</td>
+						<td>
+							{{org.OrgType}}
+						</td>
+						<td>
+							{{org.ParentOrgName}}
+						</td>
+						<td>
+							{{org.HospitalType}}
+						</td>
+						<td>
+							{{org.PhoneMobile}}
+						</td>
+            <td>
+							{{org.CreatedOn| date}}
+						</td>
+            <td>
+              <span *ngIf="org.Status== 'A'">Approved</span>
+              <!-- <div *ngIf="col.field === 'HospitalType'">
+                {{ rowData[col.field] }}
+              </div> -->
+              <span *ngIf="org.Status == 'P'" class="flex align-items-center">
+                <span pButton pRipple (click)="openPendingModal(org)" class="p-button-secondary three-dot-btn"
+                  icon="pi pi-ellipsis-v" title="Approve user"></span>
+    
+                &nbsp;<span> Pending</span>
+              </span>
+
+						</td>
+            <td>
+							{{org.JobTypeName}}
+						</td>
+            <td>
+              <button *ngIf="org.Status== 'A'" type="button" [ngStyle]="{ 'min-width': '100px' }" pButton
+                icon="fa fa-pencil-square-o" class="ui-button-info" title="Update user" label="Update" pButton
+                (click)="openUserUpdateModal(org)"></button>
+            </td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+</div>
+
+<!-- Update User / Approve User Pop UP -->
+<p-dialog header="{{ approveUserHeader ? 'Approve User' : 'Update User' }}" [(visible)]="userInfoConfirm"
+  (onHide)="closeUpdateModal()" [modal]="true" [responsive]="true" [minY]="70" [maximizable]="false"
+  [style]="{ width: '80vw', height: '720px' }" [breakpoints]="{ '960px': '75vw' }">
+  <ng-container *ngIf="userInfoConfirm">
+    <p-tabView>
+      <p-tabPanel header="User Infomation">
+        <div class="user-approval-form" *ngIf="selectedOrganizationForUpdateUser != null">
+          <div class="p-fluid">
+            <div class="grid">
+              <div class="col-10 col-offset-1">
+                <div class="grid">
+
+                  <div class="col-12 lg:col-10 md:col-10">
+                    <div class="grid">
+                      <div class="col-12 lg:col-5 md:col-5">
+                        <div class="field grid">
+                          <label htmlfor="OrgType" class="col-12 mb-2 md:col-4 md:mb-0">Org Type<span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown appendTo="body" [options]="orgTypeList" [(ngModel)]="selectedOrgType"
+                              (onChange)="
+                                loadSelectedOrgTypeOrganizationForApproveAndUpdate()
+                              " placeholder="Select an Org Type" optionLabel="label" [showClear]="true"
+                              (onClear)="onClearOrgType()"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">User Role <span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown appendTo="body" [options]="userTypes" [filter]="true" optionLabel="JobTypeName"
+                              placeholder="Select Role" [disabled]="selectedOrganizationForUpdateUser.OrgId==0"
+                              [(ngModel)]="userTypeStatus" (onClear)="onClearUserRoleForPenDingOrUpDate()"
+                              (onChange)="onchangeUserRoleForPenDingOrUpDate()" [showClear]="true"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">First Name <span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText [(ngModel)]="selectedUser.Fname" autocomplete="off" readonly
+                              onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Phone No<span
+                              class="red">*</span>
+                          </label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText [(ngModel)]="selectedUser.PhoneMobile" placeholder="Phone No."
+                              autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">
+                            Password</label>
+                          <div class="col-12 md:col-8">
+                            <input placeholder="Password" type="password" pInputText [(ngModel)]="selectedUser.Password"
+                              autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="MedicalLincence" class="col-12 mb-2 md:col-4 md:mb-0">Medical License</label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText id="medicalLincence"
+                              [(ngModel)]="selectedUser.MedicalLincence" placeholder="Medical License"
+                              name="medicalLincence" autocomplete="off" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="country" class="col-12 mb-2 md:col-4 md:mb-0">Country<span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown [options]="countryList" optionLabel="CountryName" [(ngModel)]="selectedCountry"
+                              (onChange)="loadProvince()" placeholder="Select a country" [showClear]="true"
+                              (onClear)="onClearCountry()">
+                            </p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="lastname" class="col-12 mb-2 md:col-4 md:mb-0">District</label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown [options]="districtList" [(ngModel)]="selectedDistrict"
+                              (onChange)="loadSubDistrict()" placeholder="Select a District" optionLabel="DistrictName"
+                              [showClear]="true" (onClear)="onClearDistrict()"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="Subspecialties" class="col-12 mb-2 md:col-4 md:mb-0">Subspecialties</label>
+                          <div class="col-12 md:col-8">
+                            <p-multiSelect [options]="SubSpecialtyList" [(ngModel)]="selectedSubSpecialty"
+                              placeholder="Select Subspecialties" optionLabel="SubspecialtyName" appendTo="body"
+                              [showClear]="true" [disabled]="!isVisibleSubspeciality"></p-multiSelect>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 lg:col-2 md:col-2"></div>
+
+                      <div class="col-12 lg:col-5 md:col-5">
+                        <div class="field grid">
+                          <label htmlfor="organization" class="col-12 mb-2 md:col-4 md:mb-0">Organization<span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown appendTo="body" [options]="orgList"
+                              [(ngModel)]="selectedOrganizationForUpdateUser.OrgId" placeholder="Select an Organization"
+                              optionLabel="OrgName" optionValue="OrgId"
+                              (onChange)="onChangeOrganizationForApproveAndUpdate()" (onClear)="onClearOrganization()"
+                              [showClear]="true"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">User Level
+                            <span [ngStyle]="{
+                                visibility: !isVisibleUserLevel ? 'hidden' : 'visible'
+                              }" class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown appendTo="body" [options]="userLevels" [filter]="true"
+                              optionLabel="JobTypeLevelName" placeholder="Select Level" [(ngModel)]="selectedUserLevel"
+                              (onClear)="onClearJobTypeLevelForPenDingOrUpDate()"
+                              (onChange)="onchangeJobTypeLevelForPenDingOrUpDate()" [disabled]="!isVisibleUserLevel"
+                              [showClear]="true"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Last Name <span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText [(ngModel)]="selectedUser.Lname" autocomplete="off" readonly
+                              onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Email <span
+                              class="red">*</span></label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText [(ngModel)]="selectedUser.EmailOfficial" autocomplete="off"
+                              readonly onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="Status" class="col-12 mb-2 md:col-4 md:mb-0">Status</label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown appendTo="body" [options]="status" [(ngModel)]="userStatus" placeholder="Select"
+                              [showClear]="true" optionLabel="label" [filter]="true"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="LineId" class="col-12 mb-2 md:col-4 md:mb-0">Line Id</label>
+                          <div class="col-12 md:col-8">
+                            <input type="text" pInputText placeholder="Line Id" [(ngModel)]="selectedUser.LineId"
+                              autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="province" class="col-12 mb-2 md:col-4 md:mb-0">Province</label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown [options]="ProvinceList" [(ngModel)]="selectedProvince"
+                              (onChange)="loadDistrict()" placeholder="Select a Province" optionLabel="ProvinceName"
+                              [showClear]="true" (onClear)="onClearProvince()"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="lastname" class="col-12 mb-2 md:col-4 md:mb-0">Sub-District</label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown [options]="SubDistrictList" [(ngModel)]="selectedSubDistrict"
+                              placeholder="Select a Sub-District" optionLabel="SubdistrictName"
+                              [showClear]="true"></p-dropdown>
+                          </div>
+                        </div>
+
+                        <div class="field grid">
+                          <label htmlfor="ZipCode" class="col-12 mb-2 md:col-4 md:mb-0">Zip Code</label>
+                          <div class="col-12 md:col-8">
+                            <p-dropdown [options]="postalCodeList" optionLabel="PalceNameAndPostalCode"
+                              [(ngModel)]="selectedZipCode" placeholder="Select a Zip Code"
+                              [showClear]="true"></p-dropdown>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 lg:col-2 md:col-2">
+                    <div class="use-info-profile-img-wrap">
+                      <img src="{{prorileUrl}}" alt="Profile Photo">
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="modal-submit-btn flex justify-content-around align-items-center">
+                      <div *ngIf="approveUserHeader" class="mr-2">
+                        <!-- (click)="approveUser(selectedUser)" -->
+                        <button *ngIf="selectedUser.Status == 'P'" [disabled]="
+                            !selectedUser.Fname ||
+                            !selectedUser.Lname ||
+                            !selectedUser.Fname ||
+                            !selectedUser.PhoneMobile ||
+                            !selectedUser.EmailOfficial ||
+                            !userStatus ||
+                            !userTypeStatus ||
+                            !selectedCountry ||
+                            !selectedOrgType ||
+                            !selectedOrganizationForUpdateUser.OrgId
+                          " (click)="approveUser(selectedUser)" type="submit" pButton icon="fa fa-pencil-square-o" class="ui-button-info mr-2"
+                           label="Approve"></button>
+                      </div>
+                      <!-- (click)="updateUser(selectedUser)" -->
+                      <button [disabled]="
+                          !selectedUser.Fname ||
+                          !selectedUser.Lname ||
+                          !selectedUser.PhoneMobile ||
+                          !selectedUser.EmailOfficial ||
+                          !userStatus ||
+                          !userTypeStatus ||
+                          !selectedCountry ||
+                          !selectedOrgType ||
+                          !selectedOrganizationForUpdateUser.OrgId ||
+                          userLevels?.length > 0
+                            ? !selectedUserLevel
+                            : selectedUserLevel
+                        " (click)="updateUser(selectedUser)" type="submit" pButton icon="fa fa-pencil-square-o" class="ui-button-info"
+                         label="Update"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Documents">
+        <app-user-list-document [userValueSendForChild]="userValueSendForChild"></app-user-list-document>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-container>
+</p-dialog>
+
+<!-- ADD USER TAB START-->
+<p-dialog header="Add User" [(visible)]="displayAddUserPopUp" [modal]="true" (onHide)="closeAddUserModal()"
+  [responsive]="true" [minY]="70" [maximizable]="false" [style]="{ width: '80vw', height: '720px' }"
+  [breakpoints]="{ '960px': '75vw' }">
+  <p-tabView>
+    <p-tabPanel header="User Infomation">
+      <div class="custom-card">
+        <form [formGroup]="newUserForm">
+          <div class="p-fluid p-formgrid grid">
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="OrgType" class="col-12 mb-2 md:col-4 md:mb-0">Org Type<span class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" [options]="orgTypeList" formControlName="OrgType"
+                    (onChange)="loadSelectedOrgTypeOrganization()" placeholder="Select an Org Type" optionLabel="label"
+                    [showClear]="true" optionValue="value" (onClear)="onClearOrgType()"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="organization" class="col-12 mb-2 md:col-4 md:mb-0">Organization<span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" [options]="orgList" formControlName="Organization"
+                    placeholder="Select an Organization" optionLabel="OrgName" optionValue="OrgId"
+                    [showClear]="true"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-2"></div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">User Role <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" formControlName="userRole" [options]="userTypesforadd" [filter]="true"
+                    [disabled]="!newUserForm.controls['Organization'].valid" optionLabel="JobTypeName"
+                    (onChange)="onchangeUserRole()" (onClear)="onClearUserRole()" placeholder="Select Role"
+                    [showClear]="true"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">User Level
+                  <span [ngStyle]="{
+                      visibility: !isVisibleUserLevel ? 'hidden' : 'visible'
+                    }" class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" formControlName="userLevel" [options]="userLevels" [filter]="true"
+                    optionLabel="JobTypeLevelName" placeholder="Select Level" [showClear]="true"
+                    [disabled]="!isVisibleUserLevel"></p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-2"></div>
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">First Name <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="text" id="firstName" pInputText placeholder="First Name" formControlName="firstName"
+                    [(ngModel)]="userEnty.Fname" name="firstName" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                  <span class="ng-dirty ng-invalid ui-inputtext text-danger" *ngIf="
+                      newUserForm.controls['firstName'].touched &&
+                      newUserForm.controls['firstName'].errors?.['required']
+                    ">
+                    This field is required
+                  </span>
+                  <div *ngIf="
+                      newUserForm.controls['firstName'].invalid &&
+                      newUserForm.controls['firstName'].errors?.['nameError']
+                    " class="ng-dirty ng-invalid ui-inputtext text-danger">
+                    Provide valid name.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="lastName" class="col-12 mb-2 md:col-4 md:mb-0">Last Name <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="text" id="lastName" pInputText placeholder="Last Name" formControlName="lastName"
+                    [(ngModel)]="userEnty.Lname" name="lastName" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                  <span class="ng-dirty ng-invalid ui-inputtext text-danger" *ngIf="
+                      newUserForm.controls['lastName'].touched &&
+                      newUserForm.controls['lastName'].errors?.['required']
+                    ">
+                    This field is required
+                  </span>
+                  <div *ngIf="
+                      newUserForm.controls['lastName'].invalid &&
+                      newUserForm.controls['lastName'].errors?.['nameError']
+                    " class="ng-dirty ng-invalid ui-inputtext text-danger">
+                    Provide valid name.
+                  </div>
+                  <!-- <div
+                    *ngIf="
+                      !newUserForm.controls['lastName'].valid &&
+                      newUserForm.controls['lastName'].dirty &&
+                      newUserForm.controls['lastName'].errors?.['trimError']
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    This field is required
+                  </div>
+
+                  <div
+                    *ngIf="
+                      !newUserForm.controls['lastName'].valid &&
+                      newUserForm.controls['lastName'].dirty &&
+                      newUserForm.controls['lastName'].errors.nameError
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    Provide valid name.
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-2"></div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="phoneNo" class="col-12 mb-2 md:col-4 md:mb-0">Phone No <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="text" id="phoneNo" pInputText placeholder="Phone No" formControlName="phoneNo"
+                    [(ngModel)]="userEnty.PhoneMobile" name="phoneNo" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                  <span class="ng-dirty ng-invalid ui-inputtext text-danger" *ngIf="
+                      newUserForm.controls['phoneNo'].touched &&
+                      newUserForm.controls['phoneNo'].errors?.['required']
+                    ">
+                    This field is required
+                  </span>
+                  <div class="ng-dirty ng-invalid ui-inputtext text-danger" *ngIf="
+                      newUserForm.controls['phoneNo'].invalid &&
+                      newUserForm.controls['phoneNo'].errors?.['phoneNumberError']
+                    ">
+                    Provide valid phone no.
+                  </div>
+
+                  <!-- <div
+                    *ngIf="
+                      !newUserForm.controls['phoneNo'].valid &&
+                      newUserForm.controls['phoneNo'].dirty &&
+                      newUserForm.controls['phoneNo'].errors?.['trimError']
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    This field is required
+                  </div>
+
+                  <div
+                    *ngIf="
+                      !newUserForm.controls['phoneNo'].valid &&
+                      newUserForm.controls['phoneNo'].dirty &&
+                      newUserForm.controls['phoneNo'].errors.phoneNumberError
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    Provide valid phone no.
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Email <span class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="text" id="email" pInputText class="ui-inputtext" placeholder="Email"
+                    formControlName="email" [(ngModel)]="userEnty.EmailOfficial" name="email" a autocomplete="off"
+                    readonly onfocus="this.removeAttribute('readonly');" (keyup)="checkEmail($event)" />
+                  <span class="ng-dirty ng-invalid ui-inputtext text-danger" *ngIf="
+                      newUserForm.controls['email'].touched &&
+                      newUserForm.controls['email'].errors?.['required']
+                    ">
+                    This field is required
+                  </span>
+                  <div *ngIf="
+                      newUserForm.controls['email'].invalid &&
+                      newUserForm.controls['email'].errors?.['nameError']
+                    " class="ng-dirty ng-invalid ui-inputtext text-danger">
+                    Provide valid email.
+                  </div>
+                  <div *ngIf="!emailExists" class="ng-dirty ng-invalid ui-inputtext text-danger">
+                    Email already exists.
+                  </div>
+
+                  <!-- <div
+                    *ngIf="
+                      !newUserForm.controls['email'].valid &&
+                      newUserForm.controls['email'].dirty &&
+                      newUserForm.controls['email'].errors?.['trimError']
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    This field is required
+                  </div>
+
+                  <div
+                    *ngIf="
+                      !newUserForm.controls['email'].valid &&
+                      newUserForm.controls['email'].dirty &&
+                      newUserForm.controls['email'].errors.emailError
+                    "
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    Provide valid email.
+                  </div>
+                  <div
+                    *ngIf="!emailExists"
+                    class="ui-message ui-messages-error ui-corner-all"
+                  >
+                    Email already exists.
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-2"></div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Password <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="password" id="newPassword" pInputText class="ui-inputtext" placeholder="Password"
+                    formControlName="newPassword" name="newPassword" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                  <div *ngIf="
+                      !newUserForm.controls['newPassword'].valid &&
+                      newUserForm.controls['newPassword'].dirty &&
+                      newUserForm.controls['newPassword'].errors?.['trimError']
+                    " class="ui-message ui-messages-error ui-corner-all">
+                    This field is required
+                  </div>
+
+                  <div *ngIf="
+                      !newUserForm.controls['newPassword'].valid &&
+                      newUserForm.controls['newPassword'].dirty &&
+                      newUserForm.controls['newPassword'].errors?.['numberError']
+                    " class="ui-message ui-messages-error ui-corner-all">
+                    Provide valid password.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Confirm Password <span
+                    class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <input type="password" id="confirmPassword" pInputText class="ui-inputtext"
+                    placeholder="Confirm Password" formControlName="confirmPassword" [(ngModel)]="userEnty.Pwd"
+                    name="confirmPassword" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                  <div *ngIf="
+                      !newUserForm.controls['confirmPassword'].valid &&
+                      newUserForm.controls['confirmPassword'].dirty &&
+                      newUserForm.controls['confirmPassword'].errors?.['trimError']
+                    " class="ui-message ui-messages-error ui-corner-all">
+                    This field is required
+                  </div>
+
+                  <div *ngIf="
+                      !newUserForm.controls['confirmPassword'].valid &&
+                      newUserForm.controls['confirmPassword'].dirty &&
+                      newUserForm.controls['confirmPassword'].errors?.['numberError']
+                    " class="ui-message ui-messages-error ui-corner-all">
+                    Provide valid password.
+                  </div>
+
+                  <div *ngIf="
+                      newUserForm.controls['confirmPassword'].dirty &&
+                      newUserForm.hasError('mismatch')
+                    " class="ui-message ui-messages-error ui-corner-all">
+                    Password mismatch
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-2"></div>
+
+
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="LineId" class="col-12 mb-2 md:col-4 md:mb-0">Line Id</label>
+                <div class="col-12 md:col-8">
+                  <input type="text" pInputText class="ui-inputtext" id="lineId" placeholder="Line Id"
+                    formControlName="lineId" name="lineId" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="MedicalLincence" class="col-12 mb-2 md:col-4 md:mb-0">Medical License</label>
+                <div class="col-12 md:col-8">
+                  <input type="text" pInputText id="medicalLincence" placeholder="Medical License"
+                    formControlName="medicalLincence" name="medicalLincence" autocomplete="off" readonly
+                    onfocus="this.removeAttribute('readonly');" />
+                  <!-- [(ngModel)]="userEnty.MedicalLincence" -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-2"></div>
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="Country" class="col-12 mb-2 md:col-4 md:mb-0">Country<span class="red">*</span></label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" [options]="countryList" formControlName="country"
+                    (onChange)="loadProvinceForNewuser()" placeholder="Select a country" optionLabel="CountryName"
+                    (onClear)="onClearCountry()" [showClear]="true">
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="province" class="col-12 mb-2 md:col-4 md:mb-0">Province</label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown [options]="ProvinceList" formControlName="province" (onChange)="loadDistrictForNewuser()"
+                    placeholder="Select a Province" optionLabel="ProvinceName" [showClear]="true"
+                    (onClear)="onClearProvince()"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-2"></div>
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="lastname" class="col-12 mb-2 md:col-4 md:mb-0">District</label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown [options]="districtList" formControlName="district"
+                    (onChange)="loadSubDistrictForNewuser()" placeholder="Select a District" optionLabel="DistrictName"
+                    [showClear]="true" (onClear)="onClearDistrict()"></p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="SubDistrict" class="col-12 mb-2 md:col-4 md:mb-0">Sub-District</label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown [options]="SubDistrictList" placeholder="Select a Sub-District"
+                    optionLabel="SubdistrictName" formControlName="subDistrict" [showClear]="true">
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-2"></div>
+            <div class="col-12 md:col-1"></div>
+
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="Subspecialties" class="col-12 mb-2 md:col-4 md:mb-0">Subspecialties</label>
+                <div class="col-12 md:col-8">
+                  <p-multiSelect [options]="SubSpecialtyList" formControlName="subSpecialty"
+                    placeholder="Select Subspecialties" optionLabel="SubspecialtyName" appendTo="body"
+                    [showClear]="true" [disabled]="!isVisibleSubspeciality"></p-multiSelect>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="ZipCode" class="col-12 mb-2 md:col-4 md:mb-0">Zip Code</label>
+                <div class="col-12 md:col-8">
+                  <!-- <input type="text" pInputText placeholder="Zip Code" [(ngModel)]="userEnty.ZipCode" formcon /> -->
+                  <p-dropdown [options]="postalCodeList" optionValue="PostalCodeId" optionLabel="PalceNameAndPostalCode"
+                    formControlName="zipCode" [(ngModel)]="selectedPostalCode" placeholder="Select a Zip Code"
+                    [showClear]="true">
+                    <!-- <ng-template let-item pTemplate="item">
+                      <span>{{item.PlaceName}} ({{item.PostalCode}})</span>
+                    </ng-template>
+                    <ng-template let-selectedZipCode pTemplate="selectedItem">
+                      <span>{{selectedZipCode.PlaceName}} ({{selectedZipCode.PostalCode}})</span>
+                    </ng-template> -->
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-2"></div>
+
+          </div>
+        </form>
+        <div class="modal-footer-btn text-right">
+          <button style="margin-right: 5px" type="button" pButton icon="fa fa-floppy-o" label="Create"
+            (click)="createUser()" [disabled]="!newUserForm.valid"></button>
+          <button style="margin-right: 5px" type="button" pButton icon="fa fa-floppy-o" label="Create & Approve"
+            (click)="createAndApprove()" [disabled]="!newUserForm.valid"></button>
+          <button type="button" pButton icon="fa fa-remove" (click)="displayAddUserPopUp = false" label="Cancel"
+            class="p-button-outlined p-button-danger"></button>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Upload Documents">
+      <div class="document_upload_form">
+        <div class="formgroup-inline">
+          <div class="field">
+            <label htmlFor="type" class="d-block mb-1">Type</label>
+            <p-dropdown id="type" [options]="documentTypedDopdownItems" optionLabel="name" [required]="true" name="Type"
+              [(ngModel)]="selectedDocumentType"></p-dropdown>
+          </div>
+          <div class="field">
+            <label htmlFor="document" class="d-block mb-1">Select file</label>
+            <input pInputText id="document" type="file" name="File" [(ngModel)]="selecetdInput"
+              accept="application/pdf,image/png,image/jpeg" (change)="documentUploader($event)" />
+            <!-- <div
+                *ngIf="
+                  FileData?.invalid && (FileData.dirty || FileData.touched)
+                "
+              >
+                <div *ngIf="FileData.errors.required" class="error-text">
+                  File must don't have empty.
+                </div>
+              </div> -->
+          </div>
+          <div class="field">
+            <label htmlFor="title" class="d-block mb-1">Title</label>
+            <input class="min-w-515" pInputText id="title" type="text" placeholder="Enter Title" required name="Title"
+              [(ngModel)]="userDocumet.Title" />
+            <!-- <div
+                *ngIf="
+                  TitleData?.invalid && (FileData.dirty || FileData.touched)
+                "
+              >
+                <div *ngIf="TitleData.errors.required" class="error-text">
+                  Title is required.
+                </div>
+              </div> -->
+          </div>
+          <!-- <button
+            type="submit"
+            class="mt-4"
+            pButton
+            label="Upload"
+            (onClick)="uploadDocuments()"
+          ></button> -->
+
+          <p-button class="mt-20" icon="pi pi-upload" (onClick)="uploadDocuments()" label="Upload"></p-button>
+        </div>
+      </div>
+      <div class="mt-2">
+        <p-table #dt1 [value]="newUser.hrEmpdocuments" dataKey="type" [rows]="10" [rowHover]="true"
+          styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="max-w-150" pSortableColumn="Type">
+                Type <p-sortIcon field="Type"></p-sortIcon>
+              </th>
+              <th class="max-w-110" pSortableColumn="Format">
+                Format <p-sortIcon field="Format"></p-sortIcon>
+              </th>
+              <th pSortableColumn="Title">
+                Title <p-sortIcon field="Title"></p-sortIcon>
+              </th>
+              <th class="width-70">Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td class="max-w-150">
+                {{ rowData.Type }}
+              </td>
+              <td class="max-w-110">
+                <div class="flex justify-content-center align-items-center">
+                  <i class="mr-2" [ngClass]="
+                      rowData.Format === 'pdf'
+                        ? 'pi pi-file-pdf'
+                        : 'pi pi-image'
+                    "></i>
+                  <span>({{ rowData.Format }})</span>
+                </div>
+              </td>
+              <td class="td-min-w">
+                {{ rowData.Title }}
+              </td>
+              <td class="width-70">
+                <!-- <button
+                pButton
+                type="button"
+                icon="pi pi-eye"
+                title="Preview the document"
+                class="p-button-rounded mr-2"
+                (click)="previewOrderDocument(rowData)"
+              ></button> -->
+
+                <button pButton type="button" icon="fa fa-regular fa-trash" title="Delete the document"
+                  class="p-button-danger p-button-rounded" (click)="deleteOrderDocument(rowData)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="4" class="text-center">No data found.</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="loadingbody">
+            <tr>
+              <td colspan="4" class="text-center">
+                Loading uploaded document data. Please wait.
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>
+<!-- ADD USER TAB END-->

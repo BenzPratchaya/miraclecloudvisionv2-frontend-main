@@ -1,0 +1,77 @@
+.mat-badge {
+    padding: 2px 15px;
+    border-radius: 3.5px;
+    border: unset !important;
+    font-weight: 500;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.mat-badge-inbox {
+    background: linear-gradient(89deg, $matgPrimaryColor -39.87%, $matgPrimaryHoverColor 87.89%);
+
+    &:hover {
+        background: linear-gradient(89deg, $matgPrimaryHoverColor -39.87%, $matgPrimaryColor 87.89%);
+    }
+}
+
+.mat-badge-sent {
+    background: linear-gradient(89deg, $matgSuccessColor -39.87%, $matgSuccessLinearPairColor 87.89%);
+
+    &:hover {
+        background: linear-gradient(89deg, $matgSuccessLinearPairColor -39.87%, $matgSuccessColor 87.89%);
+    }
+}
+
+.mat-badge-unassigned {
+    background: linear-gradient(99deg, $matgInfoColor -5.71%, $matgInfoHoverColor 79.65%);
+
+    &:hover {
+        background: linear-gradient(99deg, $matgInfoHoverColor -5.71%, $matgInfoColor 79.65%);
+    }
+}
+
+.mat-badge-completed {
+    background: $matrPrimaryColor;
+
+    &:hover {
+        background: $matrPrimaryHoverColor;
+    }
+}
+
+
+.mat-badge-accepted {
+    background: $matgSuccessColor;
+
+    &:hover {
+        background: $matgSuccessHoverColor;
+    }
+}
+
+
+.mat-badge-submitted {
+    background: $matrWarningColor;
+    color: $matrWarningTextColor !important;
+
+    &:hover {
+        background: $matrWarningHoverColor;
+    }
+}
+
+.mat-badge-finalized {
+    background: $matrSuccessColor;
+
+    &:hover {
+        background: $matrSuccessHoverColor;
+    }
+}
+
+.mat-badge-modality {
+    background: $matiHelpColor;
+
+    &:hover {
+        background: $matiHelpHoverColor;
+    }
+}
+
+

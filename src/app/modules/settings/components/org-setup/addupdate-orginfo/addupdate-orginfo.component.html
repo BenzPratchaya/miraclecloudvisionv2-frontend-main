@@ -1,0 +1,1940 @@
+<div class="custom-card">
+    <form [formGroup]="formgroup">
+      <p-tabView (onChange)="switchHeaders($event)" [(activeIndex)]="tabIndex">
+        <p-tabPanel header="General Information">
+          <div style="min-height: 700px">
+            <div class="p-fluid p-formgrid grid">
+              <div class="col-12 md:col-12"></div>
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Org Type<span class="red">*</span>
+                  </label>
+                  <div class="col-12 md:col-8">
+                    <p-dropdown appendTo="body" (onChange)="getParentOrgList()" formControlName="OrgType"
+                      [options]="orgTypeList" [filter]="true" optionLabel="label" optionValue="value"
+                      placeholder="Select Org Type"></p-dropdown>
+                    <div *ngIf="
+                        !formgroup.get('OrgType').valid &&                     
+                        (formgroup.get('OrgType').dirty ||
+                          formgroup.get('OrgType').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Parent Org<span
+                      *ngIf="!formgroup.get('OrgParentId').valid" class="red">*</span></label>
+                  <div class="col-12 md:col-8">
+                    <p-dropdown appendTo="body" formControlName="OrgParentId" (onChange)="getParentOrgData()"
+                      [options]="parentOrgList" [filter]="true" optionLabel="OrgName" optionValue="OrgParentId"
+                      placeholder="Select Parent Org"></p-dropdown>
+                    <div *ngIf="
+                        !formgroup.get('OrgParentId').valid &&                     
+                        (formgroup.get('OrgParentId').dirty ||
+                          formgroup.get('OrgParentId').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-12 md:col-2"></div>
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgName" class="col-12 mb-2 md:col-4 md:mb-0">Org Name<span class="red">*</span>
+                  </label>
+                  <div class="col-12 md:col-8">
+                    <!-- <input type="text" id="OrgName" formControlName="OrgName" pInputText class="ng-dirty ng-invalid ui-inputtext"
+                    placeholder="Org Name" name="OrgName" /> -->
+                    <input pInputText type="text" formControlName="OrgName" placeholder="Org Name" />
+                    <div *ngIf="
+                        !formgroup.get('OrgName').valid &&                     
+                        (formgroup.get('OrgName').dirty ||
+                          formgroup.get('OrgName').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgWebsite" class="col-12 mb-2 md:col-4 md:mb-0">Web URL</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="OrgWebsite" formControlName="OrgWebsite" pInputText placeholder="Web URL"
+                      name="OrgWebsite" />
+                    <div *ngIf="
+                        !formgroup.get('OrgWebsite').valid &&
+                        (formgroup.get('OrgWebsite').dirty ||
+                          formgroup.get('OrgWebsite').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgTel1" class="col-12 mb-2 md:col-4 md:mb-0">Tel. No.</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="OrgTel1" formControlName="OrgTel1" pInputText placeholder="Tel. No."
+                      name="OrgTel1" />
+                    <div *ngIf="
+                        !formgroup.get('OrgTel1').valid &&
+                        (formgroup.get('OrgTel1').dirty ||
+                          formgroup.get('OrgTel1').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgEmail1" class="col-12 mb-2 md:col-4 md:mb-0">Email</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="OrgEmail1" formControlName="OrgEmail1" pInputText placeholder="Email"
+                      name="OrgEmail1" />
+                    <div *ngIf="
+                        !formgroup.get('OrgEmail1').valid &&
+                        (formgroup.get('OrgEmail1').dirty ||
+                          formgroup.get('OrgEmail1').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="LineId" class="col-12 mb-2 md:col-4 md:mb-0">Line ID</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="LineId" formControlName="LineId" pInputText placeholder="Line ID"
+                      name="LineId" />
+                    <div *ngIf="
+                        !formgroup.get('LineId').valid &&
+                        (formgroup.get('LineId').dirty ||
+                          formgroup.get('LineId').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgPrefix" class="col-12 mb-2 md:col-4 md:mb-0">Org Prefix</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="OrgPrefix" formControlName="OrgPrefix" pInputText placeholder="Org Prefix"
+                      name="OrgPrefix" />
+                    <div *ngIf="
+                        !formgroup.get('OrgPrefix').valid &&
+                        (formgroup.get('OrgPrefix').dirty ||
+                          formgroup.get('OrgPrefix').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="OrgSuffix" class="col-12 mb-2 md:col-4 md:mb-0">Org Suffix</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="OrgSuffix" formControlName="OrgSuffix" pInputText placeholder="Org Suffix"
+                      name="OrgSuffix" />
+                    <div *ngIf="
+                        !formgroup.get('OrgSuffix').valid &&
+                        (formgroup.get('OrgSuffix').dirty ||
+                          formgroup.get('OrgSuffix').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <!-- <label htmlfor="AddendumPosition" class="col-12 mb-2 md:col-4 md:mb-0">Addendum Position</label> -->
+                  <div class="col-12 md:col-8">
+                    <!-- <p-dropdown appendTo="body" formControlName="AddendumPosition" [options]="addendumPosition" [filter]="false"
+                  optionLabel="label" optionValue="value" placeholder="Select Org Type"></p-dropdown> -->
+                    <div *ngIf="
+                        !formgroup.get('AddendumPosition').valid &&
+                        (formgroup.get('AddendumPosition').dirty ||
+                          formgroup.get('AddendumPosition').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid rad-profile org-logo">
+                  <label htmlfor="OrgSuffix" class="col-12 mb-2 md:col-4 md:mb-0">Logo</label>
+                  <div class="col-12 md:col-4">
+                    <div class="">
+                      <p-image *ngIf="model.OrgImgString == null" [src]="profileImageUrl" alt="Image" width="100"
+                        [preview]="false"></p-image>
+                      <p-image *ngIf="model.OrgImgString != null" src="data:image/jpeg;base64,{{ model.OrgImgString }}"
+                        alt="Image" width="100"></p-image>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-3">
+                    <p-fileUpload class="ui-state-focus" #imageReset name="myFile[]"  [customUpload]="true"
+                      (uploadHandler)="myUploaderForHospitalLogo($event)" (onUpload)="onUploadHospitalLogo($event)"
+                      [auto]="true" accept="image/*">
+                    </p-fileUpload>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <!-- <label htmlfor="AddendumPosition" class="col-12 mb-2 md:col-4 md:mb-0">Addendum Position</label> -->
+                  <div class="col-12 md:col-8"></div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+            </div>
+            <p-panel styleClass="patient-information-panel" header="Organization Address">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <!-- <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Org Type<span class="red">*</span>
+                </label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" (onChange)="getParentOrgList()" formControlName="OrgType"
+                    [options]="orgTypeList" [filter]="true" optionLabel="label" optionValue="value"
+                    placeholder="Select Org Type"></p-dropdown>
+                  <div *ngIf="
+                    !formgroup.get('OrgType').valid &&
+                    formgroup.get('OrgType').required &&
+                    (formgroup.get('OrgType').dirty ||
+                    formgroup.get('OrgType').touched)
+                  " class="ui-message ui-messages-error ui-corner-all">
+                    This field is required
+                  </div>
+                </div>
+              </div> -->
+  
+                  <div class="field grid">
+                    <label htmlfor="CountryId" class="col-12 mb-2 md:col-4 md:mb-0">Country</label>
+                    <div class="col-12 md:col-8">
+                      <p-dropdown appendTo="body" (onChange)="loadProvince()" formControlName="CountryId"
+                        [options]="countryList" [filter]="true" optionLabel="CountryName" optionValue="CountryId"
+                        placeholder="Select Country"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('CountryId').valid &&
+                          (formgroup.get('CountryId').dirty ||
+                            formgroup.get('CountryId').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="Province" class="col-12 mb-2 md:col-4 md:mb-0">Province</label>
+                    <div class="col-12 md:col-8">
+                      <p-dropdown appendTo="body" (onChange)="loadDistrict()" formControlName="ProvinceId"
+                        [options]="provinceList" [filter]="true" optionLabel="ProvinceName" optionValue="ProvinceId"
+                        placeholder="Select Province"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('ProvinceId').valid &&
+                          (formgroup.get('ProvinceId').dirty ||
+                            formgroup.get('ProvinceId').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="District" class="col-12 mb-2 md:col-4 md:mb-0">District</label>
+                    <div class="col-12 md:col-8">
+                      <p-dropdown appendTo="body" (onChange)="loadSubDistrict()" formControlName="DistrictId"
+                        [options]="districtList" [filter]="true" optionLabel="DistrictName" optionValue="DistrictId"
+                        placeholder="Select District"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('DistrictId').valid &&
+                          (formgroup.get('DistrictId').dirty ||
+                            formgroup.get('DistrictId').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="Province" class="col-12 mb-2 md:col-4 md:mb-0">Sub District</label>
+                    <div class="col-12 md:col-8">
+                      <p-dropdown appendTo="body" formControlName="SubdistrictId" [options]="subDistrictList"
+                        [filter]="true" optionLabel="SubdistrictName" optionValue="SubdistrictId"
+                        placeholder="Select Sub District"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('SubdistrictId').valid &&
+                          (formgroup.get('SubdistrictId').dirty ||
+                            formgroup.get('SubdistrictId').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="ZipCode" class="col-12 mb-2 md:col-4 md:mb-0">Zip Code</label>
+                    <div class="col-12 md:col-8">
+                      <!-- <input type="text" id="ZipCode" formControlName="ZipCode" pInputText placeholder="Zip Code"
+                        name="ZipCode" /> -->
+  
+                      <p-dropdown id="ZipCode" [options]="postalCodeList" optionValue="PostalCodeId"
+                        formControlName="PostalCodeId" optionLabel="PalceNameAndPostalCode"
+                        placeholder="Select a Zip Code" [showClear]="true"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('ZipCode').valid &&
+                          (formgroup.get('ZipCode').dirty ||
+                            formgroup.get('ZipCode').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="OrgAddr1" class="col-12 mb-2 md:col-4 md:mb-0">Address</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="OrgAddr1" formControlName="OrgAddr1" pInputText placeholder="Address"
+                        name="OrgAddr1" />
+                      <div *ngIf="
+                          !formgroup.get('OrgAddr1').valid &&
+                          (formgroup.get('OrgAddr1').dirty ||
+                            formgroup.get('OrgAddr1').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- <label htmlfor="OrgSuffix" class="col-12 mb-2 md:col-4 md:mb-0">Org Suffix</label> -->
+                <!-- <input type="text" id="OrgSuffix" formControlName="OrgSuffix" pInputText class="ng-dirty ng-invalid ui-inputtext"
+                  placeholder="Org Suffix" name="OrgSuffix"/> -->
+              </div>
+            </p-panel>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="API Setting">
+          <div style="min-height: 750px">
+            <div class="p-fluid p-formgrid grid">
+              <!-- <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Org Type </label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" (onChange)="getParentOrgList()" formControlName="OrgType" [options]="orgTypeList" [filter]="true"
+                    optionLabel="label" optionValue="value" placeholder="Select Org Type"></p-dropdown>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-12 md:col-1"></div>
+            <div class="col-12 md:col-4">
+              <div class="field grid">
+                <label htmlfor="firstname" class="col-12 mb-2 md:col-4 md:mb-0">Parent Org</label>
+                <div class="col-12 md:col-8">
+                  <p-dropdown appendTo="body" formControlName="OrgParentId" [options]="parentOrgList" [filter]="true"
+                    optionLabel="OrgName" optionValue="OrgParentId" placeholder="Select Parent Org"></p-dropdown>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-12 md:col-2"></div> -->
+  
+              <!-- <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="Hcode" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Hcode
+                  </label>
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="Hcode"
+                      formControlName="Hcode"
+                      pInputText
+                      placeholder="Hcode"
+                      name="Hcode"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('Hcode').valid &&
+                        (formgroup.get('Hcode').dirty ||
+                          formgroup.get('Hcode').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="Hospmain" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Hospmain</label
+                  >
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="Hospmain"
+                      formControlName="Hospmain"
+                      pInputText
+                      placeholder="Hospmain"
+                      name="Hospmain"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('Hospmain').valid &&
+                        (formgroup.get('Hospmain').dirty ||
+                          formgroup.get('Hospmain').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="HospSub" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Hosp Sub
+                  </label>
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="HospSub"
+                      formControlName="HospSub"
+                      pInputText
+                      placeholder="Hosp Sub"
+                      name="HospSub"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('HospSub').valid &&
+                        (formgroup.get('HospSub').dirty ||
+                          formgroup.get('HospSub').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="GovCode" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Gov Code</label
+                  >
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="GovCode"
+                      formControlName="GovCode"
+                      pInputText
+                      placeholder="Gov Code"
+                      name="GovCode"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('GovCode').valid &&
+                        (formgroup.get('GovCode').dirty ||
+                          formgroup.get('GovCode').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="GovName" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Gov Name</label
+                  >
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="GovName"
+                      formControlName="GovName"
+                      pInputText
+                      placeholder="Gov Name"
+                      name="GovName"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('GovName').valid &&
+                        (formgroup.get('GovName').dirty ||
+                          formgroup.get('GovName').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="PermitNo" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Permit No</label
+                  >
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="text"
+                      id="PermitNo"
+                      formControlName="PermitNo"
+                      pInputText
+                      placeholder="Permit No"
+                      name="PermitNo"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('PermitNo').valid &&
+                        (formgroup.get('PermitNo').dirty ||
+                          formgroup.get('PermitNo').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+  
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="HType" class="col-12 mb-2 md:col-4 md:mb-0"
+                    >HType</label
+                  >
+                  <div class="col-12 md:col-8">
+            
+                    <p-dropdown
+                      appendTo="body"
+                      formControlName="HTypeId"
+                      optionLabel="SetupTitle"
+                      optionValue="APISetupId"
+                      [options]="risSetupList"
+                      placeholder="Select a HType"
+                    >
+                    </p-dropdown>
+                    <div
+                      *ngIf="
+                        !formgroup.get('HTypeId').valid &&
+                        (formgroup.get('HTypeId').dirty ||
+                          formgroup.get('HTypeId').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label
+                    htmlfor="SessionActiveSecond"
+                    class="col-12 mb-2 md:col-4 md:mb-0"
+                    >Session Active Second</label
+                  >
+                  <div class="col-12 md:col-8">
+                    <input
+                      type="number"
+                      min="0"
+                      max="120"
+                      id="SessionActiveSecond"
+                      formControlName="SessionActiveSecond"
+                      pInputText
+                      placeholder="Session Active Second"
+                      name="SessionActiveSecond"
+                    />
+                    <div
+                      *ngIf="
+                        !formgroup.get('SessionActiveSecond').valid &&
+                        (formgroup.get('SessionActiveSecond').dirty ||
+                          formgroup.get('SessionActiveSecond').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-2"></div>
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label
+                    htmlfor="ReSubmitAllow"
+                    class="col-12 mb-2 md:col-6 md:mb-0"
+                    >Resubmit Allow?
+                  </label>
+                  <div class="col-12 md:col-6">
+                    <p-checkbox
+                      formControlName="ReSubmitAllow"
+                      [binary]="true"
+                    ></p-checkbox>
+                    <div
+                      *ngIf="
+                        !formgroup.get('ReSubmitAllow').valid &&
+                        (formgroup.get('ReSubmitAllow').dirty ||
+                          formgroup.get('ReSubmitAllow').touched)
+                      "
+                      class="ui-message ui-messages-error ui-corner-all"
+                    >
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+  
+              <div class="col-12 md:col-4">
+                <div class="field grid"></div>
+              </div>
+              <div class="col-12 md:col-2"></div> -->
+            </div>
+            <br />
+            <p-panel
+              styleClass="patient-information-panel"
+              header="Submit API Settings"
+            >
+              <!-- <div class="fetch-from-wrap">
+                <div class="fetch-from-wrap-inner">
+                  <button
+                    style="margin-right: 5px"
+                    [disabled]="!formgroup.get('OrgParentId').valid"
+                    (click)="getParentWorkflowForSubmitApiSettings()"
+                    type="button"
+                    pButton
+                    icon="fa fa-floppy-o"
+                    label="Fetch From Parent"
+                  ></button>
+                </div>
+              </div> -->
+  
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="AuthAPI" class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Auth API
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="AuthAPI"
+                        formControlName="AuthAPI"
+                        pInputText
+                        placeholder="Auth API"
+                        name="AuthAPI"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="BaseURL" class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Base URL</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="BaseURL"
+                        formControlName="BaseURL"
+                        pInputText
+                        placeholder="Base URL"
+                        name="BaseURL"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="AuthType" class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Auth Type</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <p-dropdown
+                        appendTo="body"
+                        formControlName="AuthType"
+                        [options]="authTypeList"
+                        [filter]="false"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select Auth Type"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="UserName" class="col-12 mb-2 md:col-4 md:mb-0"
+                      >User Name</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="UserName"
+                        formControlName="UserName"
+                        pInputText
+                        placeholder="UserName"
+                        name="UserName"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="SubmitAPI"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Submit API
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="SubmitAPI"
+                        formControlName="SubmitAPI"
+                        pInputText
+                        placeholder="Submit API"
+                        name="SubmitAPI"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="Password" class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Password</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="Password"
+                        id="Password"
+                        formControlName="Password"
+                        pInputText
+                        placeholder="Password"
+                        name="Password"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="SubmitAPIType"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Submit API Type</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <p-dropdown
+                        appendTo="body"
+                        formControlName="SubmitAPIType"
+                        [options]="authTypeList"
+                        [filter]="false"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select Submit API Type"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+            <br />
+            <p-panel
+              styleClass="patient-information-panel"
+              header="Receive API Settings"
+            >
+              <!-- <div class="fetch-from-wrap">
+                <div class="fetch-from-wrap-inner">
+                  <button
+                    style="margin-right: 5px"
+                    [disabled]="!formgroup.get('OrgParentId').valid"
+                    (click)="getParentWorkflowForReceiveApiSettings()"
+                    type="button"
+                    pButton
+                    icon="fa fa-floppy-o"
+                    label="Fetch From Parent"
+                  ></button>
+                </div>
+              </div> -->
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="ReceiveBaseURL"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Base URL
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="ReceiveBaseURL"
+                        formControlName="ReceiveBaseURL"
+                        pInputText
+                        placeholder="Receive Base URL"
+                        name="ReceiveBaseURL"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="ReceiveAPI"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Receive API</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="text"
+                        id="ReceiveAPI"
+                        formControlName="ReceiveAPI"
+                        pInputText
+                        placeholder="Receive API"
+                        name="ReceiveAPI"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="ReceiveUserName"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >User Name</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="ReceiveUserName"
+                        id="ReceiveUserName"
+                        formControlName="ReceiveUserName"
+                        pInputText
+                        placeholder="Receive User Name"
+                        name="ReceiveUserName"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="ReceiveAPIType"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Receive API Type</label
+                    >
+                    <div class="col-12 md:col-8">
+                      <p-dropdown
+                        appendTo="body"
+                        formControlName="ReceiveAPIType"
+                        [options]="authTypeList"
+                        [filter]="false"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select Receive API Type"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label
+                      htmlfor="ReceivePassword"
+                      class="col-12 mb-2 md:col-4 md:mb-0"
+                      >Password
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input
+                        type="Password"
+                        id="ReceivePassword"
+                        formControlName="ReceivePassword"
+                        pInputText
+                        placeholder="Receive Password"
+                        name="ReceivePassword"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="PACS Setting">
+          <div style="min-height: 750px">
+            <!-- <div class="text-right">
+              <button style="margin-right: 5px" [disabled]="!formgroup.get('OrgParentId').valid" (click)="getParentPACS()"
+                type="button" pButton icon="fa fa-floppy-o" label="Fetch From Parent"></button>
+            </div> -->
+            <br />
+  
+            <p-panel styleClass="patient-information-panel" header="Data Center PACS">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="PacsUrl1" class="col-12 mb-2 md:col-4 md:mb-0">PACS URL
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="PacsUrl1" formControlName="PacsUrl1" pInputText placeholder="PACS URL"
+                        name="PacsUrl1" />
+                      <div *ngIf="
+                          !formgroup.get('PacsUrl1').valid &&
+                          (formgroup.get('PacsUrl1').dirty ||
+                            formgroup.get('PacsUrl1').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="PacsIp" class="col-12 mb-2 md:col-4 md:mb-0">PACS IP</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="PacsIp" formControlName="PacsIp" pInputText placeholder="PACS IP"
+                        name="PacsIp" />
+                      <div *ngIf="
+                          !formgroup.get('PacsIp').valid &&                       
+                          (formgroup.get('PacsIp').dirty ||
+                            formgroup.get('PacsIp').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="field grid"> (click)="addUpdate()" [disabled]="!formgroup.valid"
+                  <label htmlfor="PacsUrl2" class="col-12 mb-2 md:col-4 md:mb-0">PACS Url2</label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="PacsUrl2" formControlName="PacsUrl2" pInputText placeholder="PACS Url2"
+                      name="PacsUrl2" />
+                    <div *ngIf="
+                      !formgroup.get('PacsUrl2').valid &&
+                      formgroup.get('PacsUrl2').required &&
+                      (formgroup.get('PacsUrl2').dirty ||
+                      formgroup.get('PacsUrl2').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div> -->
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <!-- <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                  <label htmlfor="PacsUrl3" class="col-12 mb-2 md:col-4 md:mb-0">PACS Url3 </label>
+                  <div class="col-12 md:col-8">
+                    <input type="text" id="PacsUrl3" formControlName="PacsUrl3" pInputText placeholder="PACS Url3"
+                      name="PacsUrl3" />
+                    <div *ngIf="
+                      !formgroup.get('PacsUrl3').valid &&
+                      formgroup.get('PacsUrl3').required &&
+                      (formgroup.get('PacsUrl3').dirty ||
+                      formgroup.get('PacsUrl3').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+               
+                </div>
+                <div class="col-12 md:col-2"></div> -->
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="PacsPort" class="col-12 mb-2 md:col-4 md:mb-0">PACS Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="PacsPort" formControlName="PacsPort" pInputText placeholder="PACS Port"
+                        name="PacsPort" />
+                      <div *ngIf="
+                          !formgroup.get('PacsPort').valid &&
+                          (formgroup.get('PacsPort').dirty ||
+                            formgroup.get('PacsPort').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="DCMViewer" class="col-12 mb-2 md:col-4 md:mb-0">DCM Viewer</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="DCMViewer" formControlName="DCMViewer" pInputText placeholder="DCM Viewer"
+                        name="DCMViewer" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+            </p-panel>
+            <br />
+  
+            <p-panel styleClass="patient-information-panel" header="Local PACS">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="LocalPacsHost" class="col-12 mb-2 md:col-4 md:mb-0">PACS HOST
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="LocalPacsHost" formControlName="LocalPacsHost" pInputText
+                        placeholder="Local Pacs Host" name="LocalPacsHost" />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="LocalPacsUsetls" class="col-12 mb-2 md:col-4 md:mb-0">PACS UseTIs?</label>
+                    <div class="col-12 md:col-8">
+                      <p-checkbox id="LocalPacsUsetls" formControlName="LocalPacsUsetls" [binary]="true"></p-checkbox>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="LocalPacsPort" class="col-12 mb-2 md:col-4 md:mb-0">PACS Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="LocalPacsPort" formControlName="LocalPacsPort" pInputText
+                        placeholder="PACS Port" name="LocalPacsPort" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="LocalPacsCallingae" class="col-12 mb-2 md:col-4 md:mb-0">PACS Calling AE</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="LocalPacsCallingae" formControlName="LocalPacsCallingae" pInputText
+                        placeholder="PACS Calling AE" name="LocalPacsCallingae" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="LocalPacsCalledae" class="col-12 mb-2 md:col-4 md:mb-0">PACS Called AE</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="LocalPacsCalledae" formControlName="LocalPacsCalledae" pInputText
+                        placeholder="PACS Called AE" name="LocalPacsCalledae" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+            </p-panel>
+            <br />
+  
+            <p-panel styleClass="patient-information-panel" header="Router">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="PacsAeTitle" class="col-12 mb-2 md:col-4 md:mb-0">PACS AE TITLE</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="PacsAeTitle" formControlName="PacsAeTitle" pInputText
+                        placeholder="PACS AE TITLE" name="PacsAeTitle" />
+                      <div *ngIf="
+                          !formgroup.get('PacsAeTitle').valid &&
+                          (formgroup.get('PacsAeTitle').dirty ||
+                            formgroup.get('PacsAeTitle').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="DeviceName" class="col-12 mb-2 md:col-4 md:mb-0">Device Name</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="DeviceName" formControlName="DeviceName" pInputText placeholder="Device Name"
+                        name="DeviceName" />
+                      <div *ngIf="
+                          !formgroup.get('DeviceName').valid &&
+                          (formgroup.get('DeviceName').dirty ||
+                            formgroup.get('DeviceName').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="DeviceAeTitle" class="col-12 mb-2 md:col-4 md:mb-0">Device AE TITLE
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="DeviceAeTitle" formControlName="DeviceAeTitle" pInputText
+                        placeholder="Device AE TITLE" name="DeviceAeTitle" />
+                      <div *ngIf="
+                          !formgroup.get('DeviceAeTitle').valid &&
+                          (formgroup.get('DeviceAeTitle').dirty ||
+                            formgroup.get('DeviceAeTitle').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="DeviceIp" class="col-12 mb-2 md:col-4 md:mb-0">Device IP</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="DeviceIp" formControlName="DeviceIp" pInputText placeholder="Device IP"
+                        name="DeviceIp" />
+                      <div *ngIf="
+                          !formgroup.get('DeviceIp').valid &&
+                          (formgroup.get('DeviceIp').dirty ||
+                            formgroup.get('DeviceIp').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="DevicePort" class="col-12 mb-2 md:col-4 md:mb-0">Device Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="DevicePort" formControlName="DevicePort" pInputText placeholder="Device Port"
+                        name="DevicePort" />
+                      <div *ngIf="
+                          !formgroup.get('DevicePort').valid &&
+                          (formgroup.get('DevicePort').dirty ||
+                            formgroup.get('DevicePort').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="SenderAiTitle" class="col-12 mb-2 md:col-4 md:mb-0">Sender AI TITLE</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="SenderAiTitle" formControlName="SenderAiTitle" pInputText
+                        placeholder="Sender AI TITLE" name="SenderAiTitle" />
+                      <div *ngIf="
+                          !formgroup.get('SenderAiTitle').valid &&
+                          (formgroup.get('SenderAiTitle').dirty ||
+                            formgroup.get('SenderAiTitle').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+            </p-panel>
+            <br />
+            <p-panel styleClass="patient-information-panel" header="HL7">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RemoteHL7IP" class="col-12 mb-2 md:col-4 md:mb-0">Remote IP
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RemoteHL7IP" formControlName="RemoteHL7IP" pInputText placeholder="Remote IP"
+                        name="RemoteHL7IP" />
+                      <div *ngIf="
+                          !formgroup.get('RemoteHL7IP').valid &&
+                          (formgroup.get('RemoteHL7IP').dirty ||
+                            formgroup.get('RemoteHL7IP').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RemoteHL7Port" class="col-12 mb-2 md:col-4 md:mb-0">Remote Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RemoteHL7Port" formControlName="RemoteHL7Port" pInputText
+                        placeholder="Remote Port" name="RemoteHL7Port" />
+                      <div *ngIf="
+                          !formgroup.get('RemoteHL7Port').valid &&
+                          (formgroup.get('RemoteHL7Port').dirty ||
+                            formgroup.get('RemoteHL7Port').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RemoteHL7Version" class="col-12 mb-2 md:col-4 md:mb-0">Remote Version
+                    </label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RemoteHL7Version" formControlName="RemoteHL7Version" pInputText
+                        placeholder="Remote Version" name="RemoteHL7Version" />
+                      <div *ngIf="
+                          !formgroup.get('RemoteHL7Version').valid &&
+                          (formgroup.get('RemoteHL7Version').dirty ||
+                            formgroup.get('RemoteHL7Version').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <!-- <div class="field grid">
+                    <label htmlfor="RemoteHL7Port" class="col-12 mb-2 md:col-4 md:mb-0">Remote Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RemoteHL7Port" formControlName="RemoteHL7Port" pInputText
+                        placeholder="Remote Port" name="RemoteHL7Port" />
+                      <div *ngIf="
+                          !formgroup.get('RemoteHL7Port').valid &&
+                          formgroup.get('RemoteHL7Port').required &&
+                          (formgroup.get('RemoteHL7Port').dirty ||
+                            formgroup.get('RemoteHL7Port').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+            </p-panel>
+            <br />
+            <p-panel styleClass="patient-information-panel" header="RIS">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisIp" class="col-12 mb-2 md:col-4 md:mb-0">RIS IP</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisIp" formControlName="RisIp" pInputText placeholder="RIS IP"
+                        name="RisIp" />
+                      <div *ngIf="
+                          !formgroup.get('RisIp').valid &&
+                          (formgroup.get('RisIp').dirty ||
+                            formgroup.get('RisIp').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisPort" class="col-12 mb-2 md:col-4 md:mb-0">RIS Port</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisPort" formControlName="RisPort" pInputText placeholder="RIS Port"
+                        name="RisPort" />
+                      <div *ngIf="
+                          !formgroup.get('RisPort').valid &&
+                          (formgroup.get('RisPort').dirty ||
+                            formgroup.get('RisPort').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisUser" class="col-12 mb-2 md:col-4 md:mb-0">RIS User</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisUser" formControlName="RisUser" pInputText placeholder="RIS User"
+                        name="RisUser" />
+                      <div *ngIf="
+                          !formgroup.get('RisUser').valid &&
+                          (formgroup.get('RisUser').dirty ||
+                            formgroup.get('RisUser').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisPass" class="col-12 mb-2 md:col-4 md:mb-0">RIS Pass</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisPass" formControlName="RisPass" pInputText placeholder="RIS Pass"
+                        name="RisPass" />
+                      <div *ngIf="
+                          !formgroup.get('RisPass').valid &&
+                          (formgroup.get('RisPass').dirty ||
+                            formgroup.get('RisPass').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisUrl" class="col-12 mb-2 md:col-4 md:mb-0">RIS URL</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisUrl" formControlName="RisUrl" pInputText placeholder="RIS URL"
+                        name="RisUrl" />
+                      <div *ngIf="
+                          !formgroup.get('RisUrl').valid &&
+                          (formgroup.get('RisUrl').dirty ||
+                            formgroup.get('RisUrl').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+  
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisApiUrl" class="col-12 mb-2 md:col-4 md:mb-0">RIS API URL</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisApiUrl" formControlName="RisApiUrl" pInputText placeholder="RIS API URL"
+                        name="RisApiUrl" />
+                      <div *ngIf="
+                          !formgroup.get('RisApiUrl').valid &&
+                          (formgroup.get('RisApiUrl').dirty ||
+                            formgroup.get('RisApiUrl').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisApiMethod" class="col-12 mb-2 md:col-4 md:mb-0">RIS API Method</label>
+                    <div class="col-12 md:col-8">
+                      <input type="text" id="RisApiMethod" formControlName="RisApiMethod" pInputText
+                        placeholder="RIS API Method" name="RisApiMethod" />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="RisApiMethodType" class="col-12 mb-2 md:col-4 md:mb-0">RIS API Method Type</label>
+                    <div class="col-12 md:col-8">
+                      <p-dropdown id="RisApiMethodType" appendTo="body" formControlName="RisApiMethodType"
+                        [options]="authTypeList" [filter]="false" optionLabel="label" optionValue="value"
+                        placeholder="Select RIS API Method Type"></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+              </div>
+            </p-panel>
+          </div>
+        </p-tabPanel>
+  
+        <p-tabPanel header="Workflow">
+          <div style="min-height: 750px">
+            <!-- <div class="text-right">
+              <button style="margin-right: 5px" [disabled]="!formgroup.get('OrgParentId').valid"
+                (click)="getParentWorkflow()" type="button" pButton icon="fa fa-floppy-o"
+                label="Fetch From Parent"></button>
+            </div> -->
+            <br />
+            <p-panel styleClass="patient-information-panel" header="General">
+              <div class="p-fluid p-formgrid grid">
+                <div class="col-12 md:col-12"></div>
+                <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="ShowPatientNameToRad" class="col-12 mb-2 md:col-4 md:mb-0">Show Patient Name To Rad
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="IshideOrgtype" [binary]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="SendPatientNameToPacs" class="col-12 mb-2 md:col-4 md:mb-0">Send Patient Name To
+                        PACS
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="SendPatientNameToPacs" [binary]="true"></p-checkbox>
+                    <div *ngIf="
+                        !formgroup.get('SendPatientNameToPacs').valid &&
+                        (formgroup.get('SendPatientNameToPacs').dirty ||
+                          formgroup.get('SendPatientNameToPacs').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="DefaultPatientType" class="col-12 mb-2 md:col-4 md:mb-0">Patient Type
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" formControlName="DefaultPatientType" [options]="PatientTypes"
+                      [filter]="false" optionLabel="label" optionValue="value"
+                      placeholder="Select Patient Type"></p-dropdown>
+                    <div *ngIf="
+                        !formgroup.get('DefaultPatientType').valid &&
+                        (formgroup.get('DefaultPatientType').dirty ||
+                          formgroup.get('DefaultPatientType').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      <label htmlfor="ApiSubmitCriteriaId" class="col-12 mb-2 md:col-4 md:mb-0">API Submit Criteria
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" (onChange)="showCriteriaInputField()"
+                          formControlName="ApiSubmitCriteriaId" [options]="risSetupAPISubmitList" [filter]="false"
+                          optionLabel="SetupTitle" optionValue="APISetupId"
+                          placeholder="Select API Submit Criteria"></p-dropdown>
+                        <div *ngIf="
+                            !formgroup.get('ApiSubmitCriteriaId').valid &&
+                            (formgroup.get('ApiSubmitCriteriaId').dirty ||
+                              formgroup.get('ApiSubmitCriteriaId').touched)
+                          " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="AutoRefreshAllow" class="col-12 mb-2 md:col-4 md:mb-0">Auto Refresh?
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="AutoRefreshAllow" (click)="autoRefreshRequired()"
+                        [binary]="true"></p-checkbox>
+                        <div *ngIf="
+                        !formgroup.get('AutoRefreshAllow').valid &&
+                        (formgroup.get('AutoRefreshAllow').dirty ||
+                          formgroup.get('AutoRefreshAllow').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                  
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="AutoRefreshSecond" class="col-12 mb-2 md:col-4 md:mb-0">Auto Refresh Second<span
+                        class="red" *ngIf="!formgroup.get('AutoRefreshSecond').valid">*</span>
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <input pInputText type="text" formControlName="AutoRefreshSecond" placeholder="Auto Refresh Second" />
+  
+                        <div *ngIf="
+                            !formgroup.get('AutoRefreshSecond').valid &&
+                            (formgroup.get('AutoRefreshSecond').dirty ||
+                              formgroup.get('AutoRefreshSecond').touched)
+                          " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                  
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="SubmitLevel" class="col-12 mb-2 md:col-4 md:mb-0">Submit Level
+                      </label>
+                      <div class="col-12 md:col-8">
+               
+                        <input pInputText type="text" formControlName="SubmitLevel"
+                        placeholder="Submit Level" />
+                 
+                  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="IsSsnmandatory" class="col-12 mb-2 md:col-4 md:mb-0">SSN Mandatory?
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="IsSsnmandatory" [binary]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="IsStudyautosubmit" class="col-12 mb-2 md:col-4 md:mb-0">Study Auto Submit?
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="IsStudyautosubmit" [binary]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                 
+              </div>
+              
+              </p-panel>
+              <br />
+              <p-panel styleClass="patient-information-panel" header="Signup">
+                <div class="p-fluid p-formgrid grid">
+                  <div class="col-12 md:col-12"></div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="IshideOrgtype" class="col-12 mb-2 md:col-4 md:mb-0">Hide Org Type?
+                      </label>
+                      <div class="col-12 md:col-8">
+                          <p-checkbox formControlName="IshideOrgtype" [binary]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                   
+                    <div class="field grid">
+                      <label htmlfor="SignupOrgtype" class="col-12 mb-2 md:col-4 md:mb-0">Signup Org Type</label>
+                      <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" formControlName="SignupOrgtype"
+                        [options]="signUpOrgTypeList" [filter]="false" optionLabel="label" optionValue="value"
+                        placeholder="Select Signup Org Type" (onChange)="ImagingHospitalRequired()"></p-dropdown>
+           
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="OrgidDefaultimaging" class="col-12 mb-2 md:col-4 md:mb-0">Default Imaging Hospital
+                        <span
+                        class="red" *ngIf="!formgroup.get('OrgidDefaultimaging').valid">*</span>
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" formControlName="OrgidDefaultimaging"
+                        [options]="siteList" [filter]="false" optionLabel="OrgName" optionValue="OrgId"
+                        placeholder="Select Imaging Hospital"></p-dropdown>
+                        <div *ngIf="
+                        !formgroup.get('OrgidDefaultimaging').valid &&
+                        (formgroup.get('OrgidDefaultimaging').dirty ||
+                          formgroup.get('OrgidDefaultimaging').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                </div>
+              </p-panel>
+              <br />
+              <p-panel styleClass="patient-information-panel" header="Reporting">
+                <div class="p-fluid p-formgrid grid">
+                  <div class="col-12 md:col-12"></div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="AddendumPosition" class="col-12 mb-2 md:col-4 md:mb-0">Addendum Position
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" formControlName="AddendumPosition" [options]="addendumPosition"
+                        [filter]="false" optionLabel="label" optionValue="value" placeholder="Select Org Type"></p-dropdown>
+                      <div *ngIf="
+                          !formgroup.get('AddendumPosition').valid &&
+                          (formgroup.get('AddendumPosition').dirty ||
+                            formgroup.get('AddendumPosition').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                   
+                    <div class="field grid">
+                      <label htmlfor="DisplayStudyVersion" class="col-12 mb-2 md:col-4 md:mb-0">Display Version?</label>
+                      <div class="col-12 md:col-8">
+                        <p-checkbox formControlName="DisplayStudyVersion" [binary]="true"></p-checkbox>
+                    <div *ngIf="
+                        !formgroup.get('DisplayStudyVersion').valid &&
+                        (formgroup.get('DisplayStudyVersion').dirty ||
+                          formgroup.get('DisplayStudyVersion').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5">
+                    <div class="field grid">
+                      
+                      <label htmlfor="StudyVersionCustomText" class="col-12 mb-2 md:col-4 md:mb-0">Study Version Custom
+                        Text
+                      </label>
+                      <div class="col-12 md:col-8">
+                        <input pInputText type="text" formControlName="StudyVersionCustomText"
+                      placeholder="Study Version Custom Text" />
+                    <div *ngIf="
+                        !formgroup.get('StudyVersionCustomText').valid &&
+                        (formgroup.get('StudyVersionCustomText').dirty ||
+                          formgroup.get('StudyVersionCustomText').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                      This field is required
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-5"></div>
+                  <!-- <div class="col-12 md:col-2"></div> -->
+                </div>
+              </p-panel>
+              <br />
+     
+          </div>
+        </p-tabPanel>
+  
+        <p-tabPanel header="Package Subscription" *ngIf="orgId > 0 && model.IsImaging==true">
+          <div class="grid">
+            <div class="col-12">
+              <div style="min-height: 750px" class="package-subscription-table">
+                <div class="grid">
+                  <div class="col-12 md:col-9">
+                    <section class="pricing-plans">
+                      <span *ngFor="let col of packageList">
+                        <div class="pricing-card" [ngClass]="
+                            col.PackageName === 'BASIC' &&
+                            col.PackageId == selectedPackage.PackageId
+                              ? 'basic pricing-card-hover'
+                              : col.PackageName === 'BASIC'
+                              ? 'basic'
+                              : col.PackageName === 'PRO' &&
+                                col.PackageId == selectedPackage.PackageId
+                              ? 'standard pricing-card-hover'
+                              : col.PackageName === 'PRO'
+                              ? 'standard'
+                              : col.PackageName === 'ULTRA' &&
+                                col.PackageId == selectedPackage.PackageId
+                              ? 'premium pricing-card-hover'
+                              : col.PackageName === 'ULTRA'
+                              ? 'premium'
+                              : ''
+                          ">
+                          <div class="heading">
+                            <h4>{{ col.PackageName }}</h4>
+                            <!-- <p>{{ col.PackageDescription }}</p> -->
+                          </div>
+                          <p class="price">
+                            ฿ {{ col.Rate }}
+                            <sub>/Study</sub>
+                          </p>
+                          <ul class="features">
+                            <li *ngIf="col.IsReporting">
+                              <i class="pi pi-check"></i>
+                              Reporting
+                            </li>
+                            <li *ngIf="col.IsScheduling">
+                              <i class="pi pi-check"></i>
+                              Scheduling
+                            </li>
+                            <li *ngIf="col.IsPatientPortal">
+                              <i class="pi pi-check"></i>
+                              Patient Portal
+                            </li>
+                            <li>
+                              <i class="pi pi-check"></i>
+                              Data Retention {{ col.DataRetentionDay }} Days
+                            </li>
+                            <li>
+                              <i class="pi pi-check"></i>
+                              Analytics {{ col.AnalyticsType }}
+                            </li>
+                          </ul>
+                          <button type="button" class="cta-btn" (click)="packageSelected(col)">
+                            {{
+                            col.PackageId == selectedPackage.PackageId
+                            ? "SELECTED"
+                            : "SELECT"
+                            }}
+                          </button>
+                        </div>
+                      </span>
+                    </section>
+                  </div>
+                  <div class="col-12 md:col-3 mt-3">
+                    <div class="card package-summary-wrap">
+                      <div class="heading">
+                        <h4>Package Summary</h4>
+                      </div>
+                      <div class="p-fluid p-formgrid">
+                        <ul class="features">
+                          <li>
+                            Current Package:
+                            <strong>{{ selectedPackage.PackageName }}</strong>
+                          </li>
+                          <li>
+                            Activated Date:
+                            <strong>{{
+                              selectedPackage.ActiveDate | date : "dd-MM-yyyy"
+                              }}</strong>
+                          </li>
+                          <li>
+                            Next Billing Date:
+                            <strong>{{
+                              selectedPackage.NextBillingDate
+                              | date : "dd-MM-yyyy"
+                              }}</strong>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+      <div class="modal-footer-btn text-right">
+        <button style="margin-right: 5px" type="button" pButton icon="fa fa-floppy-o" label="{{ btnText }}"
+          (click)="addUpdate()" [disabled]="!formgroup.valid"></button>
+        <button *ngIf="isApproveBtn" style="margin-right: 5px" type="button" pButton icon="fa fa-floppy-o"
+          label="Approved" (click)="approveOrgInfo()" [disabled]="!formgroup.valid"></button>
+        <button type="button" pButton icon="fa fa-remove" (click)="cancel()" label="Cancel"
+          class="p-button-outlined p-button-danger"></button>
+      </div>
+    </form>
+    <p-confirmDialog header="Confirmation" key="ApprovedOrgInfo" icon="pi pi-exclamation-triangle"
+      message="Do you want to approve?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+      rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+    <p-confirmDialog header="Confirmation" key="ConfirmPackage" icon="pi pi-exclamation-triangle"
+      message="Do you want to delete?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+      rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
+    <p-dialog header="Inactive Reason" [(visible)]="displayInactiveReason" [draggable]="false" [modal]="true"
+      [responsive]="true" [minY]="70" (onHide)="close()" [maximizable]="false" [style]="{ width: '40vw' }"
+      [breakpoints]="{ '960px': '75vw' }">
+      <div>
+        <p>
+          This will terminate current subscription and create a new subscription.
+        </p>
+        <input style="width: 100%" type="text" id="InactivedReason" [(ngModel)]="inactivedReason" pInputText
+          placeholder="Inactive Reason" name="InactivedReason" />
+      </div>
+      <div class="modal-footer-btn text-right mt-3">
+        <button style="margin-right: 5px" type="button" pButton icon="fa fa-floppy-o" label="Yes"
+          (click)="addpackage()"></button>
+  
+        <button type="button" pButton icon="fa fa-remove" (click)="noPackage()" label="No"
+          class="ui-button-default"></button>
+      </div>
+    </p-dialog>
+  </div>
+  
+  <div class="loading-overlay" *ngIf="loaderVisible">
+    <div class="loader"></div>
+  </div>

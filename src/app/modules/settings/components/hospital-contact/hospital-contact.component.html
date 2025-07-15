@@ -1,0 +1,513 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Hospital Contract</h5>
+			<p-table #dt1 [value]="hospitalContactData" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['OrgName','OrgNameMapTo','IsDefault','IsActive','Status','ActiveInActive']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-end mb-3" *ngIf="client.IsReferring">
+						<button pButton icon="pi pi-plus" label="Add Hospital Contract" (click)="openAddHospitalContact()"></button>
+					  </div>
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Org Name
+								<p-columnFilter type="text" field="OrgName" display="menu" placeholder="Search by Org Name"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Org Contact To
+								<p-columnFilter type="text" field="OrgNameMapTo" display="menu" placeholder="Search by Org Contact To"></p-columnFilter>
+							</div>
+						</th>
+            <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Default?
+                <p-columnFilter type="boolean" field="IsDefault" display="menu"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Active?
+                <p-columnFilter type="boolean" field="IsActive" display="menu"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Status
+								<p-columnFilter type="text" field="Status" display="menu" placeholder="Search by Parent Status"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Active/InActive Date
+								<p-columnFilter type="text" field="ActiveInActive" display="menu" placeholder="Search by Active/InActive Date"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Action
+								
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-row>
+					<tr>
+						<td>
+							{{row.OrgName}}
+						</td>
+						<td>
+							{{row.OrgNameMapTo}}
+						</td>
+            <td>
+							<p-checkbox [(ngModel)]="row.IsDefault" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+						<td>
+							<p-checkbox [(ngModel)]="row.IsActive" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+						<td>
+              <span *ngIf="row.IsActive; else pendingElseBlock">
+                Approved
+              </span>
+              <ng-template #pendingElseBlock>
+                <span class="flex align-items-center">
+                  <span *ngIf="!client.IsReferring" pButton pRipple
+                    (click)="openForHospitalContactApprovalDialog(row)" class="p-button-secondary three-dot-btn"
+                    icon="pi pi-ellipsis-v" title="Approve Hospital"></span>
+  
+                  &nbsp;<span> Pending</span>
+                </span>
+              </ng-template>
+						</td>
+						<td>
+						
+							<span *ngIf="row.IsActive; else activeInActiveElseBlock">
+								{{row.ActiveDate | date : "medium"}}
+							  </span>
+							  <ng-template #activeInActiveElseBlock>
+								{{row.InactivatedDate | date : "medium"}}
+							  </ng-template>
+						</td>
+						<td>
+              <div>
+                <button *ngIf="client.OrgType === 'SP'" (click)="openForEditHospitalContactDialog(row)"
+                  icon="fa fa-times fa-edit" class="p-button-rounded mr-1 mb-1"
+                  title="Press for editing the Hospital Contact." pButton></button>
+                <button (click)="openForDeactivateHospitalContact(row)" icon="pi pi-check-circle"
+                  class="p-button-rounded p-button-danger mr-1 mb-1" [title]="
+                    row.IsActive
+                      ? 'Press for deactivate the Hospital Contact.'
+                      : ''
+                  " pButton *ngIf="client.IsReferring"></button>
+                   <button (click)="openForDeactivateHospitalContact(row)" icon="pi pi-check-circle"
+                   class="p-button-rounded p-button-danger mr-1 mb-1" [title]="
+                     row.IsActive
+                       ? 'Press for deactivate the Hospital Contact.'
+                       : ''
+                   " pButton [disabled]="!row.IsActive" *ngIf="!client.IsReferring"></button>
+              </div>
+            </td>
+		
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+
+</div>
+<!-- Add Hospital MappingForm Dialog Start -->
+<p-dialog header="{{
+    isHospitalMappingEditActionOn
+      ? 'Edit Hospital Contract'
+      : 'Add Hospital Contract'
+  }}" [(visible)]="isVisibleAddMappingDialog" (onHide)="closeaddRadiologistMappingDialog()" [modal]="true"
+  [maximizable]="false" [style]="{ width: '50vw' }" [breakpoints]="{ '960px': '75vw' }">
+  <div class="radiologist-mapping-form">
+    <form [formGroup]="hospitalMappingForm">
+      <div class="p-fluid">
+        <div class="p-formgrid grid">
+          <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+            <label htmlFor="OrgId">Organization<span class="red">*</span></label>
+            <p-dropdown appendTo="body" itemid="OrgId" optionLabel="OrgName" optionValue="OrgId"
+              [readonly]="client.IsReferring" [options]="hospitalReferList" formControlName="OrgId"
+              placeholder="Select a Organization" [filter]="true">
+            </p-dropdown>
+            <div *ngIf="hospitalMappingForm.controls['OrgId'].invalid && hospitalMappingForm.controls['OrgId'].touched" class="pi-error-msg">
+              This field is required.
+            </div>
+          </div>
+
+          <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+            <label htmlFor="OrgIdMapTo">Org Contract To<span class="red">*</span></label>
+            <p-dropdown appendTo="body" itemid="OrgIdMapTo" optionLabel="OrgName" optionValue="OrgId"
+              [options]="hospitalMapToList" formControlName="OrgIdMapTo" placeholder="Select a Org Contract To"
+              [filter]="true">
+            </p-dropdown>
+            <div *ngIf="hospitalMappingForm.controls['OrgIdMapTo'].invalid && hospitalMappingForm.controls['OrgIdMapTo'].touched" class="pi-error-msg">
+              This field is required.
+            </div>
+          </div>
+
+          <!-- <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+            <div class="flex justify-content-start align-items-center">
+              <label htmlFor="IsActive" class="mr-5">Active?</label>
+              <p-checkbox id="IsActive" formControlName="IsActive" [binary]="true"></p-checkbox>
+            </div>
+          </div> -->
+
+          <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+            <div class="flex justify-content-start align-items-center">
+              <label htmlFor="IsDefault" class="mr-5">Default?</label>
+              <p-checkbox id="IsDefault" formControlName="IsDefault" [binary]="true"></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="filed">
+        <div class="text-right sm:pb-3 mt-3">
+          <div class="flex justify-content-start align-items-center">
+            <button class="mr-2" pButton type="button" (click)="onSubmit()" label="Save"
+              [disabled]="!hospitalMappingForm.valid" icon="pi pi-check" iconPos="right"></button>
+            <button pButton label="Close" icon="pi pi-times-circle" iconPos="right"
+              class="p-button-outlined p-button-danger" (click)="closeaddRadiologistMappingDialog()"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-dialog>
+<!-- Add Hospital Mapping Form Dialog End -->
+<!-- Approve Hospital Contact Dialog Start -->
+<p-dialog header="Approve Contact" [(visible)]="isvisibleDialogForApproval"
+  (onHide)="closeHospitalContactApprovalDialog()" [modal]="true" [maximizable]="false" [style]="{ width: '70vw' }"
+  [breakpoints]="{ '960px': '75vw' }">
+  <div class="hospital-contact-approval-form" *ngIf="selectedRowData != null">
+    <div class="p-fluid">
+      <div class="grid">
+        <div class="col-10 col-offset-1">
+          <div class="grid">
+            <div class="col-12 lg:col-10 md:col-10">
+              <div class="grid">
+                <div class="col-12 md:col-5 lg:col-5">
+                  <div class="field grid">
+                    <label htmlFor="OrgNameMapTo" class="col-12 mb-2 md:col-3 lg:col-3">Org Contact To</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgNameMapTo" type="text" readonly
+                        value="{{ selectedRowData.OrgNameMapTo }}" placeholder="Org Contact To" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgName" class="col-12 mb-2 md:col-3 lg:col-3">Org Name<span
+                        class="red">*</span></label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgName" type="text" readonly value="{{ selectedRowData.OrgName }}"
+                        placeholder="Org Name" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgWebsite" class="col-12 mb-2 md:col-3 lg:col-3">Web URL</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgWebsite" type="text" readonly
+                        value="{{ selectedRowData.OrgWebsite }}" placeholder="Web URL" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgTel1" class="col-12 mb-2 md:col-3 lg:col-3">Tel No.</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgTel1" type="text" readonly value="{{ selectedRowData.OrgTel1 }}"
+                        placeholder="Tel No." />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="LineId" class="col-12 mb-2 md:col-3 lg:col-3">Line ID</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="LineId" type="text" readonly value="{{ selectedRowData.LineId }}"
+                        placeholder="Line ID" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 md:col-2 lg:col-2"></div>
+
+                <div class="col-12 md:col-5 lg:col-5">
+                  <div class="field grid">
+                    <label htmlFor="CountryName" class="col-12 mb-2 md:col-3 lg:col-3">Country</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <p-dropdown itemid="CountryName" [readonly]="true" [options]="countryList"
+                        optionLabel="CountryName" [(ngModel)]="selectedCountry" placeholder="Select a country"
+                        appendTo="body">
+                      </p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="ProvinceName" class="col-12 mb-2 md:col-3 lg:col-3">Province</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="ProvinceName" type="text" readonly
+                        value="{{ selectedProvince?.ProvinceName }}" placeholder="Province" />
+                      <!-- <p-dropdown itemid="ProvinceName" [readonly]="true" [options]="provinceList"
+                        optionLabel="ProvinceName" [(ngModel)]="selectedProvince" placeholder="Select a Province"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="DistrictName" class="col-12 mb-2 md:col-3 lg:col-3">District</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="DistrictName" type="text" readonly
+                        value="{{ selectedDistrict?.DistrictName }}" placeholder="District" />
+                      <!-- <p-dropdown itemid="DistrictName" [readonly]="true" [options]="districtList"
+                        optionLabel="DistrictName" [(ngModel)]="selectedDistrict" placeholder="Select a District"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="SubdistrictName" class="col-12 mb-2 md:col-3 lg:col-3">Sub-District</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="SubdistrictName" type="text" readonly
+                        value="{{ selectedSubDistrict?.SubdistrictName }}" placeholder="Sub-District" />
+                      <!-- <p-dropdown itemid="SubdistrictName" [readonly]="true" [options]="SubDistrictList"
+                        optionLabel="SubdistrictName" [(ngModel)]="selectedSubDistrict" placeholder="Select a Sub-District"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="ZipCode" class="col-12 mb-2 md:col-3 lg:col-3">Zip Code</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="ZipCode" type="text" readonly value="{{ selectedRowData.ZipCode }}"
+                        placeholder="Zip Code" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 lg:col-2 md:col-2">
+              <div class="use-info-profile-img-wrap">
+                <div *ngIf="selectedRowData.OrgImgString !== null; else defaultImageElseBlock">
+                  <img src="data:image/jpeg;base64,{{ selectedRowData.OrgImgString }}" alt="Hospital Logo">
+                </div>
+
+                <ng-template #defaultImageElseBlock>
+                  <img src="{{defaultLogo}}" alt="Hospital Logo">
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div class="field grid">
+            <div class="col-8"></div>
+            <div class="col-4">
+              <div class="flex justify-content-end align-items-center">
+                <button class="width-unset mr-2" pButton type="button" label="Approve" icon="pi pi-check"
+                  iconPos="right" (click)="onApproveHospitalContact()"></button>
+                <button pButton label="Close" icon="pi pi-times-circle" iconPos="right"
+                  class="width-unset p-button-outlined p-button-danger"
+                  (click)="closeHospitalContactApprovalDialog()"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+<!-- Approve Hospital Contact Form Dialog End -->
+
+<!-- Deactivate Hospital Contact Dialog Start -->
+<p-dialog header="Deactivate Contact" [(visible)]="isvisibleDialogForDeactivate"
+  (onHide)="closeDeactivateHospitalContactDialog()" [modal]="true" [maximizable]="false" [style]="{ width: '70vw' }"
+  [breakpoints]="{ '960px': '75vw' }">
+  <div class="radiologist-mapping-deactivate-form" *ngIf="selectedRowData != null">
+    <div class="p-fluid">
+      <div class="grid">
+        <div class="col-10 col-offset-1">
+          <div class="grid">
+            <div class="col-12 lg:col-10 md:col-10">
+              <div class="grid">
+                <div class="col-12 md:col-5 lg:col-5">
+                  <div class="field grid">
+                    <label htmlFor="OrgNameMapTo" class="col-12 mb-2 md:col-3 lg:col-3">Org Contact To</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgNameMapTo" type="text" readonly
+                        value="{{ selectedRowData.OrgNameMapTo }}" placeholder="Org Contact To" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgName" class="col-12 mb-2 md:col-3 lg:col-3">Org Name<span
+                        class="red">*</span></label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgName" type="text" readonly value="{{ selectedRowData.OrgName }}"
+                        placeholder="Org Name" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgWebsite" class="col-12 mb-2 md:col-3 lg:col-3">Web URL</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgWebsite" type="text" readonly
+                        value="{{ selectedRowData.OrgWebsite }}" placeholder="Web URL" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="OrgTel1" class="col-12 mb-2 md:col-3 lg:col-3">Tel No.</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="OrgTel1" type="text" readonly value="{{ selectedRowData.OrgTel1 }}"
+                        placeholder="Tel No." />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="LineId" class="col-12 mb-2 md:col-3 lg:col-3">Line ID</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="LineId" type="text" readonly value="{{ selectedRowData.LineId }}"
+                        placeholder="Line ID" />
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="reason" class="col-12 mb-2 md:col-3 lg:col-3" style="display: block;">Reason<span
+                        class="red">*</span></label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <textarea rows="2" cols="30" pInputTextarea
+                        [(ngModel)]="deactivateHospitalContactReq.InactivatedReason" id="reason"
+                        placeholder="Please write a reason"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 md:col-2 lg:col-2"></div>
+
+                <div class="col-12 md:col-5 lg:col-5">
+                  <div class="field grid">
+                    <label htmlFor="CountryName" class="col-12 mb-2 md:col-3 lg:col-3">Country</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <p-dropdown itemid="CountryName" [readonly]="true" [options]="countryList" [style]="{'minWidth':'100%'}"
+                        optionLabel="CountryName" [(ngModel)]="selectedCountry" placeholder="Select a country"
+                        appendTo="body">
+                      </p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="ProvinceName" class="col-12 mb-2 md:col-3 lg:col-3">Province</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="ProvinceName" type="text" readonly
+                        value="{{ selectedProvince?.ProvinceName }}" placeholder="Province" />
+                      <!-- <p-dropdown itemid="ProvinceName" [readonly]="true" [options]="ProvinceList"
+                        optionLabel="ProvinceName" [(ngModel)]="selectedProvince" placeholder="Select a Province"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="DistrictName" class="col-12 mb-2 md:col-3 lg:col-3">District</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="DistrictName" type="text" readonly
+                        value="{{ selectedDistrict?.DistrictName }}" placeholder="District" />
+                      <!-- <p-dropdown itemid="DistrictName" [readonly]="true" [options]="districtList"
+                        optionLabel="DistrictName" [(ngModel)]="selectedDistrict" placeholder="Select a District"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="SubdistrictName" class="col-12 mb-2 md:col-3 lg:col-3">Sub-District</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="SubdistrictName" type="text" readonly
+                        value="{{ selectedSubDistrict?.SubdistrictName }}" placeholder="Sub-District" />
+                      <!-- <p-dropdown itemid="SubdistrictName" [readonly]="true" [options]="SubDistrictList"
+                        optionLabel="SubdistrictName" [(ngModel)]="selectedSubDistrict" placeholder="Select a Sub-District"
+                        appendTo="body"></p-dropdown> -->
+                    </div>
+                  </div>
+
+                  <div class="field grid">
+                    <label htmlFor="ZipCode" class="col-12 mb-2 md:col-3 lg:col-3">Zip Code</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                      <input pInputText itemid="ZipCode" type="text" readonly value="{{ selectedRowData.ZipCode }}"
+                        placeholder="Zip Code" />
+                    </div>
+                  </div>
+                  <div class="field grid" *ngIf="client.IsReferring">
+                    <label htmlFor="ZipCode" class="col-12 mb-2 md:col-3 lg:col-3">Default?</label>
+                    <div class="col-12 md:col-9 lg:col-9">
+                        <p-checkbox [(ngModel)]="selectedRowData.IsDefault" [binary]="true"></p-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 lg:col-2 md:col-2">
+              <div class="use-info-profile-img-wrap">
+                <div *ngIf="selectedRowData.OrgImgString !== null; else defaultImageElseBlock">
+                  <img src="data:image/jpeg;base64,{{ selectedRowData.OrgImgString }}" alt="Hospital Logo">
+                </div>
+
+                <ng-template #defaultImageElseBlock>
+                  <img src="{{defaultLogo}}" alt="Hospital Logo">
+                </ng-template>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="field grid">
+            <div class="col-6"></div>
+            <div class="col-6">
+              <div class="flex justify-content-end align-items-center">
+                <button class="width-unset mr-2" pButton type="button" label="Update" icon="pi pi-pencil"
+                iconPos="right" *ngIf="client.IsReferring" (click)="onSubmitForUpdateHospitalContact()"></button>
+                <button class="width-unset mr-2" pButton type="button" label="Deactivate" icon="pi pi-check"
+                  iconPos="right" [disabled]="!deactivateHospitalContactReq.InactivatedReason"
+                  (click)="onSubmitForDeactivateHospitalContact()"></button>
+                <button pButton label="Close" icon="pi pi-times-circle" iconPos="right"
+                  class="width-unset p-button-outlined p-button-danger"
+                  (click)="closeDeactivateHospitalContactDialog()"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+<!-- Deactivate Hospital Contact Form Dialog End -->
+
+<!-- Deactivate Hospital Contact Confirmation Dialog START -->
+<p-confirmDialog header="Confirmation" key="deactivateHospitalContactConfirm" icon="pi pi-exclamation-triangle"
+  message="Are you sure you want to proceed?" [style]="{ width: '30vw' }" acceptButtonStyleClass="p-button-text"
+  rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<!-- Deactivate Hospital Contact Confirmation Dialog END -->

@@ -1,0 +1,133 @@
+<div class="document_upload_form">
+    <div class="grid">
+        <div class="col-6">
+            <div class="dicom-file-upload-option flex align-items-center">
+                <h6 class="mr-3 mt-2">File(S):</h6>
+                <p-inputSwitch [(ngModel)]="fileOrFolderSwitch" (onChange)="handleSwitchChange($event)"></p-inputSwitch>
+                <h6 class="ml-3 mt-2">Folder:</h6>
+            </div>
+        </div>
+        <div class="col-6 flex justify-content-end align-items-center">
+            <div class="field grid pr-4">
+              <label htmlFor="referringHospital" class="mr-3">Refer To:</label>
+              <p-dropdown id="referringHospital" [options]="siteList" [(ngModel)]="selectedSite" placeholder="Select a Refer To" optionLabel="OrgName" [filter]="true" [showClear]="true">
+              </p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div>
+      <p-panel *ngIf="!fileOrFolderSwitch">
+        <div class="files-upload-wrap flex align-items-center">
+
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-file"></i></span>
+              <label class="uploadFiles">
+                <span class="filename">Choose File(S)</span>
+                <input type="file" (click)="myInputFiles.value" accept=".dcm, .zip" multiple
+                  (change)="onFileSelect($event)" #myInputFiles />
+              </label>
+          </div>
+
+          <button [disabled]="
+                filesToUpload.length == 0 && myDrectoryFiles.length == 0
+              " class="mat-submit-btn mx-2" type="button" pButton pRipple label="Upload" icon="pi pi-upload"
+              (click)="onUploadFiles()" style="width: 120px; padding: 7px 10px;">
+          </button>
+          <button [disabled]="
+                filesToUpload.length == 0 && myDrectoryFiles.length == 0
+              " type="button" pButton pRipple icon="pi pi-times-circle" label="Clear"
+              title="Remove All Files" class="mat-cancel-btn" (click)="cancelFiles()"
+              style="width: 120px; padding: 7px 10px;">
+          </button>
+        </div>
+
+        <div class="dicom-files-grid mt-3" *ngIf="filesToUpload.length > 0">
+          <p-table [value]="filesToUpload" scrollDirection="both" [scrollable]="true" scrollHeight="300px" styleClass="mt-3" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Size (MB)</th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-filesToUpload let-rowIndex="rowIndex">
+              <tr>
+                <td style="width: 150px; table-layout: fixed">
+                  {{ rowIndex + 1 }}
+                </td>
+                <td style="width: 150px; table-layout: fixed">
+                  {{ filesToUpload.name }}
+                </td>
+                <td style="width: 150px; table-layout: fixed">
+                  {{ filesToUpload.size / 1000000 | number : "1.3-3" }}
+                </td>
+                <td style="width: 150px; table-layout: fixed">
+                  <button type="button" pButton pRipple icon="pi pi-times" title="Remove a File"
+                    class="p-button-outlined p-button-outlined p-button-danger" (click)="deleteFiles(rowIndex)"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-panel>
+  
+      <p-panel *ngIf="fileOrFolderSwitch">
+        <div class="folder-upload-wrap flex align-items-center">
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-folder-open"></i></span>
+            <label class="uploadFolder">
+              <span class="filename">Choose Folder</span>
+              <input type="file" class="inputfile" id="multiplefileupload" (click)="folderInput.value" #folderInput
+                (change)="onFolderSelected($event)" webkitDirectory mozdirectory multiple />
+            </label>
+          </div>
+
+          <button [disabled]="
+                folderFilesToUpload.length == 0 && myDrectoryFiles.length == 0
+              " class="mat-submit-btn mx-2" type="button" pButton pRipple label="Upload" icon="pi pi-upload"
+              (click)="onDirectoryUploadFiles()" style="width: 120px; padding: 7px 10px;"></button>
+            <button [disabled]="
+                folderFilesToUpload.length == 0 && myDrectoryFiles.length == 0
+              " type="button" pButton pRipple icon="pi pi-times-circle" label="Clear"
+              title="Remove All Files" class="mat-cancel-btn"
+              (click)="cancelFolderFile()" style="width: 120px; padding: 7px 10px;"></button>
+        </div>
+
+        <div class="dicom-files-grid mt-3" *ngIf="folderFilesToUpload.length > 0">
+          <p-table [value]="folderFilesToUpload" responsiveLayout="scroll" [scrollable]="true" scrollHeight="300px">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Size (MB)</th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-filesToUpload let-rowIndex="rowIndex">
+              <tr>
+                <td>{{ rowIndex + 1 }}</td>
+                <td>{{ filesToUpload.name }}</td>
+                <td>
+                  {{ filesToUpload.size / 1000000 | number : "1.3-3" }}
+                </td>
+                <td>
+                  <button type="button" pButton pRipple icon="pi pi-times" title="Remove a File"
+                    class="p-button-outlined p-button-danger" (click)="deleteFolderFile(rowIndex)"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+  
+<!-- PRELOADER START -->
+<div *ngIf="isLoaderVisible" class="layout-preloader-container">
+  <div class="layout-preloader">
+      <span></span>
+  </div>
+</div>
+<!-- PRELOADER END -->

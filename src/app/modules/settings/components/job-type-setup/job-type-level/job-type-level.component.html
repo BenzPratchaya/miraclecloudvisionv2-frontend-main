@@ -1,0 +1,132 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Job Type Level</h5>
+			<p-table #dt1 [value]="jobtypeLevelList" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['JobTypeName','OrgName','JobTypeLevelUid','JobTypeLevelName','IsActive']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-end mb-3">
+						<button pButton icon="pi pi-plus" label="Add New" (click)="addUpdateJobTypeLevel(0)"></button>
+					  </div>
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Job Type
+								<p-columnFilter type="text" field="JobTypeName" display="menu" placeholder="Search by Job Type"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Organization
+								<p-columnFilter type="text" field="OrgName" display="menu" placeholder="Search by Organization"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Level UID
+								<p-columnFilter type="text" field="JobTypeLevelUid" display="menu" placeholder="Search by Level UID"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Level Name
+								<p-columnFilter type="text" field="JobTypeLevelName" display="menu" placeholder="Search by Level Name"></p-columnFilter>
+							</div>
+						</th>
+       
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Active?
+                <p-columnFilter type="boolean" field="IsActive" display="menu"></p-columnFilter>
+							</div>
+						</th>
+						
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Action
+								
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-row>
+					<tr>
+						<td>
+							{{row.JobTypeName}}
+						</td>
+						<td>
+							{{row.OrgName}}
+						</td>
+                        <td>
+							{{row.JobTypeLevelUid}}
+						</td>
+                        <td>
+							{{row.JobTypeLevelName}}
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.IsActive" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<button
+            
+              pButton
+			  class="p-button-raised p-button-info mr-2" icon="pi pi-pencil"
+              title="Update Job Type Level"
+              label=""              
+              (click)="addUpdateJobTypeLevel(row.JobTypeLevelId)"
+            ></button>
+            <button            
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger"
+            title="Delete Job Type Level"
+            label=""              
+            (click)="deleteJobtypeLevel(row.JobTypeLevelId)"
+          ></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+
+</div>
+
+<p-confirmDialog header="Confirmation" key="DeleteJobTypeLevel" icon="pi pi-exclamation-triangle"
+message="Do you want to delete?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-dialog 
+  header="{{addUpdateLevelUpHeader}}"
+  [(visible)]="displayAddUpdateLevelPopUp"
+  [draggable]="false"
+  [modal]="true"
+  [responsive]="true"
+  [minY]="70"
+  (onHide)="close()"
+  [maximizable]="false"
+  [style]="{ width: '80vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+>   
+<app-addupdate-jobtypelevel  [jobTypeLevelId] = "inputJobTypeLevelId" [btnText]="btnLabel"   (response)="reload($event)"></app-addupdate-jobtypelevel>
+</p-dialog>

@@ -1,0 +1,115 @@
+.order_card {
+    margin-bottom: 16px;
+    border-radius: 13.734px;
+    box-sizing: border-box;
+
+    .order_card-top {
+        padding: 16px;
+    }
+
+
+    .order_card-header,
+    .order_card-inner_header {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .order_card-table {
+        border: none !important;
+        //width: 100% !important;
+    }
+
+    .order_card-bottom {
+        //padding: 16px 16px 32px 16px;
+        padding: 8px 16px;
+        border-radius: 13.734px;
+        box-sizing: border-box;
+    }
+
+    .order_card-inner_header_sub {
+        font-size: 12px;
+        font-weight: 400;
+        color: #DADADA;
+    }
+
+    .order_card-more-actions {
+        // margin-top: 20px;
+        // padding-top: 20px;
+        padding-top: 12px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.collapsed {
+    display: none;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.pdr-0 {
+    padding-right: 0 !important;
+}
+.upload-btn {
+    padding-left: 0;
+    margin-right: 50px;
+}
+.inbox-btn {
+    margin-right: 50px;
+    margin-left: 20px;
+}
+.upload-btn-border {
+    height: 20px;
+    width: 2px;
+    border: 1px solid green;
+}
+
+//Responsiveness
+@media screen and (max-width: 1300px) {
+    .order_card-more-actions {
+        display: unset !important;
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-04 {
+            margin-top: 4px;
+        }
+        
+        .mr-10 {
+            margin-right: 10px;
+        }
+    }
+}
+
+@media screen and (min-width: 1301px) {
+    .order_card-more-actions {
+        display: flex !important;
+
+        .mt-20 {
+            margin-top: unset;
+        }
+
+        .mt-04 {
+            margin-top: unset;
+        }
+        
+        .mr-10 {
+            margin-right: unset;
+        }
+    }
+}

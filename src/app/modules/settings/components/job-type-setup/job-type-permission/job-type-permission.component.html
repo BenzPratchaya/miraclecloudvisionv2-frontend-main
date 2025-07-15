@@ -1,0 +1,204 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Job Type Permission</h5>
+			<p-table #dt1 [value]="jobtypesPermission" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['JobTypeName','JobTypeLevelName','StudyFinalizeAllow','StudyAddendumAllow','StudyDraftAllow','StudyAssignAllow','StudyAssignAllowOthers','StudyUnAssignAllow','StudyUnAssignAllowOthers','StudyResetAllow','StudyResetAllowOthers','StudyResetWindowHour','IsActive']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-end mb-3">
+						<button pButton icon="pi pi-plus" label="Add New" (click)="addUpdateJobTypePermission(0)"></button>
+					  </div>
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Job Type
+								<p-columnFilter type="text" field="JobTypeName" display="menu" placeholder="Search by Job Type"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Level
+								<p-columnFilter type="text" field="JobTypeLevelName" display="menu" placeholder="Search by Level"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Study Finalize?
+                                <p-columnFilter type="boolean" field="StudyFinalizeAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Addendum?
+                                <p-columnFilter type="boolean" field="StudyAddendumAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Draft?
+                                <p-columnFilter type="boolean" field="StudyDraftAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Self Assign?
+                                <p-columnFilter type="boolean" field="StudyAssignAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Assign To Others?
+                                <p-columnFilter type="boolean" field="StudyAssignAllowOthers" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Self UnAssign?
+                                <p-columnFilter type="boolean" field="StudyUnAssignAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study UnAssign From Others?
+                                <p-columnFilter type="boolean" field="StudyUnAssignAllowOthers" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Reset Self?
+                                <p-columnFilter type="boolean" field="StudyResetAllow" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Study Reset Others?
+                                <p-columnFilter type="boolean" field="StudyResetAllowOthers" display="menu"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Reset Window Hour
+								<p-columnFilter type="text" field="StudyResetWindowHour" display="menu" placeholder="Search by Reset Window Hour"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Active?
+                <p-columnFilter type="boolean" field="IsActive" display="menu"></p-columnFilter>
+							</div>
+						</th>
+				
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Action
+								
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-row>
+					<tr>
+						<td>
+							{{row.JobTypeName}}
+						</td>
+						<td>
+							{{row.JobTypeLevelName}}
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyFinalizeAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyAddendumAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyDraftAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyAssignAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyAssignAllowOthers" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyUnAssignAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyUnAssignAllowOthers" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyResetAllow" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.StudyResetAllowOthers" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							{{row.StudyResetWindowHour}}
+						</td>
+                        <td>
+							<p-checkbox [(ngModel)]="row.IsActive" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <td>
+							<button
+            
+							pButton
+							class="p-button-raised p-button-info mr-2" icon="pi pi-pencil"
+							title="Update Job Type Permission"
+							label=""              
+							(click)="addUpdateJobTypePermission(row.JobTypePermissionId)"
+						  ></button>
+						  <button            
+						  pButton
+						  icon="pi pi-trash"
+						  class="p-button-danger"
+						  title="Delete Job Type Permission"
+						  label=""              
+						  (click)="deleteJobtypePermission(row.JobTypePermissionId)"
+						></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+
+</div>
+
+
+<p-confirmDialog header="Confirmation" key="DeleteJobTypePermission" icon="pi pi-exclamation-triangle"
+message="Do you want to delete?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-dialog 
+  header="{{addUpdatePermissionUpHeader}}"
+  [(visible)]="displayAddUpdatePermissionPopUp"
+  [draggable]="false"
+  [modal]="true"
+  [responsive]="true"
+  [minY]="70"
+  (onHide)="close()"
+  [maximizable]="false"
+  [style]="{ width: '80vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+>   
+<app-addupdate-jobtypepermission  [permissionId] = "inputPermissionId" [btnText]="btnLabel"   (response)="reload($event)"></app-addupdate-jobtypepermission>
+</p-dialog>

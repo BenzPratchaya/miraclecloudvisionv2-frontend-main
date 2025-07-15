@@ -1,0 +1,111 @@
+.order_card {
+    margin-bottom: 16px;
+    border-radius: 13.734px;
+    box-sizing: border-box;
+
+    .order_card-top {
+        padding: 16px;
+    }
+
+
+    .order_card-header,
+    .order_card-inner_header {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .order_card-table {
+        border: none !important;
+        width: 100% !important;
+    }
+
+    .order_card-bottom {
+        padding: 16px 16px 32px 16px;
+        border-radius: 13.734px;
+        box-sizing: border-box;
+    }
+
+    .order_card-inner_header_sub {
+        font-size: 12px;
+        font-weight: 400;
+        color: #DADADA;
+    }
+
+    .order_card-more-actions {
+        margin-top: 20px;
+        padding-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.collapsed {
+    display: none;
+}
+  
+
+//Responsiveness
+@media screen and (max-width: 1300px) {
+    .order_card-more-actions {
+        display: unset !important;
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-04 {
+            margin-top: 4px;
+        }
+        
+        .mr-10 {
+            margin-right: 10px;
+        }
+    }
+}
+
+@media screen and (min-width: 1301px) {
+    .order_card-more-actions {
+        display: flex !important;
+
+        .mt-20 {
+            margin-top: unset;
+        }
+
+        .mt-04 {
+            margin-top: unset;
+        }
+        
+        .mr-10 {
+            margin-right: unset;
+        }
+    }
+}
+
+/* Arrow Rotation Animation */
+// @keyframes rotateUp {
+//     from { transform: rotate(0deg); }
+//     to { transform: rotate(180deg); }
+//   }
+  
+//   @keyframes rotateDown {
+//     from { transform: rotate(180deg); }
+//     to { transform: rotate(0deg); }
+//   }
+  
+//   .pi {
+//     transition: transform 0.3s ease;
+//   }
+  
+//   .pi-angle-up {
+//     animation: rotateUp 0.3s ease forwards;
+//   }
+  
+//   .pi-angle-down {
+//     animation: rotateDown 0.3s ease forwards;
+//   }
+  
+

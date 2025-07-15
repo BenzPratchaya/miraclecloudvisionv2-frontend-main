@@ -1,0 +1,357 @@
+<div class="card base_card" style="height: 100%;">
+
+    <div class="grid mb-5">
+        <div class="col-12" style="padding: 0 1rem;">
+            <p-toolbar>
+                <div class="p-toolbar-group-left flex flex-wrap">
+                    <div class="p-fluid">
+                        <div class="p-formgrid grid study_filter-wrap">
+                            <div class="field col matg_datepicker-btn max-fit pdr-0">
+                                <label htmlFor="fromDate">From Date</label>
+                                <p-calendar id="fromDate" name="fromDate" (onSelect)="onSelectFromDate($event)"
+                                [readonlyInput]="true" [maxDate]="toDate" [(ngModel)]="fromDate"
+                                dateFormat="dd-mm-yy" [showIcon]="true" [monthNavigator]="true"
+                                [yearNavigator]="true" yearRange="2018:2050" [showIcon]="true" inputId="icon" appendTo="body"></p-calendar>
+                            </div>
+        
+                            <div class="field col matg_datepicker-btn max-fit pdr-0">
+                                <label htmlFor="toDate">To Date</label>
+                                <p-calendar id="toDate" (onSelect)="onSelectFromDate($event)" name="toDate"
+                                [readonlyInput]="true" [minDate]="fromDate" [(ngModel)]="toDate"
+                                dateFormat="dd-mm-yy" [showIcon]="true" [monthNavigator]="true"
+                                [yearNavigator]="true" yearRange="2018:2050" [showIcon]="true" inputId="icon" appendTo="body"></p-calendar>
+                            </div>
+        
+                            <div class="field col max-fit mr-10">
+                                <label htmlFor="site">Sites</label>
+                                <p-dropdown [options]="siteList" [(ngModel)]="selectedSite" placeholder="Select a Site" optionLabel="OrgName" [filter]="true" appendTo="body">
+                                </p-dropdown>
+                            </div>
+        
+                            <div class="field col max-fit pdr-0 upload-btn" *ngIf="isVisbleDicomUploadBtn">
+                                <label for="dicomUpload" class="block">&nbsp;</label>
+                                <button id="dicomUpload" (click)="openDicomUploadDialog()" pButton pRipple type="button" icon="pi pi-cloud-upload" title="DICOM Upload" label="Upload" class="matr-btn-md matr-success-btn"></button>
+                            </div>
+        
+                            <!-- <div class="field col max-fit pdr-0 inbox-btn" [hidden]="client.IsImaging">
+                                <label for="inboxBtn">&nbsp;</label>
+                                <button id="inboxBtn" [ngClass]="isActiveInboxBtn ? 'active-inbox-btn' : ''" (click)="getInboxOrders()" pButton pRipple type="button" label="Inbox" class="matg-btn matg-btn-md matg-primary-btn" icon="pi pi-inbox"></button>
+                            </div> -->
+                            <div class="field col max-fit pdr-0" *ngIf="client.IsReferring">
+                                <label for="sentBtn">&nbsp;</label>
+                                <button id="sentBtn" [ngClass]="isActiveSentBtn ? 'active-sent-btn' : ''" (click)="getSentOrders()" pButton pRipple type="button" label="Sent" class="matg-btn matg-btn-md matg-success-btn" icon="pi pi-send"></button>
+                            </div>
+                            <div class="field col max-fit pdr-0"  *ngIf="client.IsReferring">
+                                <label for="unassignedBtn">&nbsp;</label>
+                                <button id="unassignedBtn" (click)="getUnassignedOrders()" pButton pRipple type="button" label="Unassigned" class="matg-btn matg-btn-md matg-info-btn" icon="pi pi-link"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-toolbar-group-right">
+                    <div class="field col mt-5">
+                        <div class="mt-1"><p-inputSwitch title="Auto Refresh" id="autoRefresh" [(ngModel)]="valSwitch"></p-inputSwitch></div>
+                    </div>
+                </div>
+            </p-toolbar>
+        </div>
+    </div>
+
+    <!-- <hr class="mat_hr"> -->
+
+    <div class="grid">
+        <div class="col-12">
+            <p-dataView #dv [value]="orderData" [paginator]="true" [rows]="9" filterBy="SearchField" layout="grid">
+				<ng-template pTemplate="header">
+                    <div class="grid">
+                        <div class="col-12 lg:col-9 md:col-9">
+                            <p-dropdown class="mr-3 sm:mb-2" *ngIf="client.IsReferring"  id="orderSortDropdown" [(ngModel)]="sortByOptionsSelected" [options]="sortByOptions" optionLabel="label" placeholder="Sorting" (onChange)="onSortChange($event)" appendTo="body" [showClear]="true" (onClear)="onClearOrderSortBy()">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="sortByOptionsSelected">
+                                        <div class="flex align-items-center">
+                                            <span class="mr-2" style="width: 100px;">{{sortByOptionsSelected.label}}</span>
+                                            <span class="pi" [ngClass]="sortByOptionsSelected.value === 'Completed_DSC' ? 'pi-arrow-up' : sortByOptionsSelected.value === 'Completed_ASC' ? 'pi-arrow-down' : sortByOptionsSelected.value === 'Submitted_DSC' ? 'pi-arrow-up' : sortByOptionsSelected.value === 'Submitted_ASC' ? 'pi-arrow-down' : sortByOptionsSelected.value === 'Accepted_DSC' ? 'pi-arrow-up' : sortByOptionsSelected.value === 'Accepted_ASC' ? 'pi-arrow-down' : ''"></span>
+                                        </div>
+                                    </div>
+                                </ng-template>
+    
+                                <ng-template let-option pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <span class="mr-2" style="width: 100px;">{{option.label}}</span>
+                                        <span class="pi" [ngClass]="option.value === 'Completed_DSC' ? 'pi-arrow-up' : option.value === 'Completed_ASC' ? 'pi-arrow-down' : option.value === 'Submitted_DSC' ? 'pi-arrow-up' : option.value === 'Submitted_ASC' ? 'pi-arrow-down' : option.value === 'Accepted_DSC' ? 'pi-arrow-up' : option.value === 'Accepted_ASC' ? 'pi-arrow-down' : ''"></span>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+    
+                            <p-dropdown class="mr-3 sm:mb-2" *ngIf="client.IsImaging"  id="orderSortDropdown" [(ngModel)]="sortByOptionsImagingSelected" [options]="sortByOptions" optionLabel="label" placeholder="Sorting" (onChange)="onSortChangeImaging($event)" appendTo="body" [showClear]="true" (onClear)="onClearOrderSortByImaging()">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="sortByOptionsImagingSelected">
+                                        <div class="flex align-items-center">
+                                            <span class="mr-2" style="width: 100px;">{{sortByOptionsImagingSelected.label}}</span>
+                                            <span class="pi" [ngClass]="sortByOptionsImagingSelected.value === 'Completed_DSC' ? 'pi-arrow-up' : sortByOptionsImagingSelected.value === 'Completed_ASC' ? 'pi-arrow-down' : sortByOptionsImagingSelected.value === 'Submitted_DSC' ? 'pi-arrow-up' : sortByOptionsImagingSelected.value === 'Submitted_ASC' ? 'pi-arrow-down' : sortByOptionsImagingSelected.value === 'Accepted_DSC' ? 'pi-arrow-up' : sortByOptionsImagingSelected.value === 'Accepted_ASC' ? 'pi-arrow-down' : ''"></span>
+                                        </div>
+                                    </div>
+                                </ng-template>
+    
+                                <ng-template let-option pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <span class="mr-2" style="width: 100px;">{{option.label}}</span>
+                                        <span class="pi" [ngClass]="option.value === 'Completed_DSC' ? 'pi-arrow-up' : option.value === 'Completed_ASC' ? 'pi-arrow-down' : option.value === 'Submitted_DSC' ? 'pi-arrow-up' : option.value === 'Submitted_ASC' ? 'pi-arrow-down' : option.value === 'Accepted_DSC' ? 'pi-arrow-up' : option.value === 'Accepted_ASC' ? 'pi-arrow-down' : ''"></span>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+
+                            <p-dropdown class="mr-3 sm:mb-2" *ngIf="client.IsReferring" id="orderFilterDropdown" [(ngModel)]="orderFilterByOptionsSelected" [options]="orderFilterByOptions" optionLabel="label" placeholder="Filter" (onChange)="onFilterChange($event)" appendTo="body" [showClear]="true" (onClear)="onClearOrderFilter()"></p-dropdown>
+                            <p-dropdown class="mr-3 sm:mb-2" *ngIf="client.IsImaging" id="orderFilterDropdown" [(ngModel)]="orderFilterByOptionsForImagingHospitalSelected" [options]="orderFilterByOptionsForImagingHospital" optionLabel="label" placeholder="Filter" (onChange)="onFilterChangeImaging($event)" appendTo="body" [showClear]="true" (onClear)="onClearOrderFilterImaging()"></p-dropdown>                      
+                            
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input type="search" pInputText placeholder="Search by Study" (input)="onInputChange(dv, $event)">
+                            </span>	
+                        </div>
+
+                        <!-- <div class="col-12 lg:col-4 md:col-6">
+                            <div class="order_global-search">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input type="search" pInputText placeholder="Search by Study" (input)="onInputChange(dv, $event)">
+                                </span>	
+                            </div>
+                        </div> -->
+
+                        <div class="col-12 lg:col-3 md:col-3">
+                            <div class="data-grid-option" style="float: inline-end;">
+                                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                            </div>
+                        </div>
+                    </div>
+				</ng-template>
+
+				<ng-template let-rowIndex="rowIndex" let-order pTemplate="listItem">
+					<div class="col-12">
+						<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+							<img src="assets/app_images/default-img/no_image.png" alt="{{order.ExamName}}" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"/>
+
+							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
+								<div class="font-bold text-xl"> <span class="text-uppercase"><a class="study-name-anchor" [href]="studyNameWithPacsUrl(order)" target="_blank">{{order.ExamName}}</a> - <span class="mat-badge mat-badge-modality">{{order.ModalityName}}</span></span></div>
+                                <div class="mb-1">
+                                    <b>Patient Name:</b>
+                                    <span class="ml-2">{{order.PatientName}}</span>
+                                </div>
+                                <div class="mb-1">
+                                    <b>Gender:</b>
+                                    <span class="ml-2">{{order.Gender}}<span *ngIf="order?.Dob">,</span> {{calculateAge(order.Dob)}}</span>
+                                </div>
+								<div class="mb-1">
+                                    <b>Accession#:</b>
+                                    <span class="ml-2">{{order.AccessionNo}}</span>
+                                </div>
+                                <div class="mb-1">
+                                    <b>HN:</b>
+                                    <span class="ml-2">{{order.Hn}}</span>
+                                </div>
+                                <div class="mb-1">
+                                    <b>{{client.IsReferring ? 'Referred:' : 'Referrer:'}}</b>
+                                    <span class="ml-2" *ngIf="client.IsImaging">
+                                        {{order.OrgName}} 
+                                    </span>
+                                    <span class="ml-2" *ngIf="client.IsReferring">
+                                        <span *ngIf="client.IsReferring && order.OrgRefertoName != null; else elseBlockOrgReferto">
+                                            {{order.OrgRefertoName}}
+                                        </span>
+                                        <ng-template #elseBlockOrgReferto>
+                                            <p-dropdown id="referringHospital" [options]="imagingSiteList" [(ngModel)]="selectedImagingSite" placeholder="Select Hospital" optionLabel="OrgName" [filter]="true" [showClear]="true">
+                                            </p-dropdown>
+                                            <button (click)="orderAssign(order)" type="button" pButton pRipple icon="pi pi-check" title="Order assign to Imaging Hospital" class="ml-1 mate-btn mate-btn-sm mate-primary-btn"></button> 
+                                        </ng-template>
+                                    </span>
+                                </div>
+                                <div class="mb-1">
+                                    <b>Date:</b>
+                                    <span class="ml-2">{{order.OrderDt | date : "dd-MM-yyyy hh:mm a"}}</span>
+                                </div>
+                                <div class="mb-1">
+                                    <span class="mat-badge mat-badge-accepted" *ngIf="order.IsAccepted; else elseStatusBadge">Accepted</span>
+                                    <ng-template #elseStatusBadge>
+                                        <span class="mat-badge" [ngClass]="order.Status === 'C' ? 'mat-badge-completed' : order.Status === 'A' ? 'mat-badge-submitted' : 'mat-badge-finalized'">{{order.StatusName}}</span>
+                                    </ng-template>
+                                </div>
+                                <div *ngIf="order.DocumentCount > 0" class="text-right">
+                                    <button type="button" (click)="openStudyDocumentDialog(order)" title="Documents" class="mati-btn mati-primary-btn mr-1">
+                                        <div class="mati-btn-text-sm">{{order.DocumentCount}}</div>
+                                        <div class="mati-btn-icon-sm mati-primary-btn-icon"><i class="pi pi-images"></i></div>
+                                    </button>
+                                </div>
+							</div>
+
+							<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+								<button *ngIf="client.IsReferring" [disabled]="order.Status !== 'C' || order.OrgRefertoName == null" (click)="orderSubmit(order)" pButton pRipple type="button" label="Submit" class="mat-submit-btn btn-w100 mb-2"></button>
+                                <button *ngIf="client.IsImaging && order.Status === 'A'" [disabled]="order.IsAccepted" (click)="orderAccept(order)" pButton pRipple type="button" label="Accept" class="mat-submit-btn btn-w100 mb-2"></button>
+                                <button type="button"  (click)="openOrderReconcileDialog(order)" title="Order Reconcile and Submit" class="mati-btn mati-success-btn btn-w100 mb-2">
+                                    <div class="mati-btn-text-sm">Edit</div>
+                                    <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-pencil"></i></div>
+                                </button>
+                                <button type="button" (click)="onCopy(order)" title="Copy Link" class="mati-btn mati-primary-btn btn-w100 mb-2">
+                                    <div class="mati-btn-text-sm">Link</div>
+                                    <div class="mati-btn-icon-sm mati-primary-btn-icon"><i class="pi pi-link"></i></div>
+                                </button>
+                                <button type="button" (click)="copyQRCode(order)" title="Copy QR" class="mati-btn mati-success-btn btn-w100">
+                                    <div class="mati-btn-text-sm">QR</div>
+                                    <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-qrcode"></i></div>
+                                </button>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+				<ng-template let-rowIndex="rowIndex" let-order pTemplate="gridItem">
+					<div class="col-12 md:col-4">
+                        <div class="order_card dark_bg-one m-3" [ngClass]="isActiveInboxBtn ? 'inbox-border' : isActiveSentBtn ? 'sent-border' : 'unassigned-border'">
+                            <div class="order_card-bottom dark_bg-four">
+                                <div class="order_card-inner_header">
+                                    <span>
+                                        <span class="text-uppercase">{{order.PatientName}}</span> <br> <span class="order_card-inner_header_sub">{{order.Gender}}<span *ngIf="order?.Dob">,</span> {{calculateAge(order.Dob)}}</span>
+                                    </span>
+                                    <span>
+                                        <button *ngIf="client.IsReferring" [disabled]="order.Status !== 'C' || order.OrgRefertoName == null" (click)="orderSubmit(order)" pButton pRipple type="button" label="Submit" class="mat-submit-btn mr-2"></button>
+                                        <button *ngIf="client.IsImaging && order.Status === 'A'" [disabled]="order.IsAccepted" (click)="orderAccept(order)" pButton pRipple type="button" label="Accept" class="mat-submit-btn mr-2"></button>
+                                        <button (click)="toggleCollapse(rowIndex)" type="button" pButton pRipple class="mate-btn mate-btn-sm">
+                                            <i class="pi" [ngClass]="{'pi-angle-down': !isCollapsed[rowIndex],'pi-angle-up': isCollapsed[rowIndex]}"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                        
+                                <div [class.collapsed]="!isCollapsed[rowIndex]" [@fadeInOut]>
+                                    <div class="order_card-more-actions">
+                                        <button type="button" (click)="openOrderReconcileDialog(order)" title="Order Reconcile and Submit" class="mati-btn mati-success-btn mr-10 mt-20">
+                                            <div class="mati-btn-text-sm">Edit</div>
+                                            <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-pencil"></i></div>
+                                        </button>
+                                        <button type="button" (click)="onCopy(order)" title="Copy Link" class="mati-btn mati-primary-btn mr-10 mt-20">
+                                            <div class="mati-btn-text-sm">Link</div>
+                                            <div class="mati-btn-icon-sm mati-primary-btn-icon"><i class="pi pi-link"></i></div>
+                                        </button>
+                                        <button type="button" (click)="copyQRCode(order)" title="Copy QR" class="mati-btn mati-success-btn mr-10 mt-20">
+                                            <div class="mati-btn-text-sm">QR</div>
+                                            <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-qrcode"></i></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_card-top">
+                                <div class="order_card-header mb-2 mr-1">
+                                    <span class="text-uppercase"><a class="study-name-anchor" [href]="studyNameWithPacsUrl(order)" target="_blank">{{order.ExamName}}</a> - <span class="mat-badge mat-badge-modality">{{order.ModalityName}}</span></span>
+                                    <span class="mat-badge mat-badge-accepted" *ngIf="order.IsAccepted && order.Status === 'A'; else elseStatusBlock">Accepted</span>
+                                    <ng-template #elseStatusBlock>
+                                        <span class="mat-badge" [ngClass]="order.Status === 'C' ? 'mat-badge-completed' : order.Status === 'A' ? 'mat-badge-submitted' : 'mat-badge-finalized'">{{order.StatusName}}</span>
+                                    </ng-template>
+                                </div>
+                                <div class="order_card-body mb-2 mt-3">
+                                    <div class="grid">
+                                        <div class="col-12 lg:col-8">
+                                            <table class="order_card-table">
+                                                <tr>
+                                                    <td>Accession#</td>
+                                                    <td>{{order.AccessionNo}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>HN</td>
+                                                    <td>{{order.Hn}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{client.IsReferring ? 'Referred' : 'Referrer'}}</td>
+                                                    <td>
+                                                        <div *ngIf="client.IsImaging">
+                                                            {{order.OrgName}} 
+                                                        </div>
+                                                        <div *ngIf="client.IsReferring">
+                                                            <div *ngIf="client.IsReferring && order.OrgRefertoName != null; else elseBlockOrgReferto">
+                                                                {{order.OrgRefertoName}}
+                                                            </div>
+                                                            <ng-template #elseBlockOrgReferto>
+                                                                <p-dropdown id="referringHospital" [options]="imagingSiteList" [(ngModel)]="selectedImagingSite" placeholder="Select Hospital" optionLabel="OrgName" [filter]="true" [showClear]="true">
+                                                                </p-dropdown>
+                                                                <button (click)="orderAssign(order)" type="button" pButton pRipple icon="pi pi-check" title="Order assign to Imaging Hospital" class="ml-1 mate-btn mate-btn-sm mate-primary-btn"></button> 
+                                                            </ng-template>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date</td>
+                                                    <td>{{order.OrderDt | date : "dd-MM-yyyy hh:mm a"}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-12 lg:col-4">
+                                            <div *ngIf="order.DocumentCount > 0" class="text-right">
+                                                <button type="button" (click)="openStudyDocumentDialog(order)" title="Documents" class="mati-btn mati-primary-btn mr-1">
+                                                    <div class="mati-btn-text-sm">{{order.DocumentCount}}</div>
+                                                    <div class="mati-btn-icon-sm mati-primary-btn-icon"><i class="pi pi-images"></i></div>
+                                                </button>
+                                            </div>
+                                            <div class="order_img">
+                                                <img src="assets/app_images/default-img/no_image.png" alt="{{order.ExamName}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</ng-template>
+			</p-dataView>
+        </div>
+    </div>
+
+</div>
+
+<!-- CONFIRM TO SUBMIT ORDER START -->
+<p-confirmDialog header="Confirmation" key="submitOrder" icon="pi pi-exclamation-triangle"
+  message="Do you want to save?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+  rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<!-- CONFIRM TO SUBMIT ORDER END -->
+
+<!-- ACCEPT ORDER START -->
+<p-confirmDialog header="Confirmation" key="acceptOrder" icon="pi pi-exclamation-triangle"
+  message="Do you want to save?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+  rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<!-- ACCEPT ORDER END -->
+
+<!-- DICOM UPLOAD START -->
+<p-dialog header="Upload DICOM" [(visible)]="isVisibleDicomUploadDialog" [modal]="true" showEffect="fade" 
+[maximizable]="false" [draggable]="false" styleClass="upload-dicom-dialog" [style]="{width: '50vw'}" [breakpoints]="{'960px': '75vw'}" (onHide)="closeDicomUploadDialog()"
+>
+    <app-dicom-upload (reloadOrderParentFunc)="reloadOrderParentFunc()" (isVisibleDicomUploadDialog)="closeDicomUploadDialogFromChild($event)"></app-dicom-upload>
+    <ng-template pTemplate="footer">
+            <button pButton (click)="closeDicomUploadDialog()" label="Cancel" class="mat-cancel-btn"></button>
+    </ng-template>
+</p-dialog>
+<!-- DICOM UPLOAD END -->
+
+<!-- ORDER RECONCILE START -->
+<p-dialog header="Order Reconcile" [(visible)]="isVisibleOrderReconcileDialog" [modal]="true" showEffect="fade" 
+[maximizable]="false" [draggable]="false" styleClass="order-reconcile-dialog" [style]="{width: '80vw'}" [breakpoints]="{'960px': '75vw'}" (onHide)="closeOrderReconcileDialog()"
+>
+    <!-- <app-order-reconcile *ngIf="isVisibleOrderReconcileDialog"  (reloadOrderParentFunc)="reloadOrderParentFunc()" (isVisibleOrderReconcileDialog)="isVisibleOrderReconcileDialogFromChild($event)"></app-order-reconcile> -->
+    <app-order-reconcile *ngIf="isVisibleOrderReconcileDialog"  (reloadOrderParentFunc)="reloadOrderParentFunc()" (isVisibleOrderReconcileDialog)="closeOrderReconcileDialogFromChild($event)"></app-order-reconcile>
+</p-dialog>
+<!-- ORDER RECONCILE END -->
+
+<!-- DOCUMENT PANEL START -->
+<p-dialog header="Order Documents" [(visible)]="isVisibleOrderDocumentDialog" [modal]="true" showEffect="fade" 
+[maximizable]="false" [draggable]="false" styleClass="order-reconcile-dialog" [style]="{width: '80vw'}" [breakpoints]="{'960px': '75vw'}" (onHide)="closeOrderdocumentDialog()"
+>
+    <app-order-documents *ngIf="isVisibleOrderDocumentDialog" [studyWorklistData]="studyWorklistData"></app-order-documents>
+</p-dialog>
+<!-- DOCUMENT PANEL END -->
+
+<!-- PRELOADER START -->
+<div *ngIf="isVisiblePreLoader" class="layout-preloader-container">
+    <div class="layout-preloader">
+        <span></span>
+    </div>
+</div>
+<!-- PRELOADER END -->

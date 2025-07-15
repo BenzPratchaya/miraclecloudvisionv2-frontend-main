@@ -1,0 +1,98 @@
+/* Special Gradient Button Color Start */
+
+$matgBtnDarkColor: #1c2127;
+
+$matgPrimaryColor: #075BCD;
+$matgPrimaryHoverColor: #64AAFD;
+$matgPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(100, 170, 253, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+
+$matgSuccessColor: #1ED282;
+$matgSuccessHoverColor: #1AB587;
+$matgSuccessLinearPairColor: #008AC8;
+$matgSuccessShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(26, 181, 135, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matgInfoColor: #9C20C1;
+$matgInfoHoverColor: #6E32E9;
+$matgInfoShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(156, 32, 193, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matgSecondaryColor: #342C9A;
+$matgSecondaryHoverColor: #7E77D1;
+$matgSecondaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(52, 44, 154, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matgIconBgPrimaryColor: #8379FF;
+$matgIconBgPrimaryHoverColor: #4F46BB;
+$matgIconBgPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(131, 121, 255, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+/* Special Gradient Button Color End */
+
+/* Regular Button Color Start */
+$matrPrimaryColor: #1961C5;
+$matrPrimaryHoverColor: #07469D;
+$matrPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(25, 97, 197, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matrSuccessColor: #1AB587;
+$matrSuccessHoverColor: #0A8C66;
+$matrSuccessShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(26, 181, 135, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matrWarningColor: #FFE297;
+$matrWarningTextColor: #B57700;
+$matrWarningHoverColor: #F9C642;
+$matrWarningShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(255, 226, 151, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matrDangerColor: #FF8197;
+$matrDangerHoverColor: #F84F6E;
+$matrDangerShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(255, 129, 151, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+// $matrInfoColor: #1AB587;
+// $matrInfoHoverColor: #0A8C66;
+// $matrInfoShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(26, 181, 135, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+/* Regular Button Color End */
+
+
+/* Icon Button Color Start */
+$matiPrimaryColor: #6092DD;
+$matiPrimaryHoverColor: #246CD9;
+$matiPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(96, 146, 221, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matiSecondaryColor: #7E75F0;
+$matiSecondaryHoverColor: #544AD2;
+$matiSecondaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(126, 117, 240, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matiSuccessColor: #4692B2;
+$matiSuccessHoverColor: #1D6685;
+$matiSuccessShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(70, 146, 178, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0); 
+
+$matiHelpColor: #AF79D0;
+$matiHelpHoverColor: #AC46EA;
+$matiHelpShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(175, 121, 208, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+/* Icon Button Color End */
+
+/* Some Specail Case Buttons Color Start */
+$matAcceptPrimaryColor: #454166;
+$matAcceptPrimaryHoverColor: #353251;
+$matAcceptPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(69, 65, 102, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matMorePrimaryColor: #353251;
+$matMorePrimaryHoverColor: #454166;
+$matMorePrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(53, 50, 81, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+
+$matExpendPrimaryColor: #3C4661;
+$matExpendPrimaryHoverColor: #454166;
+$matExpendPrimaryShadowColor: 0 0 0 2px $matgBtnDarkColor, 0 0 0 4px rgba(60, 70, 97, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0);
+/* Some Specail Case Buttons Color End */
+
+/* Some Action Wish Color Start */
+$secondaryColor: #DADADA;
+$matInbox: #0E8BFF;
+$matSent: #15AEA0;
+$matUnassigned: #B517FF;
+
+$darkBgOne: #26273B;
+$darkBgTwo: #222338;
+$darkBgThree: #202132;
+$darkBgFour: #2C2D43;
+
+$dividerColor: #464D61;
+/* Some Action Wish Color End */

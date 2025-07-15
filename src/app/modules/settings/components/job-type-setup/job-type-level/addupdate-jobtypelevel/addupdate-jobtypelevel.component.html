@@ -1,0 +1,140 @@
+<div class="custom-card">
+    <form [formGroup]="jobTypeLevelForm" autocomplete="off">
+        <div style="min-height: 200px">
+            <div class="p-fluid p-formgrid grid">            
+      
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeId" class="col-12 mb-2 md:col-4 md:mb-0">Job Type<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body"  formControlName="JobTypeId" optionLabel="JobTypeName" optionValue="JobTypeId"
+                        [options]="jobtypeList" placeholder="Select a Job Type">
+                      </p-dropdown>
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('JobTypeId').valid &&
+                      jobTypeLevelForm.get('JobTypeId').errors?.['required'] &&
+                      (jobTypeLevelForm.get('JobTypeId').dirty ||
+                      jobTypeLevelForm.get('JobTypeId').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeLevelUid" class="col-12 mb-2 md:col-4 md:mb-0">Level UID</label>
+                    <div class="col-12 md:col-8">
+                        <input type="text" id="JobTypeLevelUid" formControlName="JobTypeLevelUid" pInputText placeholder="Level UID" name="JobTypeLevelUid"/>
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('JobTypeLevelUid').valid &&
+                      jobTypeLevelForm.get('JobTypeLevelUid').errors?.['required'] &&
+                      (jobTypeLevelForm.get('JobTypeLevelUid').dirty ||
+                      jobTypeLevelForm.get('JobTypeLevelUid').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+            
+                </div>
+                <div class="col-12 md:col-2"></div>
+                
+              
+                      
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeLevelName" class="col-12 mb-2 md:col-4 md:mb-0">Level Name<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <input type="text" id="JobTypeLevelName" formControlName="JobTypeLevelName" pInputText placeholder="Level Name" name="JobTypeLevelName"/>
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('JobTypeLevelName').valid &&
+                      jobTypeLevelForm.get('JobTypeLevelName').errors?.['required'] &&
+                      (jobTypeLevelForm.get('JobTypeLevelName').dirty ||
+                      jobTypeLevelForm.get('JobTypeLevelName').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+  
+                    <label htmlfor="IsActive" class="col-12 mb-2 md:col-4 md:mb-0">Active?</label>
+                    <div class="col-12 md:col-8">
+                      <p-checkbox formControlName="IsActive"  [binary]="true"></p-checkbox>
+                    
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('IsActive').valid &&
+                      jobTypeLevelForm.get('IsActive').errors?.['required'] &&
+                      (jobTypeLevelForm.get('IsActive').dirty ||
+                      jobTypeLevelForm.get('IsActive').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                  </div>
+                
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="OrgType" class="col-12 mb-2 md:col-4 md:mb-0">Org Type<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body"  
+                        formControlName="OrgType" 
+                        (onChange)="loadOrganizationList()"
+                        optionLabel="label" optionValue="value"
+                        [options]="orgTypeList" placeholder="Select a Org Type">
+                      </p-dropdown>
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('OrgType').valid &&
+                      jobTypeLevelForm.get('OrgType').errors?.['required'] &&
+                      (jobTypeLevelForm.get('OrgType').dirty ||
+                      jobTypeLevelForm.get('OrgType').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="OrgId" class="col-12 mb-2 md:col-4 md:mb-0">Organization<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body"  formControlName="OrgId" optionLabel="OrgName" optionValue="OrgId"
+                        [options]="orgList" placeholder="Select a Organization">
+                      </p-dropdown>
+                      <div *ngIf="
+                      !jobTypeLevelForm.get('OrgId').valid &&
+                      jobTypeLevelForm.get('OrgType').errors?.['required'] &&
+                      (jobTypeLevelForm.get('OrgId').dirty ||
+                      jobTypeLevelForm.get('OrgId').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+        </div>
+        <br>
+        <div class="modal-footer-btn text-right">
+            <button style="margin-right: 5px" type="button" (click)="addUpdateJobLevel()" pButton icon="fa fa-floppy-o" label="{{btnText}}"
+              [disabled]="!jobTypeLevelForm.valid"></button>     
+            <button type="button" pButton icon="fa fa-remove" (click)="cancel()" label="Cancel"
+              class="ui-button-default"></button>
+          </div>
+    </form>
+</div>

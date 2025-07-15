@@ -1,0 +1,113 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Job Type</h5>
+			<p-table #dt1 [value]="jobtypeList" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['JobTypeUid','JobTypeName','IsActive']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<!-- <div class="flex justify-content-end mb-3">
+						<button pButton icon="pi pi-plus" label="Add New" (click)="addUpdateJobType(0)"></button>
+					  </div> -->
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Job Type UID
+								<p-columnFilter type="text" field="JobTypeUid" display="menu" placeholder="Search by Job Type UID"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Job Type Name
+								<p-columnFilter type="text" field="JobTypeName" display="menu" placeholder="Search by Job Type Name"></p-columnFilter>
+							</div>
+						</th>
+       
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Active?
+                <p-columnFilter type="boolean" field="IsActive" display="menu"></p-columnFilter>
+							</div>
+						</th>
+						
+						<!-- <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+                                Action
+								
+							</div>
+						</th> -->
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-row>
+					<tr>
+						<td>
+							{{row.JobTypeUid}}
+						</td>
+						<td>
+							{{row.JobTypeName}}
+						</td>
+         
+                        <td>
+							<p-checkbox [(ngModel)]="row.IsActive" [disabled]="true" [binary]="true"></p-checkbox>
+						</td>
+                        <!-- <td>
+							<button pButton
+			  class="p-button-raised p-button-info mr-2" icon="pi pi-pencil"
+              title="Update Job Type Permission"
+              label=""              
+              (click)="addUpdateJobType(row.JobTypeId)"
+            ></button>
+            <button            
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger"
+            title="Delete Job Type Permission"
+            label=""              
+            (click)="deleteJobtype(row.JobTypeId)"
+          ></button>
+						</td> -->
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+
+</div>
+
+<p-confirmDialog header="Confirmation" key="DeleteJobType" icon="pi pi-exclamation-triangle"
+message="Do you want to delete?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-dialog 
+  header="{{addUpdatePermissionUpHeader}}"
+  [(visible)]="displayAddUpdatePermissionPopUp"
+  [draggable]="false"
+  [modal]="true"
+  [responsive]="true"
+  [minY]="70"
+  (onHide)="close()"
+  [maximizable]="false"
+  [style]="{ width: '80vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+>   
+<app-addupdate-jobtype  [jobTypeId] = "inputJobTypeId" [btnText]="btnLabel"   (response)="reload($event)"></app-addupdate-jobtype>
+</p-dialog>

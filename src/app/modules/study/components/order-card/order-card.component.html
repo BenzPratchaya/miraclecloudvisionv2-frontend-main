@@ -1,0 +1,82 @@
+<div class="grid grid-nogutter" *ngIf="orderData.length > 0">
+    <div class="col-12 xl:col-4 lg:col-6 md:col-12 sm:col-12 px-2" *ngFor="let order of orderData; let i = index">
+        <div class="order_card dark_bg-one" [ngClass]="order.OrgIdreferto != null ? 'sent-border' : 'inbox-border'">
+
+            <div class="order_card-top">
+                <div class="order_card-header mb-2 mr-1">
+                    <span class="text-uppercase">{{order.ExamName}}</span>
+                    <span class="mat-badge" [ngClass]="order.Status === 'C' ? 'mat-badge-completed' : 'mat-badge-submitted'">{{order.StatusName}}</span>
+                    <!-- <span class="mat-badge" [ngClass]="order.OrgIdreferto != null ? 'mat-badge-sent' : 'mat-badge-unassigned'">
+                        {{order.OrgIdreferto != null ? 'Sent' : 'Unassigned'}}
+                    </span> -->
+                </div>
+            
+                <div class="order_card-body mb-2">
+                    <table class="order_card-table">
+                        <tr>
+                            <td>Accession#</td>
+                            <td>{{order.AccessionNo}}</td>
+                            <!-- <td class="text-right">
+                                <span class="mat-badge" [ngClass]="order.Status === 'C' ? 'mat-badge-completed' : ''">{{order.StatusName}}</span>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td>HN</td>
+                            <td>{{order.Hn}}</td>
+                        </tr>
+                        <tr>
+                            <td>Referred To</td>
+                            <td>{{order.OrgRefertoName != null ? order.OrgRefertoName : 'N/A'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="order_card-bottom dark_bg-four">
+                <div class="order_card-inner_header">
+                    <span>
+                        <span class="text-uppercase">{{order.PatientName}}</span> <br> <span class="order_card-inner_header_sub">{{order.Gender}}<span *ngIf="order.Dob">,</span> {{calculateAge(order.Dob)}}</span>
+                    </span>
+                    <span>
+                        <button *ngIf="client.IsReferring" [disabled]="order.Status !== 'C'" (click)="orderSubmit(order)" pButton pRipple type="button" label="Submit" class="mat-submit-btn mr-2"></button>
+                        <button *ngIf="client.IsImaging && order.Status === 'A'" (click)="orderAccept(order)" pButton pRipple type="button" label="Accept" class="mat-submit-btn mr-2"></button>
+                        <!-- <button pButton pRipple type="button" label="Accept" class="mata-btn mata-btn-sm mata-primary-btn mr-2"></button> -->
+                        <!-- <button pButton pRipple type="button" title="View Order Info." class="matm-btn matm-btn-sm matm-primary-btn mr-2" icon="pi pi-ellipsis-v"></button> -->
+                        <button (click)="toggleCollapse(i)" type="button" pButton pRipple class="mate-btn mate-btn-sm">
+                            <i class="pi" [ngClass]="{'pi-angle-down': !isCollapsed[i],'pi-angle-up': isCollapsed[i]}"></i>
+                        </button>                                             
+                    </span>
+                </div>
+        
+                <!-- <div [class.collapsed]="isCollapsed[i]" [style.display]="isCollapsed[i] ? 'none' : 'block'" class="order_card-more-actions" [@fadeInOut]> -->
+                <div [class.collapsed]="!isCollapsed[i]" [@fadeInOut]>
+                    <div class="order_card-more-actions">
+                        <button (click)="openOrderReconcileDialog(order)" type="button" class="mati-btn mati-success-btn mr-10 mt-20">
+                            <div class="mati-btn-text-sm">Edit</div>
+                            <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-pencil"></i></div>
+                        </button>
+                            <div (copy)="onCopy($event)">
+                                <button type="button" class="mati-btn mati-help-btn mr-10 mt-20">
+                                    <div class="mati-btn-text-sm">History</div>
+                                    <div class="mati-btn-icon-sm mati-help-btn-icon"><i class="pi pi-history"></i></div>
+                                </button>
+                            </div>
+                        <button type="button" class="mati-btn mati-primary-btn mt-04">
+                            <div class="mati-btn-text-sm">Report</div>
+                            <div class="mati-btn-icon-sm mati-primary-btn-icon"><i class="pi pi-file-pdf"></i></div>
+                        </button>
+                        <!-- <button type="button" class="mati-btn mati-success-btn mt-04">
+                            <div class="mati-btn-text-sm">Download</div>
+                            <div class="mati-btn-icon-sm mati-success-btn-icon"><i class="pi pi-cloud-download"></i></div>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog header="Confirmation" key="submitOrder" icon="pi pi-exclamation-triangle"
+  message="Do you want to save?" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+  rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>

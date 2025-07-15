@@ -1,0 +1,492 @@
+/* Special Gradient Button Start */
+
+.matg-btn {
+    border-radius: 3.5px;
+    //border-width: 1px;
+    border: unset !important;
+}
+
+.matg-btn-lg {
+    padding: 10px 40px;
+}
+
+.matg-btn-md {
+    padding: 5px 20px;
+}
+
+.matg-btn-sm {
+    padding: 2px 15px;
+}
+
+.matg-primary-btn {
+    background: linear-gradient(89deg, $matgPrimaryColor -39.87%, $matgPrimaryHoverColor 87.89%);
+    //border-color: $matgPrimaryColor;
+}
+
+.matg-primary-btn:enabled:hover {
+    background: linear-gradient(89deg, $matgPrimaryHoverColor -39.87%, $matgPrimaryColor 87.89%);
+    //border-color: $matgPrimaryHoverColor;
+}
+
+.matg-primary-btn:enabled:active {
+    background: linear-gradient(89deg, $matgPrimaryHoverColor -39.87%, $matgPrimaryColor 87.89%);
+    //border-color: transparent;
+}
+
+.matg-primary-btn:focus {
+    box-shadow: $matgPrimaryShadowColor;
+}
+
+.active-inbox-btn {
+    box-shadow: $matgPrimaryShadowColor !important;
+}
+
+.matg-success-btn {
+    background: linear-gradient(89deg, $matgSuccessColor -39.87%, $matgSuccessLinearPairColor 87.89%);
+}
+
+.matg-success-btn:enabled:hover {
+    background: linear-gradient(89deg, $matgSuccessLinearPairColor -39.87%, $matgSuccessColor 87.89%);
+}
+
+.matg-success-btn:enabled:active {
+    background: linear-gradient(89deg, $matgSuccessLinearPairColor -39.87%, $matgSuccessColor 87.89%);
+}
+
+.matg-success-btn:focus {
+    box-shadow: $matgSuccessShadowColor;
+}
+
+.active-sent-btn {
+    box-shadow: $matgSuccessShadowColor !important;
+}
+
+
+.matg-info-btn {
+    background: linear-gradient(99deg, $matgInfoColor -5.71%, $matgInfoHoverColor 79.65%);
+}
+
+.matg-info-btn:enabled:hover {
+    background: linear-gradient(99deg, $matgInfoHoverColor -5.71%, $matgInfoColor 79.65%);
+}
+
+.matg-info-btn:enabled:active {
+    background: linear-gradient(99deg, $matgInfoHoverColor -5.71%, $matgInfoColor 79.65%);
+}
+
+.matg-info-btn:focus {
+    box-shadow: $matgInfoShadowColor;
+}
+
+.matg-secondary-btn {
+    background: linear-gradient(275deg, $matgSecondaryColor -24.6%, $matgSecondaryHoverColor 132.21%);
+    //border-color: $matgSecondaryColor;
+}
+
+.matg-secondary-btn:enabled:hover {
+    background: linear-gradient(275deg, $matgSecondaryHoverColor -24.6%, $matgSecondaryColor 132.21%);
+    //border-color: $matgSecondaryHoverColor;
+}
+
+.matg-secondary-btn:enabled:active {
+    background: linear-gradient(275deg, $matgSecondaryHoverColor -24.6%, $matgSecondaryColor 132.21%);
+    //border-color: transparent;
+}
+
+.matg-secondary-btn:focus {
+    box-shadow: $matgSecondaryShadowColor;
+}
+
+.matg_datepicker-btn {
+    .p-button {
+        border: unset !important;
+        background: linear-gradient(294deg, $matgIconBgPrimaryColor 19%, $matgIconBgPrimaryHoverColor 169.22%) !important;
+
+        &:enabled:hover {
+            background: linear-gradient(294deg, $matgIconBgPrimaryHoverColor 19%, $matgIconBgPrimaryColor 169.22%) !important;
+        }
+
+        &:enabled:active {
+            background: linear-gradient(294deg, $matgIconBgPrimaryHoverColor 19%, $matgIconBgPrimaryColor 169.22%) !important;
+        }
+
+        &:focus {
+            box-shadow: $matgIconBgPrimaryShadowColor !important;
+        }
+    }
+}
+
+/* Special Gradient Button End */
+
+/* Regular Button Start */
+.matr-btn {
+    border-radius: 3.5px;
+    border-width: 1px;
+}
+
+.matr-btn-lg {
+    padding: 10px 40px;
+}
+
+.matr-btn-md {
+    padding: 5px 20px;
+}
+
+.matr-btn-sm {
+    padding: 2px 15px;
+}
+
+.matr-primary-btn {
+    background: $matrPrimaryColor;
+    border-color: $matrPrimaryColor;
+}
+
+.matr-primary-btn:enabled:hover {
+    background: $matrPrimaryHoverColor;
+    border-color: $matrPrimaryHoverColor;
+}
+
+.matr-primary-btn:enabled:active {
+    background: $matrPrimaryHoverColor;
+    border-color: transparent;
+}
+
+.matr-primary-btn:focus {
+    box-shadow: $matrPrimaryShadowColor;
+}
+
+.matr-success-btn {
+    background: $matrSuccessColor;
+    border-color: $matrSuccessColor;
+}
+
+.matr-success-btn:enabled:hover {
+    background: $matrSuccessHoverColor;
+    border-color: $matrSuccessHoverColor;
+}
+
+.matr-success-btn:enabled:active {
+    background: $matrSuccessHoverColor;
+    border-color: transparent;
+}
+
+.matr-success-btn:focus {
+    box-shadow: $matrSuccessShadowColor;
+}
+
+.matr-warning-btn {
+    background: $matrWarningColor;
+    border-color: $matrWarningColor;
+    color: $matrWarningTextColor !important;
+}
+
+.matr-warning-btn:enabled:hover {
+    background: $matrWarningHoverColor;
+    border-color: $matrWarningHoverColor;
+}
+
+.matr-warning-btn:enabled:active {
+    background: $matrWarningHoverColor;
+    border-color: transparent;
+}
+
+.matr-warning-btn:focus {
+    box-shadow: $matrWarningShadowColor;
+}
+
+.matr-danger-btn {
+    background: $matrDangerColor;
+    border-color: $matrDangerColor;
+}
+
+.matr-danger-btn:enabled:hover {
+    background: $matrDangerHoverColor;
+    border-color: $matrDangerHoverColor;
+}
+
+.matr-danger-btn:enabled:active {
+    background: $matrDangerHoverColor;
+    border-color: transparent;
+}
+
+.matr-danger-btn:focus {
+    box-shadow: $matrDangerShadowColor;
+}
+
+/* Regular Button End */
+
+/* Icon Button Start */
+
+.mati-btn {
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 3.5px !important;
+    padding: 0 !important;
+    border: unset !important;
+    transition-duration: 1.2s;
+    transition-timing-function: ease;
+}
+
+.mati-btn-text-lg {
+    float: left;
+    padding: 20px 40px;
+}
+
+.mati-btn-text-md {
+    float: left;
+    padding: 10px 20px;
+}
+
+.mati-btn-text-sm {
+    float: left;
+    padding: 6px 10px;
+}
+
+.mati-btn-icon-lg {
+    float: left;
+    padding: 15px;
+    border-top-right-radius: 3.5px !important;
+    border-bottom-right-radius: 3.5px !important;
+}
+
+.mati-btn-text-md {
+    float: icon;
+    padding: 10px;
+    border-top-right-radius: 3.5px !important;
+    border-bottom-right-radius: 3.5px !important;
+}
+
+.mati-btn-icon-sm {
+    float: left;
+    padding: 6px;
+    border-top-right-radius: 3.5px !important;
+    border-bottom-right-radius: 3.5px !important;
+}
+
+.mati-primary-btn-icon {
+    background: $matiPrimaryHoverColor;
+}
+
+.mati-primary-btn {
+    background: $matiPrimaryColor;
+}
+
+.mati-primary-btn:enabled:hover {
+    background: $matiPrimaryHoverColor;
+}
+
+.mati-primary-btn:enabled:active {
+    background: $matiPrimaryHoverColor;
+}
+
+.mati-primary-btn:focus {
+    box-shadow: $matiPrimaryShadowColor;
+}
+
+.mati-secondary-btn-icon {
+    background: $matiSecondaryHoverColor;
+}
+
+.mati-secondary-btn {
+    background: $matiSecondaryColor;
+}
+
+.mati-secondary-btn:enabled:hover {
+    background: $matiSecondaryHoverColor;
+}
+
+.mati-secondary-btn:enabled:active {
+    background: $matiSecondaryHoverColor;
+}
+
+.mati-secondary-btn:focus {
+    box-shadow: $matiSecondaryShadowColor;
+}
+
+.mati-success-btn-icon {
+    background: $matiSuccessHoverColor;
+}
+
+.mati-success-btn {
+    background: $matiSuccessColor;
+}
+
+.mati-success-btn:enabled:hover {
+    background: $matiSuccessHoverColor;
+}
+
+.mati-success-btn:enabled:active {
+    background: $matiSuccessHoverColor;
+}
+
+.mati-success-btn:focus {
+    box-shadow: $matiSuccessShadowColor;
+}
+
+.mati-help-btn-icon {
+    background: $matiHelpHoverColor;
+}
+
+.mati-help-btn {
+    background: $matiHelpColor;
+}
+
+.mati-help-btn:enabled:hover {
+    background: $matiHelpHoverColor;
+}
+
+.mati-help-btn:enabled:active {
+    background: $matiHelpHoverColor;
+}
+
+.mati-help-btn:focus {
+    box-shadow: $matiHelpShadowColor;
+}
+/* Split Button End */
+
+/* Some Specail Case Buttons Start */
+.mata-btn {
+    border-radius: 3.5px;
+    border: unset !important;
+}
+
+.mata-btn-lg {
+    padding: 10px 40px;
+}
+
+.mata-btn-md {
+    padding: 5px 20px;
+}
+
+.mata-btn-sm {
+    padding: 6px 15px;
+}
+
+.mata-primary-btn {
+    background: $matAcceptPrimaryColor;
+}
+
+.mata-primary-btn:enabled:hover {
+    background: $matAcceptPrimaryHoverColor;
+}
+
+.mata-primary-btn:enabled:active {
+    background: $matAcceptPrimaryHoverColor;
+}
+
+.mata-primary-btn:focus {
+    box-shadow: $matAcceptPrimaryShadowColor;
+}
+
+.matm-btn {
+    border-radius: 3.5px;
+    border: unset !important;
+}
+
+.matm-btn-lg {
+    padding: 10px 40px;
+}
+
+.matm-btn-md {
+    padding: 5px 20px;
+}
+
+.matm-btn-sm {
+    padding: 2px 15px;
+}
+
+.matm-primary-btn {
+    background: $matMorePrimaryColor;
+}
+
+.matm-primary-btn:enabled:hover {
+    background: $matMorePrimaryHoverColor;
+}
+
+.matm-primary-btn:enabled:active {
+    background: $matMorePrimaryHoverColor;
+}
+
+.matm-primary-btn:focus {
+    box-shadow: $matMorePrimaryShadowColor;
+}
+
+.mate-btn {
+    border-radius: 3.5px;
+    border: unset !important;
+}
+
+.mate-btn-lg {
+    padding: 10px 40px;
+}
+
+.mate-btn-md {
+    padding: 5px 20px;
+}
+
+.mate-btn-sm {
+    padding: 8px 10px;
+}
+
+.mate-primary-btn {
+    background: $matMorePrimaryColor;
+}
+
+.mate-primary-btn:enabled:hover {
+    background: $matMorePrimaryHoverColor;
+}
+
+.mate-primary-btn:enabled:active {
+    background: $matMorePrimaryShadowColor;
+}
+
+.mate-primary-btn:focus {
+    box-shadow: $matMorePrimaryShadowColor;
+}
+
+.mat-submit-btn {
+    border-radius: 3.5px;
+    padding: 5px 10px;
+    border: unset !important;
+    background: $matgIconBgPrimaryColor;
+    &:enabled:hover {
+        background: $matgIconBgPrimaryHoverColor;
+    }
+    &:enabled:active {
+        background: $matgIconBgPrimaryHoverColor;
+    }
+    &:focus {
+        box-shadow: $matgIconBgPrimaryShadowColor;
+    }
+}
+
+.mat-cancel-btn {
+    border-radius: 3.5px;
+    padding: 5px 10px;
+    border: unset !important;
+    background: $matrDangerColor;
+    &:enabled:hover {
+        background: $matrDangerHoverColor;
+    }
+    &:enabled:active {
+        background: $matrDangerHoverColor;
+    }
+    &:focus {
+        box-shadow: $matrDangerShadowColor;
+    }
+}
+/* Some Specail Case Buttons End */
+
+/* Same Width btns */
+.btn-w100 {
+    width: 100px !important;
+
+    .mati-btn-icon-sm {
+        float: right !important;
+    }
+}
+
+
+
+

@@ -1,0 +1,148 @@
+.study_filter-wrap {
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        .mat_v-line {
+            display: none;
+
+        }
+    }
+}
+
+.study_search-btns {
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        display: block;
+    }
+}
+
+.base_card {
+    .p-toolbar {
+        border: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+}
+
+
+.study-name-anchor {
+    color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+        color: $matiHelpHoverColor
+    }
+}
+
+.study_sorting-wrap,
+.study_search-btns,
+.study_filter-wrap {
+    .p-inputtext {
+        width: 95px !important;
+    }
+    .p-dropdown {
+        width: 130px !important;
+    }
+
+    .field {
+        margin-bottom: -20px !important;
+    }
+}
+
+
+.sortingDropdown {
+    .p-dropdown {
+        width: 100px !important;
+    }
+}
+
+.order-reconcile-form {
+    .field.col-12.sm\:col-6.md\:col-4.lg\:col-3 {
+        padding: 0 1rem !important;
+    }
+
+    .field {
+        margin-bottom: 0 !important;
+    }
+
+    .p-dropdown {
+        width: 100% !important;
+    }
+
+    .p-tabview {
+        .p-tabview-panels {
+            height: 450px !important;
+
+            @media only screen and (max-width: 767px) {
+                height: 100% !important;
+            }
+        }
+    }
+}
+
+.order-reconcile-dialog {
+    .p-dialog-content {
+        min-height: 450px !important;
+
+        @media only screen and (max-width: 767px) {
+            min-height: 100% !important;
+        }
+    }
+}
+
+.order-reconcile-confirm-dialog {
+    .p-dialog-content {
+        min-height: unset !important;
+    }
+}
+
+.order_img {
+    max-width: 160px;
+    max-height: 160px;
+    border: 1px solid $dividerColor;
+    border-radius: 5px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+}
+
+//Responsiveness
+@media screen and (max-width: 1300px) {
+    .matVline {
+        display: none;
+    }
+
+    .mat_hr {
+        margin-top: 30px !important;
+    }
+
+    .max-fit {
+        max-width: unset !important;
+    }
+
+    .dicom-btn-icon {
+        display: none;
+    }
+
+    .dicom-btn-text {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1301px) {
+    .matVline {
+      display: block;
+    }
+
+    .max-fit {
+        max-width: fit-content !important;
+    }
+
+    .dicom-btn-icon {
+        display: block;
+    }
+
+    .dicom-btn-text {
+        display: none;
+    }
+}

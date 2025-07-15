@@ -1,0 +1,244 @@
+<div class="">
+    <p-panel
+      *ngIf="!readonlyDocument && client.JobType != 'D'"
+      styleClass="study-documents-upload-panel"
+    >
+      <div class="document_upload_form">
+        <form
+          class="forms"
+          #uploadOrderDocumentForm="ngForm"
+          autocomplete="off"
+          (ngSubmit)="uploadOrderDocument(uploadOrderDocumentForm)"
+          novalidate
+        >
+          <div class="formgroup-inline">
+            <div class="field">
+              <label htmlFor="type" class="block mb-1">Type</label>
+              <p-dropdown
+                id="type"
+                [options]="documentTypedDopdownItems"
+                optionLabel="name"
+                
+                name="Type"
+                #TypeData="ngModel"
+                [(ngModel)]="orderDocumentRequest.TypeData"
+              ></p-dropdown>
+            </div>
+            <div class="field">
+              <label htmlFor="document" class="block mb-1">Select file</label>
+              <input
+                pInputText
+                id="document"
+                type="file"
+                name="File"
+                #FileData="ngModel"
+                [(ngModel)]="orderDocumentRequest.File"
+                multiple
+                accept="application/pdf,image/png,image/jpeg"
+                (change)="documentUploader($event)"
+              />
+              <!-- <div
+                  *ngIf="
+                    FileData?.invalid && (FileData.dirty || FileData.touched)
+                  "
+                >
+                  <div *ngIf="FileData.errors.required" class="error-text">
+                    File must don't have empty.
+                  </div>
+                </div> -->
+            </div>
+            <div class="field">
+              <label htmlFor="title" class="block mb-1">Title</label>
+              <input
+                class="min-w-575"
+                pInputText
+                id="title"
+                type="text"
+                placeholder="Enter Title"
+                name="Title"
+                #TitleData="ngModel"
+                [(ngModel)]="orderDocumentRequest.Title"
+              />
+              <!-- <div
+                  *ngIf="
+                    TitleData?.invalid && (FileData.dirty || FileData.touched)
+                  "
+                >
+                  <div *ngIf="TitleData.errors.required" class="error-text">
+                    Title is required.
+                  </div>
+                </div> -->
+            </div>
+            <button
+              type="submit"
+              class="mat-submit-btn mt-5"
+              pButton
+              icon="pi pi-upload"
+              label="Upload"
+              [disabled]="!uploadOrderDocumentForm.valid"
+            ></button>
+          </div>
+        </form>
+      </div>
+    </p-panel>
+  
+    <div class="my-3" *ngIf="!readonlyDocument && client.JobType != 'D'"></div>
+  
+    <div class="uploaded_document_list_table">
+      <p-table
+        #dt1
+        [value]="orderDocumentData"
+        dataKey="type"
+        [rows]="10"
+        [loading]="loading"
+        [rowHover]="true"
+        styleClass="p-datatable-gridlines"
+        [paginator]="true"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="max-w-150" pSortableColumn="Type">
+              Type <p-sortIcon field="Type"></p-sortIcon>
+            </th>
+            <th class="max-w-110" pSortableColumn="Format">
+              Format <p-sortIcon field="Format"></p-sortIcon>
+            </th>
+            <th pSortableColumn="Title">
+              Title <p-sortIcon field="Title"></p-sortIcon>
+            </th>
+            <th
+              [ngClass]="
+                readonlyDocument || client.JobType == 'D'
+                  ? 'max-w-30'
+                  : isStudyStatusFinal
+                  ? 'max-w-110'
+                  : ''
+              "
+              class="max-w-160"
+            >
+              Action
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-orderDocumentData>
+          <tr>
+            <td class="max-w-150">
+              {{ orderDocumentData.Type }}
+            </td>
+            <td class="max-w-110">
+              <div class="flex justify-content-center align-items-center">
+                <i
+                  class="mr-2"
+                  [ngClass]="
+                    orderDocumentData.Format === 'pdf'
+                      ? 'pi pi-file-pdf'
+                      : 'pi pi-image'
+                  "
+                ></i>
+                <span>({{ orderDocumentData.Format }})</span>
+              </div>
+            </td>
+            <td class="td-min-w">
+              {{ orderDocumentData.Title }}
+            </td>
+            <td
+              [ngClass]="
+                readonlyDocument || client.JobType == 'D'
+                  ? 'max-w-30'
+                  : isStudyStatusFinal
+                  ? 'max-w-110'
+                  : ''
+              "
+              class="max-w-160"
+            >
+              <button
+                pButton
+                type="button"
+                icon="pi pi-eye"
+                title="Preview the document"
+                class="p-button-rounded mr-2"
+                (click)="previewOrderDocument(orderDocumentData)"
+              ></button>
+              <button
+                *ngIf="!readonlyDocument && client.JobType != 'D'"
+                pButton
+                type="button"
+                icon="pi pi-cloud-download"
+                title="Download the document"
+                class="p-button-rounded p-button-success mr-2"
+                (click)="downloadOrderDocument(orderDocumentData.OrderDocumentId)"
+              ></button>
+              <button
+                *ngIf="
+                  !isStudyStatusFinal &&
+                  !readonlyDocument &&
+                  client.JobType != 'D'
+                "
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                title="Delete the document"
+                class="p-button-rounded p-button-danger "
+                (click)="deleteOrderDocument(orderDocumentData.OrderDocumentId)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4" class="text-center">No data found.</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="loadingbody">
+          <tr>
+            <td colspan="4" class="text-center">
+              Loading uploaded document data. Please wait.
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  
+  <!-- Preview Order Document Dialog -->
+  <p-dialog
+    header="Document view"
+    [(visible)]="displayPreviewOrderDocumentDialog"
+    [modal]="true"
+    [responsive]="true"
+    [minY]="70"
+    [maximizable]="false"
+    [style]="{ width: '80vw', height: '95vh' }"
+    [breakpoints]="{ '960px': '75vw' }"
+    [draggable]="false"
+  >
+    <div class="text-center document-img">
+      <img
+        *ngIf="documentFormatWiseView === 'img'"
+        [src]="docSafeURL"
+        alt="Document"
+        class="shadow-2 my-3 mx-3"
+      />
+    </div>
+    <iframe
+      *ngIf="documentFormatWiseView === 'pdf'"
+      [src]="docSafeURL"
+      class="ssrs-reportviewer"
+      style="width: 100%; height: 100vh; border: none; overflow-y: hidden"
+    ></iframe>
+  </p-dialog>
+  <!-- Preview Order Document Dialog -->
+  
+  <!-- Delete Order Document Confirmation Dialog -->
+  <p-confirmDialog
+    header="Confirmation"
+    key="deleteOrderDocument"
+    icon="pi pi-exclamation-triangle"
+    message="Are you sure you want to proceed?"
+    [style]="{ width: '350px' }"
+    acceptButtonStyleClass="p-button-text"
+    rejectButtonStyleClass="p-button-text"
+  ></p-confirmDialog>
+  <!-- Delete Order Document Confirmation Dialog -->
+  

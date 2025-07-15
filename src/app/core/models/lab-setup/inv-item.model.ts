@@ -1,0 +1,53 @@
+
+import { RisExamModel } from "../exam/ris-exam.model";
+import { InvCategoryModel } from "./inv-category.model";
+import { InvItemtypeModel } from "./inv-item-type.model";
+import { InvUnitModel } from "./inv-unit.model";
+import { InvVendorModel } from "./inv-vendor.model";
+import { RisExamconsumablesModel } from "./ris-exam-consumables.model";
+
+export class InvItemModel {
+  ItemId!: number;
+  ItemUid!: string;
+  ItemName!: string;
+  ItemDesc!: string;
+  ItemImg!: string;
+  ItemBarcode!: string;
+  CategoryId?: number;
+  TxnUnit?: number;
+  ReOrderDays?: number;
+  ReOrderQty?: number;
+  OrderLeadTime?: number;
+  IsForeign!: string;
+  IncludeInAutoPr!: string;
+  GlCode?: number;
+  IsFa!: string;
+  IsReusable!: string;
+  ReusePricePerc?: number;
+  VendorId?: number;
+  PurchasePrice?: number;
+  SellingPrice?: number;
+  AllowPartialDelivery!: string;
+  AllowPartialRecieve!: string;
+  WarningEmpty?: number;
+  DangerousEmpty?: number;
+  OrgId?: number;
+  CreatedBy?: number;
+  CreatedOn?: Date;
+  LastModifiedBy?: number;
+  LastModifiedOn?: Date;
+  ItemtypeId?: number;
+  UnitId?: number;
+  IsActive?: boolean;
+  IsTracking?: boolean;
+  InActiveOn?: Date;
+  InActiveBy?: number;
+  InActiveReason!: string;
+  Tag!: string;
+  Category!: InvCategoryModel;
+  InvVendor!: InvVendorModel;
+  Itemtype!: InvItemtypeModel;
+  Unit!: InvUnitModel;
+  RisExam!: RisExamModel[];
+  RisExamconsumables!: RisExamconsumablesModel[];
+}

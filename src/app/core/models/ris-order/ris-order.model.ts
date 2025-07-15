@@ -1,0 +1,43 @@
+import { HisRegistrationModel } from "../registration/his-registration.model";
+import { HrEmpModel } from "../user-models/hr-emp.model";
+import { RisOrderDtlModel } from "./ris-order-dtl.model";
+
+export class RisOrderModel {
+  rderId!: number;
+  regId!: number;
+  hn!: string;
+  visitNo!: string;
+  admissionNo!: string;
+  orderDt!: string;
+  scheduleId?: number;
+  insuranceTypeId?: number;
+  orderStartTime?: string;
+  refUnit?: number;
+  refDoc?: number;
+  patStatus!: string;
+  refDocInstruction!: string;
+  clinicalInstruction!: string;
+  reason!: string;
+  diagnosis!: string;
+  icdId?: number;
+  arrivalBy?: number;
+  arrivalOn?: string;
+  isCanceled!: string;
+  orgId?: number;
+  createdBy?: number;
+  createdOn?: string;
+  lastModifiedBy?: number;
+  lastModifiedOn?: string;
+  lmpDt?: string;
+  isReqonline!: string;
+  xrayNo!: string;
+  requestno!: string;
+  encId!: string;
+  encType!: string;
+  isPrinted!: string;
+  hosId?: number;
+  patClass!: string;
+  refDocNavigation!: HrEmpModel;
+  reg!: HisRegistrationModel;
+  risOrderdtl!: RisOrderDtlModel[];
+}

@@ -1,0 +1,162 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Exam Information</h5>
+			<p-table #dt1 [value]="examData" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['ExamUid','ExamName','SubspecialtyName','DepartmentName','AnalyzeritemName','ExamsampleName','RoomName','IsPanel','Rate']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-end mb-3">
+						<button pButton icon="pi pi-plus" label="Add Exam"
+						  (click)="openAddOrUpdateExamDialog('Add Exam', null)"></button>
+					  </div>
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+                        <th style="min-width: 12rem" *ngFor="let col of cols">
+							<div class="flex justify-content-between align-items-center">
+								{{col.header}}
+								<p-columnFilter type="text" field="{{col.field}}" display="menu" placeholder="Search by {{col.header}}"></p-columnFilter>
+							</div>
+						</th>
+            <th class="flex justify-content-between align-items-center">
+              Action
+            </th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-row>
+					<tr>
+						<td>
+							{{row.ExamId}}
+						</td>
+						<td>
+							{{row.ExamUid}}
+						</td>
+						<td>
+							{{row.ExamName}}
+						</td>
+					
+						<td>
+							{{row.Rate}}
+						</td>
+
+            <td>
+							{{row.SubspecialtyName}}
+						</td>
+					
+            <td>
+              <button pButton pRipple type="button" class="p-button-raised p-button-info mr-2" icon="pi pi-pencil"
+              title="Edit Exam Info." (click)="openAddOrUpdateExamDialog('Edit Exam', row)"></button>
+            </td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Org found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Org data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+
+</div>
+<!-- Exam Add/Edit Dialog START -->
+<p-dialog [header]="examAddOrUpdateContent" [(visible)]="isvisibleExamAddOrUpdateDialog"
+  (onHide)="closeExamAddOrUpdateDialog()" [modal]="true" [maximizable]="false" [style]="{ width: '70vw' }"
+  [breakpoints]="{ '960px': '75vw' }">
+  <div class="exam-add-update-wrapper">
+    <form [formGroup]="examAddOrUpdateForm" (ngSubmit)="onSubmitForAddOrEditExam()">
+      <div class="grid">
+        <div class="col-12 lg:col-4 md:col-4 sm:col-6" *ngIf="!(client.OrgType.toLowerCase() === 'hospital')">
+          <div class="field p-fluid">
+            <label for="OrgId" class="d-block">Site<span class="red">*</span></label>
+            <p-dropdown appendTo="body" id="OrgId" [options]="siteList" optionLabel="OrgName" optionValue="OrgId"
+              formControlName="OrgId" class="multiselect-custom" [filter]="true" placeholder="Select a Site"
+              >
+            </p-dropdown>
+            <div
+              *ngIf="examAddOrUpdateForm.controls['OrgId'].hasError('required') && (examAddOrUpdateForm.controls['OrgId'].touched || examAddOrUpdateForm.controls['OrgId'].dirty)">
+              <span class="error-text">This field is required</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 lg:col-4 md:col-4 sm:col-6">
+          <div class="field p-fluid">
+            <label for="ExamName" class="d-block">Exam Name<span class="red">*</span></label>
+            <input pInputText id="ExamName" type="text" formControlName="ExamName" placeholder="Exam Name"
+              (input)="generateExamUid()" />
+            <div
+              *ngIf="examAddOrUpdateForm.controls['ExamName'].hasError('required')  && (examAddOrUpdateForm.controls['ExamName'].touched || examAddOrUpdateForm.controls['ExamName'].dirty)">
+              <span class="error-text">This field is required</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 lg:col-4 md:col-4 sm:col-6">
+          <div class="field p-fluid">
+            <label for="ExamUid" class="d-block">Exam UID<span class="red">*</span></label>
+            <input pInputText id="ExamUid" type="text" formControlName="ExamUid" placeholder="Exam UID" />
+            <div
+              *ngIf="examAddOrUpdateForm.controls['ExamUid'].hasError('required') && (examAddOrUpdateForm.controls['ExamUid'].touched || examAddOrUpdateForm.controls['ExamUid'].dirty)">
+              <span class="error-text">This field is required</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 lg:col-4 md:col-4 sm:col-6">
+          <div class="field p-fluid">
+            <label for="SubspecialtyId" class="d-block">Subspecialty</label>
+            <p-dropdown appendTo="body" [options]="subSpecialtyList" optionLabel="SubspecialtyName"
+              optionValue="SubspecialtyId" formControlName="SubspecialtyId" [filter]="true"
+              placeholder="Select a Subspecialty">
+            </p-dropdown>
+            <div
+              *ngIf="examAddOrUpdateForm.controls['SubspecialtyId'].hasError('required') && (examAddOrUpdateForm.controls['SubspecialtyId'].touched || examAddOrUpdateForm.controls['SubspecialtyId'].dirty)">
+              <span class="error-text">This field is required</span>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+ 
+
+        <div class="col-12 lg:col-4 md:col-4 sm:col-6">
+          <div class="grid">
+            <div class="field col-7">
+              <label for="Rate" class="d-block">Rate<span class="red">*</span></label>
+              <input pInputText id="Rate" type="text" formControlName="Rate" placeholder="Exam Rate" />
+              <div
+                *ngIf="examAddOrUpdateForm.controls['Rate'].hasError('required') && (examAddOrUpdateForm.controls['Rate'].touched || examAddOrUpdateForm.controls['Rate'].dirty)">
+                <span class="error-text">This field is required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="field">
+            <p-button type="submit" icon="pi pi-send" label="Submit" [disabled]="!examAddOrUpdateForm.valid"></p-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-dialog>
+<!-- Exam Add/Edit Dialog END -->

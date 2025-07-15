@@ -1,0 +1,776 @@
+.study-worklist {
+  label {
+    font-size: 1em !important;
+    font-weight: 500 !important;
+  }
+  .d-block {
+    display: block !important;
+  }
+
+  .formgroup-inline {
+    align-items: center !important;
+  }
+
+  .td-wrap {
+    // width: 100px !important;
+    // word-wrap: break-word !important;
+    // white-space: break-spaces !important;
+    min-width: 105px;
+  }
+
+  .show_sticky {
+    position: relative;
+    width: 100%;
+
+    &-inner {
+      position: absolute;
+      top: -140px;
+      right: 0;
+    }
+  }
+
+  .study_import-btn {
+    button {
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 10px !important;
+      }
+    }
+  }
+
+  .p-frozen-column {
+    // justify-content: flex-end;
+  }
+
+  .p-datatable-resizable .p-datatable-thead > tr > th,
+  .p-datatable-resizable .p-datatable-tfoot > tr > td,
+  .p-datatable-resizable .p-datatable-tbody > tr > td {
+    // overflow: hidden;
+    // white-space: pre-line;
+  }
+
+  /* Start Table column align */
+
+  .p-datatable-resizable .p-datatable-tbody > tr > td {
+    white-space: unset;
+  }
+  .p-datatable-resizable .p-datatable-tbody > tr > td:first-child {
+    flex-basis: auto;
+    max-width: 100px;
+  }
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(6),
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(5),
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(6),
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(5)
+  //    {
+  //     flex-basis: auto;
+  //     max-width: 100px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(2){
+  //     max-width: 120px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(3){
+  //     max-width: 110px;
+  //   }
+  //   // Accessiion#
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(4){
+  //     max-width: 145px;
+  //   }
+  //   // Gender
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(5){
+  //     max-width: 105px;
+  //   }
+  //   // HN
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(6){
+  //     min-width: 160px;
+  //   }
+  //   // date of birth
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(9){
+  //     max-width: 130px;
+  //   }
+  //   // image
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(10){
+  //     max-width: 65px;
+  //   }
+  //     //patient td name
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(7)
+  //   {
+  //     min-width: 200px;
+  //   }
+  //       //patient td name (thai)
+  //   .p-datatable-resizable .p-datatable-tbody > tr > td:nth-child(8)
+  //   {
+  //     min-width: 215px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(3){
+  //     max-width: 110px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(4){
+  //     min-width: 140px;
+  //   }
+  // //HN
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(6){
+  //     min-width: 160px;
+  //   }
+  //   //patient th name
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(7),
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(8)
+  //   {
+  //     min-width: 200px;
+  //   }
+  //     //image th name
+  //     .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(10){
+  //       max-width: 118px;
+  //     }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(3) input.p-inputtext{
+  //       min-width: 95px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(4) input.p-inputtext{
+  //     min-width: 125px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(9) input.p-inputtext{
+  //     min-width: 99px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(10) input.p-inputtext{
+  //     min-width: 98px;
+  //   }
+  //   // Image
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(11) input.p-inputtext{
+  //     min-width: 98px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(12) input.p-inputtext{
+  //     min-width: 98px;
+  //   }
+  //   .p-datatable-resizable .p-datatable-thead>tr>th:nth-child(13) input.p-inputtext{
+  //     min-width: 99px;
+  //   }
+
+  /* End Table column align */
+
+  .p-button.p-button-icon-only.p-button-rounded {
+    height: 2rem;
+    width: 2rem;
+  }
+  .p-datatable .p-datatable-tbody > tr > td {
+    // padding: 0.5rem 0.3rem;
+    // white-space: unset;
+  }
+  .p-multiselect-label {
+    max-width: 235px;
+  }
+}
+
+.upload-dicom-dialog {
+  .p-dialog-content {
+    min-height: 520px;
+  }
+}
+
+.document_upload_form {
+  //min-height: 360px;
+  // max-height: 360px;
+  // overflow-y: unset;
+
+  .p-fileupload-row > div {
+    flex: unset;
+    width: unset;
+  }
+  .p-fileupload {
+    .p-fileupload-content {
+      padding: unset !important;
+    }
+  }
+
+  .p-fileupload {
+    .p-fileupload-buttonbar {
+      padding: 0.2rem 0.5rem !important;
+
+      .p-button {
+        font-size: 0.9rem !important;
+        padding: 0.3rem 0.75rem !important;
+      }
+    }
+  }
+  .files-upload-wrap,
+  .folder-upload-wrap {
+    .p-inputgroup {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-top: 1px solid #3f4b5b;
+      border-left: 1px solid #3f4b5b;
+      border-bottom: 1px solid #3f4b5b;
+      background: #2a323d;
+    }
+    .p-inputgroup-addon {
+      background: #2a323d;
+      color: rgba(255, 255, 255, 0.6);
+      border-top: 0;
+      border-left: 0;
+      border-bottom: 0;
+      border-right: 1px solid #3f4b5b;
+      padding: 0.5rem 0.75rem;
+      min-width: 3rem;
+      margin-right: 1rem;
+    }
+    .uploadFolder,
+    .uploadFiles {
+      width: 83%;
+      background-color: #2a323d;
+      font-size: 14px;
+      line-height: 32px;
+      overflow: hidden;
+      position: relative;
+      resize: none;
+
+      [type="file"] {
+        cursor: pointer !important;
+        display: block;
+        font-size: 999px;
+        filter: alpha(opacity=0);
+        min-height: 100%;
+        min-width: 100%;
+        opacity: 0;
+        position: absolute;
+        right: 0px;
+        text-align: right;
+        top: 0px;
+        z-index: 1;
+      }
+    }
+    .folderUplodBtn {
+      //width: 100px;
+    }
+  }
+}
+
+.ck.ck-content {
+  color: #111 !important;
+}
+
+.ql-tooltip.ql-hidden {
+  display: none !important;
+}
+
+.p-editor-container .p-editor-content .ql-editor {
+  padding-left: 10px !important;
+  padding-bottom: 25px !important;
+}
+
+.p-editor-container .p-editor-content.ql-snow {
+  border: 0 !important;
+}
+
+.report-action-btns {
+  button {
+    //min-width: 140px;
+    min-width: 125px;
+  }
+  .critical-attentiion {
+    button {
+      min-width: 210px !important;
+      //min-width: 150px;
+    }
+  }
+
+  .view-img {
+    float: right;
+  }
+
+  .reporting-template {
+    button {
+      min-width: 20px;
+    }
+  }
+}
+
+.toggle-scoring {
+  display: grid;
+  button,
+  .p-dropdown {
+    //min-width: 125px;
+    //min-width: 160px;
+    // min-width: 180px;
+    // max-width: 180px;
+    min-width: 225px;
+    max-width: 225px;
+    min-height: 35px;
+  }
+}
+
+.ranking-close-btn {
+  margin-right: 15px;
+  cursor: pointer;
+  z-index: 1060 !important;
+  background: transparent;
+}
+
+.findings-dialog {
+  .p-dialog-content {
+    // overflow-y: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 614.4px) {
+  .findings-dialog {
+    .p-dialog-content {
+      overflow-y: auto !important;
+    }
+  }
+}
+
+.findings_panel {
+  .p-panel {
+    .p-panel-header {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+  }
+}
+
+.report-document-panel {
+  .p-panel {
+    .p-panel-header {
+      padding-top: 0;
+      padding-bottom: 0;
+      border: 0;
+    }
+    .p-panel-content {
+      padding: 0;
+      border: 0;
+    }
+  }
+  .p-tabview {
+    .p-tabview-panels {
+      padding-left: 0;
+    }
+  }
+
+  .p-tabview .p-tabview-panels {
+    padding-right: 0;
+  }
+}
+
+.document-grid {
+  .p-panel-header {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: 0;
+  }
+}
+
+.save-and-submit-study-worklist {
+  min-height: 580px;
+  max-height: 580px;
+}
+
+.study-documents-in-study-update,
+.study-documents-upload-panel {
+  .p-panel-header {
+    padding: 0.2rem 1.25rem !important;
+    border-bottom: 0 !important;
+  }
+}
+
+.save-and-submit-btn {
+  min-width: 15rem !important;
+}
+
+.assign-to-radiologist-option-btn {
+  min-width: 18px !important;
+  max-width: 18px !important;
+}
+
+.addendum-ckEditor,
+.finalized-report-view-for-addendum.ckEditor {
+  .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
+  .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}
+
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred,
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
+  background-color: #c3cedb;
+  //border: 0;
+}
+
+.slider-rating-wrap,
+.slider-complexity-rating-wrap {
+  display: block;
+  width: 100%;
+  max-width: 120px;
+  .rating-slider {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+.slider-complexity-rating-wrap {
+  max-width: 200px;
+  min-width: 200px;
+  //max-width: 120px;
+}
+
+.rating-max-w {
+  max-width: 150px;
+  min-width: 150px;
+  // min-width: 120px;
+  // max-width: 120px;
+}
+
+.score-title,
+.clinical-title {
+  color: #fff;
+}
+
+.score-title {
+  background-color: #5e81ac !important;
+  border: 1px solid #5e81ac !important;
+}
+
+.clinical-title {
+  background-color: #0dcaf0 !important;
+  border: 1px solid #0dcaf0 !important;
+}
+
+.score-wrap {
+  max-height: 320px;
+}
+
+.score-list,
+.clinical-list {
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      border-bottom: 1px solid #5e81ac;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      min-height: 95px;
+    }
+  }
+}
+
+.score-td {
+  width: 235px;
+}
+.scoring-scroll {
+  max-height: 330px;
+  overflow-y: auto;
+}
+
+.tatColorCode {
+  padding: 0.5rem;
+  border-radius: 2px;
+}
+
+.study-status-wrap {
+  text-align: right;
+  padding: 0.25em 0.1rem !important;
+}
+
+.study-status-badge {
+  text-align: center;
+}
+
+.study-reset,
+.study-draft,
+.study-addendum {
+  margin-bottom: 5px;
+  span {
+    padding: 0.25em 0.3rem;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 0.5rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+  }
+}
+
+.study-reset {
+  //margin-left: 60px;
+  // margin-left: 70px;
+  span {
+    //background-color: #dc3545;
+  }
+}
+
+.study-draft {
+  //margin-top: -5px;
+  //margin-left: 48px;
+  // margin-left: 58px;
+  span {
+    color: #212529;
+    background-color: #ffc107;
+  }
+}
+
+.study-addendum {
+  //margin-left: 20px;
+  // margin-left: 30px;
+  //margin-top: -5px;
+  span {
+    color: #212529;
+    background-color: #0dcaf0;
+  }
+}
+
+.study-workflow-anchor {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.87);
+  &:hover {
+    color: #5e81ac;
+  }
+}
+
+.study-tracking-wrap {
+  height: 100%;
+  padding-bottom: 1rem;
+}
+
+.study-tracking-item,
+.study-tracking-item-bold,
+.study-tracking-item-block {
+  time,
+  em {
+    display: block;
+  }
+}
+
+.study-tracking-name,
+.study-tracking-info {
+  p,
+  span {
+    display: block;
+  }
+}
+
+.study-flag-visibility {
+  opacity: 0;
+}
+
+.quick-study-stats {
+  color: #5e81ac;
+}
+
+.study-tracking-header {
+  .row-label {
+    min-width: 120px !important;
+    max-width: 120px !important;
+  }
+
+  .row-label-divider {
+    min-width: 20px;
+  }
+}
+
+.study-tracking-from-public {
+  overflow-x: hidden;
+  .grid {
+    margin: 0 !important;
+  }
+}
+
+// .main-study-report-patient-info-part,
+.study-reset-report-panel {
+  .p-panel {
+    .p-panel-header {
+      border-bottom: 0 !important;
+    }
+  }
+
+  &-header,
+  .header-wrap {
+    margin-top: -30px;
+  }
+}
+
+.dropdown-invalid {
+  margin-top: -12px;
+}
+
+.study-review-label,
+.reporting-template,
+.study-report-template,
+.study-reporting-template-wrap {
+  .field.grid > label {
+    display: block;
+    align-items: start;
+  }
+
+  .p-dialog .p-dialog-footer {
+    margin-top: -35px;
+    border: 0;
+  }
+}
+
+.reporting-template-dropdown {
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    background: #1ab587 !important;
+    margin-bottom: 4px !important;
+  }
+}
+
+.reporting-template-dropdown-zindex {
+  z-index: 1050 !important;
+}
+
+.study-reporting-template-bg {
+  .p-dialog {
+    .p-dialog-header {
+      border-bottom: 1px solid #333;
+      background: #20252e;
+    }
+    .p-dialog-content {
+      background: #20252e;
+    }
+  }
+}
+
+.findings-dialog {
+  .p-dialog {
+    //max-height: 98% !important;
+  }
+}
+
+.study-summary-dialog {
+}
+
+.review-btn-wrap {
+  // margin-bottom: 5px;
+  .p-button.p-button-icon-only {
+    width: 1.5rem;
+    height: 1rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  // .review-btn-thumbs-up {
+  //   background: transparent !important;
+  //   border: 0 !important;
+  // }
+}
+
+.review-action-btn {
+  .review-btn-thumbs-up {
+    padding: 0.25em 0.3rem;
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 0.5rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    // color: #fff;
+    // background-color: #5d7fac;
+    color: #2a323d;
+    background-color: #f97c6b;
+    cursor: pointer;
+  }
+}
+
+.review-btn {
+  margin-bottom: -10px;
+  margin-left: -10px !important;
+  background: transparent !important;
+  border: 0 !important;
+  .pi {
+    font-size: 0.85rem;
+    color: #f97c6b;
+  }
+}
+
+.review-details-textarea {
+  textarea {
+    resize: none;
+  }
+}
+
+.study-review-label {
+  .p-panel-header {
+    border-bottom: 0 !important;
+  }
+}
+
+.main-study-report-matrics,
+.main-study-report-ranking {
+  .p-panel .p-panel-content {
+    //min-height: 155px;
+    //min-height: 160px;
+    min-height: 167px;
+    max-height: 100%;
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      min-height: 240px;
+    }
+  }
+}
+
+.exam-quality-lebel {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exam-info-grid-table {
+  .p-datatable-resizable-table > .p-datatable-thead > tr > th,
+  .p-datatable-resizable-table > .p-datatable-tfoot > tr > td,
+  .p-datatable-resizable-table > .p-datatable-tbody > tr > td {
+    overflow: hidden;
+    white-space: pre-line !important;
+  }
+}
+
+.report-viewer-paramerters {
+  .report-viewer-daterange {
+    .p-calendar-w-btn {
+      width: 100% !important;
+    }
+  }
+}
+
+.dynamic-report-fields-wrap {
+  .p-dropdown,
+  .p-multiselect {
+    width: 100% !important;
+  }
+}
+
+.study-report-viewer {
+  .filter_wrap {
+    width: 100%;
+  }
+}
+
+.patient-information-panel {
+  .patient-validity {
+    position: relative;
+
+    &-btn {
+      position: absolute;
+      right: 0;
+      top: -60px;
+    }
+  }
+
+  .p-panel-header {
+    padding: 1.3rem 1.25rem !important;
+  }
+}
+
+.fetch-from-wrap {
+  position: relative;
+
+  &-inner {
+    position: absolute;
+    right: 0;
+    top: -49px;
+  }
+}

@@ -1,0 +1,243 @@
+.dr-profile {
+  //font-family: "Roboto";
+
+  &_cover-photo {
+    height: 210px;
+    border-radius: 15px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    border: 2px solid #252c39;
+    //   transform: matrix(-1, 0, 0, 1, 0, 0);
+
+    &-update {
+      position: relative;
+
+      &-position {
+        position: absolute;
+        right: 20px;
+        top: 160px;
+      }
+
+      &-btn {
+        font-size: 12px;
+        font-weight: 500;
+        font-style: normal;
+        padding: 8px 12px;
+        border-radius: 8.5px;
+        color: rgba(255, 255, 255, 0.67);
+        background: rgba(30, 37, 47, 0.32);
+
+        &:hover {
+          background: rgba(15, 18, 20, 0.32);
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &-inner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  &_wrap {
+    margin-top: -100px;
+    &-area {
+      width: 162px;
+      height: 162px;
+      background: #1e252f;
+      border-radius: 12px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      margin-bottom: 10px;
+
+      img {
+        width: 98px;
+        height: 96px;
+      }
+    }
+
+    &-update-btn {
+      font-size: 10px;
+      font-weight: 400;
+      font-style: normal;
+      padding: 5px 7px;
+      border-radius: 3.5px;
+      color: #fc6b6b;
+      background: transparent;
+      &:hover {
+        background: #fc6b6b;
+        color: #fff;
+      }
+    }
+  }
+
+  &-desc {
+    margin-top: -85px !important;
+    margin-left: 180px !important;
+
+    .profile-rating {
+      margin-top: -8px;
+    }
+  }
+
+  &-about {
+    //margin-top: 35px;
+    margin-top: 25px;
+  }
+
+  &-details {
+    //margin-top: 5px;
+  }
+
+  &-bottom {
+    //margin-top: 5px;
+    &-chart-title {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #bcbcbc;
+    }
+  }
+
+  .card {
+    background: #252c39;
+    border-radius: 8px;
+  }
+
+  .socials-links {
+    margin-top: -40px;
+    text-align: right;
+    ul {
+      li {
+        list-style: none;
+        display: inline-block;
+      }
+    }
+    i {
+      color: #04c68a;
+    }
+  }
+}
+
+.dr-profile-title-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #efefef;
+}
+
+.dr-profile-sub-title-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #bcbcbc;
+  text-align: justify;
+}
+
+.dr-profile-btn {
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.2s;
+}
+
+.rad-profile-edit-btn {
+  background: transparent;
+  border: none;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 8px;
+  color: #fc6b6b;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 3.5px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: #fc6b6b;
+    color: #fff;
+  }
+}
+
+.edit-panel-wrap {
+  label {
+    display: block;
+  }
+  textarea {
+    resize: none;
+  }
+  .p-inputtext {
+    width: 100%;
+  }
+  .p-dropdown,
+  .p-multiselect {
+    width: 100% !important;
+  }
+}
+
+.rad-cover-photo-upload-wrap {
+  img {
+    width: 100%;
+  }
+}
+
+.twofa-panel-wrap {
+  .qrcode {
+    margin: 0 auto;
+    height: 256px;
+    width: 256px;
+    padding: 5px;
+  }
+
+  button {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+.auth_icon {
+  width: 50px;
+  margin-bottom: 5px;
+}
+
+.auth_icon_p {
+  width: 20px;
+  margin-bottom: 5px;
+}
+.authenticator-process {
+  float: left;
+  margin-right: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.play-store-download-link a {
+  //background-color: rgb(226 245 242 / 50%);
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-right: 2px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.twofa-actions {
+  margin-left: -120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

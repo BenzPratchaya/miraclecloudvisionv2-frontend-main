@@ -1,0 +1,107 @@
+.singup h1 {
+  margin-bottom: 40px;
+}
+.signup-logo {
+  max-width: 80vw;
+  margin: 0 auto;
+  img {
+    //max-width: 200px;
+    //max-width: 180px;
+    max-width: 115px;
+    margin-top: 25px;
+    width: 100px;
+  }
+}
+.singup {
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-top: 1%;
+}
+.send-verfication {
+  width: 160px;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+.otp-container {
+  // max-width: 1000px;
+  // margin: 0 auto;
+}
+.check-mark i {
+  color: green;
+  position: absolute;
+  top: 11px;
+  right: 20px;
+}
+.otp-email {
+  margin-left: 10px;
+}
+.otp-phone {
+  margin-left: 100px;
+}
+.singup-top {
+  max-width: 80vw;
+  margin: auto;
+}
+
+.singup-top ul {
+  list-style: none;
+  margin: 0;
+  li {
+    display: inline-block;
+    line-height: 80px;
+    a {
+      font-size: 1rem;
+      color: #808da3;
+      padding-left: 2em;
+      padding-right: 2em;
+      transition: all 0.2s linear;
+    }
+  }
+}
+.singup-top ul li:last-child a {
+  padding-right: 0;
+}
+.singup-top ul li:hover a {
+  color: #fff;
+}
+.hospital-email-input input {
+  width: 87%;
+}
+.site-admin {
+  // border: 1px solid #3f4b5b;
+  border: 1px solid #477a47;
+  padding: 6px;
+  max-width: 130px;
+  border-radius: 5px;
+}
+
+.package-subscription-table {
+  tr {
+    th,
+    td {
+      min-width: 120px !important;
+    }
+  }
+
+  .package-btns {
+    button {
+      min-width: 100px !important;
+    }
+  }
+}
+
+
+
+.login-with-qrcode-wrap {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+}
+

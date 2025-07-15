@@ -1,0 +1,455 @@
+<div
+    [class]="'login-body flex min-h-screen  '+(layoutService.config.colorScheme === 'light' ? 'layout-light':'layout-dark')">
+    <div class="login-image w-6 h-screen hidden md:block" style="max-width: 490px;">
+        <img [src]="'assets/layout/images/pages/login-'+ (layoutService.config.colorScheme === 'dark' ? 'ondark' : 'onlight') + '.png'"
+            alt="atlantis" class=" h-screen w-full">
+    </div>
+    <div class="login-panel w-full" style="background:var(--surface-ground)">
+        <div class="p-fluid min-h-screen bg-auto md:bg-contain bg-no-repeat text-center w-full flex align-items-center md:align-items-start justify-content-center flex-column bg-auto md:bg-contain bg-no-repeat"
+            style=" padding: 20% 10% 20% 10%;background:var(--exception-pages-image)">
+         
+<div >
+    <div class="singup-top grid">
+        <div class="col-12 md:col-4">
+          <div class="signup-logo">
+            <img src="assets/app_images/logo/cloud-vision.png" alt="cloud Vision 2"/>
+          </div>
+        </div>
+        <div class="col-12 md:col-8 text-right">
+          <ul>
+            <!-- <li><a href="https://radportal.net/">HOME</a></li>
+            <li><a href="https://radportal.net/#about">ABOUT</a></li>
+            <li><a href="https://radportal.net/#contact">CONTACT US</a></li> -->
+          </ul>
+        </div>
+      </div>
+      
+      <div class="singup hospital-signup">
+        <div class="text-center">
+          <h2 class="mt-50 mb-5">Sign up as Healthcare Service Provider</h2>
+        </div>
+      
+        <form [formGroup]="orgForm">
+          <p-card styleClass="patient-information-panel">
+            <div class="p-formgrid grid" *ngIf="!IsVerifySuccessfull">
+              <div class="field col-8 col-offset-2">
+                <div class="grid">
+                  <div class="col-12 sm:col-12 md:col-12 lg:col-5">
+                    <div class="mb-2">
+                      <label for="email">Email</label>
+                    </div>
+      
+                    <div>
+                        <!-- *ngIf="IsVerifySuccessfull == true" -->
+                      <input style="width: 100%" (keyup)="checkEmail($event)" *ngIf="IsVerifySuccessfull == true" type="email"
+                        [disabled]="true" pInputText formControlName="Email" [(ngModel)]="selectedEmail" placeholder="Email" />
+                        <!--  *ngIf="IsVerifySuccessfull" -->
+                      <input style="width: 100%" (keyup)="checkEmail($event)" type="email" *ngIf="IsVerifySuccessfull"
+                        pInputText formControlName="Email" [(ngModel)]="selectedEmail"
+                        placeholder="Email" />
+                      <i *ngIf="IsVerifySuccessfull == true" style="color: green" class="pi pi-check-circle"></i>
+                    </div>
+      
+                    <div class="mt-2" *ngIf="
+                        orgForm.controls['Email'].hasError('dirty') && IsEmailVerified == false
+                      ">
+                      Email verification failed!
+                    </div>
+      
+                    <p-message severity="error" *ngIf="emailExists && orgForm.controls['Email'].hasError('dirty')"
+                      class="danger exist-email mt-2" text="Email already exists."></p-message>
+      
+                  </div>
+      
+                  <div class="col-12 sm:col-12 md:col-12 lg:col-5" *ngIf="
+                      IsSentVerificationCode == true && IsVerifySuccessfull != true
+                    ">
+                    <div class="mb-2">
+                      <label for="typeCode">Type Code</label>
+                    </div>
+                    <div class="otp-wrap">
+                      <ng-otp-input id="typeCode" #ngOtpInputEmail (onInputChange)="onEmailOtpChange($event)"
+                        [config]="{ length: 6 }"></ng-otp-input>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 sm:col-12 md:col-12 lg:col-2 mt-3">
+                    <div class="mt-15" *ngIf="
+                        IsCountDownTimeOut == false &&
+                        (IsVerifySuccessfull == false || IsVerifySuccessfull == null)
+                      ">
+                      {{ display }}
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="flex">
+                      <p-checkbox formControlName="TearmAndCondition" name="TearmAndCondition" [binary]="true"
+                        [(ngModel)]="selectedTermAndCon"></p-checkbox>
+                      <div *ngIf="config.setting.TermsAndConditions" class="ml-3"
+                        [innerHTML]="config.setting.TermsAndConditions">
+      
+                      </div>
+                      <!-- {{config.setting.TermsAndConditions}} -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="p-fluid grid" *ngIf="IsVerifySuccessfull">
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid relative check-mark hospital-email-input">
+                  <label *ngIf="IsVerifySuccessfull != true" htmlfor="lastname"
+                    class="col-12 mb-2 md:col-3 md:mb-0">Email</label>
+      
+                  <label *ngIf="IsVerifySuccessfull == true" htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Hospital
+                    Email</label>
+                  <div class="col-12 md:col-9">
+                    <!-- *ngIf="IsVerifySuccessfull == true" -->
+                    <input (keyup)="checkEmail($event)"  type="email" [disabled]="true" *ngIf="IsVerifySuccessfull == true"
+                      pInputText formControlName="Email" [(ngModel)]="selectedEmail" placeholder="Email" />
+                      <!-- *ngIf="IsVerifySuccessfull == false" -->
+                    <input (keyup)="checkEmail($event)" type="email"  pInputText *ngIf="!IsVerifySuccessfull == false"
+                      formControlName="Email" [(ngModel)]="selectedEmail" placeholder="Email" />
+                    &nbsp;
+                    <!-- *ngIf="IsCountDownTimeOut == false && (IsVerifySuccessfull == false || IsVerifySuccessfull == null)" -->
+                    <span *ngIf="IsCountDownTimeOut == false && (!IsVerifySuccessfull == false || !IsVerifySuccessfull == null)">
+                        {{ display }}
+                      </span>
+                
+      
+                    <i *ngIf="IsVerifySuccessfull == true" style="color: green" class="pi pi-check-circle"></i>
+                  </div>
+      
+                  <div *ngIf="
+                      orgForm.controls['Email'].hasError('dirty') && IsEmailVerified == false
+                    ">
+                    Email verification failed!
+                  </div>
+      
+                  <p-message severity="error" *ngIf="emailExists && orgForm.controls['Email'].hasError('dirty')"
+                    class="danger exist-email" text="Email already exists."></p-message>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="site-admin">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Site Admin
+                  </label>
+                  <p-badge value="i" pTooltip="Site Admin Infomation" styleClass="mr-2"></p-badge>
+                </div>
+              </div>
+            </div>
+      
+            <!-- details start from here -->
+            <div class="p-fluid grid" *ngIf="IsVerifySuccessfull">
+              <div class="col-12 md:col-1"></div>
+              <div class="col-12 md:col-4">
+                <div class="field grid signup-input-wrapper">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Hospital Name <span
+                      class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="HospitalName" [(ngModel)]="selectedHospitalName"
+                      placeholder="Hospital Name" />
+                  </div>
+                </div>
+                <div class="field grid signup-input-wrapper">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Web URL</label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="WebUrl" [(ngModel)]="selectedWebUrl"
+                      placeholder="Web Url" />
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="firstname" class="col-12 mb-2 md:col-3 md:mb-0">Tel no</label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="HospitalTelNo" [(ngModel)]="selectedTelNo"
+                      placeholder="Tel no" />
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Line ID</label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="LineId" [(ngModel)]="selectedLineId"
+                      placeholder="Line ID" />
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Country</label>
+                  <div class="col-12 md:col-9">
+                    <p-dropdown [options]="countryList" [(ngModel)]="selectedCountry" formControlName="Country"
+                      (onChange)="loadProvince()" placeholder="Select a country" optionLabel="CountryName"
+                      [showClear]="true"></p-dropdown>
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Province</label>
+                  <div class="col-12 md:col-9">
+                    <p-dropdown [options]="ProvinceList" [(ngModel)]="selectedProvince" (onChange)="loadDistrict()"
+                      formControlName="Province" placeholder="Select a Province" optionLabel="ProvinceName"
+                      [showClear]="true"></p-dropdown>
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">District</label>
+                  <div class="col-12 md:col-9">
+                    <p-dropdown [options]="districtList" [(ngModel)]="selectedDistrict" formControlName="District"
+                      (onChange)="loadSubDistrict()" placeholder="Select a District" optionLabel="DistrictName"
+                      [showClear]="true"></p-dropdown>
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Sub-District</label>
+                  <div class="col-12 md:col-9">
+                    <p-dropdown [options]="SubDistrictList" [(ngModel)]="selectedSubDistrict" formControlName="SubDistrict"
+                      placeholder="Select a Sub-District" optionLabel="SubdistrictName" [showClear]="true"></p-dropdown>
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Zip Code</label>
+                  <div class="col-12 md:col-9">
+                    <p-dropdown [options]="postalCodeList" [(ngModel)]="selectedZipCode" formControlName="ZipCode"
+                      placeholder="Select a Zip Code" [showClear]="true">
+                      <ng-template let-item pTemplate="item">
+                        <span>{{item.PlaceName}} ({{item.PostalCode}})</span>
+                      </ng-template>
+                      <ng-template let-selectedZipCode pTemplate="selectedItem">
+                        <span>{{selectedZipCode.PlaceName}} ({{selectedZipCode.PostalCode}})</span>
+                      </ng-template>
+                    </p-dropdown>
+                  </div>
+                </div>
+      
+                <div class="rad-profile">
+                  <label for="">Hospital Logo</label>
+                  <p-image [src]="profileImageUrl" alt="Image" width="250" [preview]="false"></p-image>
+      
+                  <p-fileUpload class="ui-state-focus" name="myFile[]" [customUpload]="true"
+                    (uploadHandler)="myUploaderForHospitalLogo($event)" (onUpload)="onUploadHospitalLogo($event)" [auto]="true"
+                    accept="image/*">
+                  </p-fileUpload>
+                </div>
+              </div>
+              <div class="col-12 md:col-1"></div>
+      
+              <div class="col-12 md:col-4">
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">First Name<span class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="FName" [(ngModel)]="selectedFName"
+                      placeholder="First Name" />
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Last Name<span class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="LName" [(ngModel)]="selectedLName"
+                      placeholder="Last Name" />
+                  </div>
+                </div>
+                <div class="field grid signup-input-wrapper">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Password <span class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <p-password [(ngModel)]="selectedPassword" formControlName="Password" [toggleMask]="true"></p-password>
+                  </div>
+                </div>
+                <div class="field grid signup-input-wrapper">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Confirm Password <span
+                      class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <p-password [(ngModel)]="selectedConfirmPassword" formControlName="ConfirmPassword"
+                      [toggleMask]="true"></p-password>
+                  </div>
+      
+                  <div *ngIf="
+                      orgForm.controls['ConfirmPassword'].hasError('dirty') &&
+                      orgForm.hasError('mismatch')
+                    ">
+                    Password mismatch
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Tel no</label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="SiteAdminTelNo" [(ngModel)]="selectedSiteAdminTelNo"
+                      placeholder="Tel no" />
+                  </div>
+                </div>
+                <div class="field grid">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Line Id</label>
+                  <div class="col-12 md:col-9">
+                    <input type="text" pInputText formControlName="SiteAdminLineId" [(ngModel)]="selectedSiteAdminLineId"
+                      placeholder="Line Id" />
+                  </div>
+                </div>
+      
+                <div class="rad-profile">
+                  <label for="">Profile Picture</label>
+                  <p-image [src]="profileImageUrl" alt="Image" width="250" [preview]="false"></p-image>
+      
+                  <p-fileUpload class="ui-state-focus" name="myFile[]" [customUpload]="true"
+                    (uploadHandler)="myUploader($event)" (onUpload)="onUpload($event)" [auto]="true" accept="image/*">
+                  </p-fileUpload>
+                </div>
+      
+                <!-- Decision Make as A Reffering Hospital or Imaging Hospital -->
+                <div class="field">
+                  <div class="flex">
+                    <p class="mr-1">I am a Referring Hospital</p>
+                    <p-inputSwitch class="nmt-9" (onChange)="referringHospitalShow($event)"></p-inputSwitch>
+                  </div>
+                </div>
+                <!-- Decision Make as A Reffering Hospital or Imaging Hospital -->
+      
+                <div class="field grid" *ngIf="!isVisiblePackage">
+                  <label htmlfor="lastname" class="col-12 mb-2 md:col-3 md:mb-0">Apply Hospital<span
+                      class="red">*</span></label>
+                  <div class="col-12 md:col-9">
+                    <p-multiSelect [options]="siteList" [(ngModel)]="selectedSite" formControlName="OrgIdS"
+                      placeholder="Select Hospital" optionLabel="OrgName" [showClear]="true" [filter]="true"></p-multiSelect>
+                  </div>
+                </div>
+      
+                <!-- Pacakge Start -->
+                <div class="field grid" *ngIf="isVisiblePackage">
+                  <label htmlfor="lastname" class="col-12">Please Select a Package<span class="red">*</span></label>
+                  <div class="col-12">
+                    <div class="package-subscription-table-for-hospital-reg">
+                      <section class="pricing-plans">
+                        <span *ngFor="let col of packageList">
+                          <div class="pricing-card" [ngClass]="
+                              col.PackageName === 'BASIC' &&
+                              col.PackageId == selectedPackage.PackageId
+                                ? 'basic pricing-card-hover'
+                                : col.PackageName === 'BASIC'
+                                ? 'basic'
+                                : col.PackageName === 'PRO' &&
+                                  col.PackageId == selectedPackage.PackageId
+                                ? 'standard pricing-card-hover'
+                                : col.PackageName === 'PRO'
+                                ? 'standard'
+                                : col.PackageName === 'ULTRA' &&
+                                  col.PackageId == selectedPackage.PackageId
+                                ? 'premium pricing-card-hover'
+                                : col.PackageName === 'ULTRA'
+                                ? 'premium'
+                                : ''
+                            ">
+                            <div class="heading">
+                              <h4>{{ col.PackageName }}</h4>
+                            </div>
+                            <p class="price">
+                              ฿ {{ col.Rate }}
+                              <sub>/Study</sub>
+                            </p>
+                            <ul class="features">
+                              <li *ngIf="col.IsReporting">
+                                <i class="pi pi-check"></i>
+                                Reporting
+                              </li>
+                              <li *ngIf="col.IsScheduling">
+                                <i class="pi pi-check"></i>
+                                Scheduling
+                              </li>
+                              <li *ngIf="col.IsPatientPortal">
+                                <i class="pi pi-check"></i>
+                                Patient Portal
+                              </li>
+                              <li>
+                                <i class="pi pi-check"></i>
+                                Data Retention {{ col.DataRetentionDay }} Days
+                              </li>
+                              <li>
+                                <i class="pi pi-check"></i>
+                                Analytics {{ col.AnalyticsType }}
+                              </li>
+                            </ul>
+                            <button type="button" class="cta-btn" (click)="packageSelected(col)">
+                              {{
+                              col.PackageId == selectedPackage.PackageId
+                              ? "SELECTED"
+                              : "SELECT"
+                              }}
+                            </button>
+                          </div>
+                        </span>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+                <!-- Pacakge End -->
+              </div>
+            </div>
+            <!-- details ends here -->
+          </p-card>
+      
+          <div class="p-formgrid grid mt-2" *ngIf="IsVerifySuccessfull">
+            <div class="col-12 md:col-9">
+              <!-- <p-checkbox formControlName="TearmAndCondition" name="groupname" value="val1"
+                [(ngModel)]="selectedTermAndCon"></p-checkbox>{{config.setting.TermsAndConditions}} -->
+            </div>
+            <div class="col-12 md:col-3 text-right">
+              <div *ngIf="isVisiblePackage; else withoutPackageElseBlock">
+                <p-button icon="pi pi-check" label="Finish" [disabled]="
+                    !orgForm.valid || !isPackageSelect
+                  " (onClick)="saveOrUpdateHospital()"></p-button>
+              </div>
+              <ng-template #withoutPackageElseBlock>
+                <p-button icon="pi pi-check" label="Finish" [disabled]="!orgForm.valid"
+                  (onClick)="saveOrUpdateHospital()"></p-button>
+              </ng-template>
+            </div>
+          </div>
+      
+          <div class="send-verfication text-center mt-50">
+            <p-button icon="pi pi-send" [disabled]="isSendOTPbutton || !orgForm.get('TearmAndCondition').value"
+              *ngIf="!IsSentVerificationCode" label="Send Verification" (onClick)="sentVerificationCode()">
+            </p-button>
+          </div>
+      
+          <div class="confirm-second-step mt-50" *ngIf="IsVerifySuccessfull != true && IsSentVerificationCode == true">
+            <div class="grid verify-btn">
+              <div class="col-12 md:col-5"></div>
+      
+              <div class="resend-btn" *ngIf="showOrHideResendButton == true && IsVerifySuccessfull == false">
+                <p-button icon="pi pi-send" label="Resend Verification Code" (onClick)="sentVerificationCode()"></p-button>
+              </div>
+      
+              <div class="verify-btn" readOnly="!orgForm.get('TearmAndCondition').value"
+                *ngIf="showOrHideResendButton != true && IsVerifySuccessfull == false">
+                <p-button icon="fa fa-check-square-o" label="Confirm" (onClick)="VerifyOtp()"></p-button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+</div>
+            <div class="login-footer flex align-items-center absolute" style="bottom: 75px;">
+                <div
+                    class="flex align-items-center login-footer-logo-container pr-4 mr-4 border-right-1 surface-border">
+                    <img src="assets/app_images/logo/cloud-vision.png" class="login-footer-logo" style="width: 22px;" />
+                </div>
+                <span class="text-sm text-color-secondary mr-3">Copyright 2024 &copy; Miracle Advance Technology</span>
+            </div>
+        </div>
+           
+    </div>
+</div>
+
+
+
+
+
+  
+
+
+
+
+<!-- PRELOADER START -->
+<div *ngIf="showSpinner" class="layout-preloader-container">
+    <div class="layout-preloader">
+        <span></span>
+    </div>
+</div>
+<!-- PRELOADER END -->

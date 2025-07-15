@@ -1,0 +1,94 @@
+<div class="custom-card">
+    <form [formGroup]="jobTypeForm" autocomplete="off">
+        <div style="min-height: 100px">
+            <div class="p-fluid p-formgrid grid">            
+      
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeUid" class="col-12 mb-2 md:col-4 md:mb-0">Job Type UID<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <input type="text" id="JobTypeUid" formControlName="JobTypeUid" pInputText placeholder="Job Type UID" name="JobTypeUid"/>
+                      <div *ngIf="
+                      !jobTypeForm.get('JobTypeUid').valid &&
+                      jobTypeForm.get('JobTypeUid').errors?.['required'] &&
+                      (jobTypeForm.get('JobTypeUid').dirty ||
+                      jobTypeForm.get('JobTypeUid').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                 
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeName" class="col-12 mb-2 md:col-4 md:mb-0">Job Type Name<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <input type="text" id="JobTypeName" formControlName="JobTypeName" pInputText placeholder="Job Type Name" name="JobTypeName"/>
+                      <div *ngIf="
+                      !jobTypeForm.get('JobTypeName').valid &&
+                      jobTypeForm.get('JobTypeName').errors?.['required'] &&
+                      (jobTypeForm.get('JobTypeName').dirty ||
+                      jobTypeForm.get('JobTypeName').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+  
+                    <label htmlfor="IsActive" class="col-12 mb-2 md:col-4 md:mb-0">Active?</label>
+                    <div class="col-12 md:col-8">
+                      <p-checkbox formControlName="IsActive"  [binary]="true"></p-checkbox>
+                    
+                      <div *ngIf="
+                      !jobTypeForm.get('IsActive').valid &&
+                      jobTypeForm.get('IsActive').errors?.['required']  &&
+                      (jobTypeForm.get('IsActive').dirty ||
+                      jobTypeForm.get('IsActive').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                  </div>
+                
+                  </div>
+                 
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <!-- <div class="field grid">
+                    <label htmlfor="JobTypeName" class="col-12 mb-2 md:col-4 md:mb-0">Job Type Name<span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <input type="text" id="JobTypeName" formControlName="JobTypeName" pInputText placeholder="Job Type Name" name="JobTypeName"/>
+                      <div *ngIf="
+                      !jobTypeForm.get('JobTypeName').valid &&
+                      jobTypeForm.get('JobTypeName').errors?.required &&
+                      (jobTypeForm.get('JobTypeName').dirty ||
+                      jobTypeForm.get('JobTypeName').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-12 md:col-2"></div>
+              </div>
+        </div>
+        <br>
+        <div class="modal-footer-btn text-right">
+            <button style="margin-right: 5px" type="button" (click)="addUpdateJobType()" pButton icon="fa fa-floppy-o" label="{{btnText}}"
+              [disabled]="!jobTypeForm.valid"></button>     
+            <button type="button" pButton icon="fa fa-remove" (click)="cancel()" label="Cancel"
+              class="ui-button-default"></button>
+          </div>
+    </form>
+</div>

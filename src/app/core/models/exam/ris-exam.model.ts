@@ -1,0 +1,65 @@
+export class RisExamModel {
+    ExamId!: number;
+    ExamUid!: string;
+    GovtId!: string;
+    ExamName!: string;
+    ReportHeader!: string;
+    ReqSample!: string;
+    Rate!: number;
+    GovtRate!: number;
+  
+    ExamType!: number;
+    ServiceType!: string;
+    ClaimableAmt!: number;
+    NonclaimableAmt!: number;
+    FreeAmt!: number;
+    SpecialClinic!: string;
+    SpecialRate!: number;
+    VatApplicable!: string;
+    VatRate!: number;
+    UnitId!: number;
+    RevHeadId!: number;
+    IsActive!: string;
+    AvgReqHrs!: number;
+    MinReqHrs!: number;
+    CostPrice!: number;
+    ReleaseAuthLevel: any;
+    FinalizeAuthLevel: any;
+    PreparationFlag!: string;
+    PreparationTat!: number;
+    RepeatFlag!: string;
+    IcdId!: number;
+    AcrId!: number;
+    CptId!: number;
+    DefCapture: any;
+    DefImages: any;
+    IsStructuredReport!: string;
+    QaRequired!: string;
+    IsUpdated!: string;
+    IsDeleted!: string;
+    OrgId!: number;
+    CreatedBy!: string;
+    CreatedOn!: Date;
+    LastModifiedBy!: string;
+    LastModifiedOn!: Date;
+    BpId!: number;
+    StatPossible!: boolean;
+    StatTatMin: any;
+    UrgentPossible!: boolean;
+    UrgentTatMin: any;
+    DeferHisReconcile!: string;
+    IsCheckup!: string;
+    VipRate!: number;
+    DfRad!: number;
+    DfTech!: number;
+    ExamBarcode!: string;
+    CanReqonline!: string;
+    AvgReqMin!: number;
+    BpviewId!: number;
+    ExamWeight!: number;
+    IsDefault!: boolean;
+
+    HospitalExamId?: number;
+    HospitalExamName: string;
+  }
+  

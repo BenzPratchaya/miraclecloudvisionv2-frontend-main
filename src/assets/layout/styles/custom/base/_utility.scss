@@ -1,0 +1,102 @@
+
+.base_card {
+    background-color: $darkBgTwo!important;
+    filter: drop-shadow(8px 10px 80px rgba(0, 15, 55, 0.04));
+}
+
+/* BG Color Class Start */
+.dark_bg-one {
+    background-color: $darkBgOne !important;
+}
+
+.dark_bg-two {
+    background-color: $darkBgTwo !important;
+}
+
+.dark_bg-three {
+    background-color: $darkBgThree !important;
+}
+
+.dark_bg-four {
+    background-color: $darkBgFour !important;
+}
+/* BG Color Class Start */
+
+
+/* Border Color Class Start */
+.inbox-border {
+    border: 1px solid $matInbox !important;
+}
+
+.sent-border {
+    border: 1px solid $matSent !important;
+}
+
+.unassigned-border {
+    border: 1px solid $matUnassigned !important;
+}
+
+/* Border Color Class End */
+
+/* Text Class End */
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+/* Text Class End */
+
+/* HR/VR Class End */
+.mat_hr {
+    margin-top: -1rem !important;
+    margin-bottom: 2rem !important;
+    border-top: solid rgb(70 77 97) !important;
+    //border-width: 2px 0 0 0 !important;
+    border-width: 1.5px 0 0 0 !important;
+}
+
+.mat_v-line {
+    // border-left: 1px solid $dividerColor; 
+    // height: 50px;
+    border-left: 1.5px solid #464D61;
+    height: 30px !important;
+}
+/* HR/VR Class End */
+
+/* Display Class Start */
+.mat_block {
+    display: block !important;
+}
+/* Display Class End */
+
+
+/* View Port Height/Width Start */
+.vh-100 {
+    height: 100vh !important;
+}
+
+.max-fit {
+    max-width: fit-content !important;
+}
+/* View Port Height/Width End */
+
+/* Negative Margin (Highly don't use it) Start */
+.nmb-40 {
+    margin-bottom: -40px;
+}
+/* Negative Margin (Highly don't use it) Start End */
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    background: #6d6d6d;
+  }

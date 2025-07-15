@@ -1,0 +1,211 @@
+.layout-footer .logo-text img {
+  height: auto;
+  width: 70px;
+}
+
+@media (max-width: 991px) {
+  .layout-wrapper
+    .layout-topbar
+    .layout-topbar-wrapper
+    .layout-topbar-left
+    .layout-topbar-logo-wrapper
+    .layout-topbar-logo
+    img {
+    height: auto;
+    width: 80px;
+    border: 0 none;
+  }
+}
+
+.layout-topbar
+  .layout-topbar-wrapper
+  .layout-topbar-right
+  .profile-item
+  > a
+  .profile-image-wrapper
+  img {
+  height: 45px;
+  width: 45px;
+  border: 2px solid #353030 !important;
+  border-radius: 100px !important;
+}
+
+
+
+
+.upload-feature-btn {
+  .p-button {
+    max-width: 170px;
+    margin-top: 10px;
+  }
+}
+.ng-otp-input-wrapper input {
+  background-color: transparent;
+  border: 1px solid #3f4b5b;
+  color: rgba(255, 255, 255, 0.87);
+}
+.verify-btn .p-button {
+  min-width: 150px;
+}
+.singup .p-card {
+  border: 1px solid #3f4b5b;
+}
+
+/* rad user profile */
+.rad-profile {
+  position: relative;
+  text-align: left;
+  .p-fileupload-files {
+    position: absolute;
+    // top: -127px;
+    // left: -15px;
+    top: -109px;
+    left: -5px;
+  }
+}
+
+.red {
+  color: red;
+}
+.rad-profile .p-fileupload-filename, .single-user-profile .p-fileupload-filename {
+  display: none;
+}
+.rad-profile .p-fileupload-files button, .single-user-profile .p-fileupload-files button {
+  display: none;
+}
+.rad-profile .p-fileupload-filename + div, .single-user-profile .p-fileupload-filename + div {
+  display: none;
+}
+.rad-profile .p-fileupload .p-fileupload-content, .single-user-profile .p-fileupload .p-fileupload-content {
+  padding: 0;
+  border: 0 solid #3f4b5b;
+}
+.rad-profile .p-fileupload .p-fileupload-buttonbar, .single-user-profile .p-fileupload .p-fileupload-buttonbar {
+  padding-left: 0 !important;
+  border: 0;
+}
+.rad-profile .p-fileupload .p-progressbar, .single-user-profile .p-fileupload .p-progressbar {
+  height: 0;
+}
+.single-user-profile .p-fileupload-files{
+  display: none;
+}
+.single-user-profile .p-fileupload .p-fileupload-buttonbar .p-button {
+  background: transparent;
+  border-color: #3f4b5b;
+}
+
+.rad-profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.rad-profile span.p-image {
+  height: 50px;
+  display: block;
+  cursor: pointer;
+  width: 50px;
+}
+
+// .rad-profile .p-fileupload .p-button {
+//   background: transparent;
+//   border: 1px solid #f97c6b;
+//   color: #f97c6b;
+
+//   &:not(.p-disabled):hover {
+//     background: transparent;
+//     border: 1px solid #ea4b4b;
+//     color: #ea4b4b;
+//   }
+
+//   &:enabled:hover {
+//     background: transparent;
+//     border: 1px solid #ea4b4b;
+//     color: #ea4b4b;
+//   }
+// }
+
+// .p-fileupload-choose:not(.p-disabled):active {
+//   background: transparent;
+//   color: #ea4b4b;
+//   border-color: #ea4b4b;
+// }
+
+
+// .user-profile .p-fileupload .p-fileupload-content{
+//     display: none;
+// }
+
+/* end rad user profile */
+
+.toggle-scoring button i{
+  position: absolute;
+  right: 10px;
+}
+
+.pass-eye i{
+  // color: green;
+  position: absolute;
+  top: 11px;
+  right: 20px;
+}
+.phone-inputgroup .p-dropdown.p-component{
+  width: 120px;
+  background-color: transparent;
+  height: 37px;
+}
+.phone-inputgroup span.p-inputtext {
+  padding: 0.6rem 0.75rem;
+}
+.phone-inputgroup input.p-inputtext.p-component.p-element{
+  height: 36px;
+}
+.phone-inputgroup input.p-dropdown-filter{
+  width: 100% !important;
+}
+.phone-inputgroup .p-dropdown .p-dropdown-trigger {
+  width: 2rem;
+}
+.hospital-signup .p-card .p-card-body{
+  padding-bottom: 0;
+}
+
+.p-accordion p-accordiontab .p-accordion-tab{
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------- start org logo -----------------*/
+
+.rad-profile.org-logo .p-fileupload-files {
+  position: absolute;
+  top: -77px;
+  left: -156px;
+}
+.rad-profile.org-logo img {
+  width: 95px;
+  height: 90px;
+}
+.rad-profile.org-logo span.p-image {
+  width: 95px;
+  height: 90px;
+}
+.rad-profile.org-logo .p-button.p-fileupload-choose {
+  top: 10px;
+}
+.multi-param .p-multiselect{
+  width: 100%;
+}
+
+/* ----------------- end org logo -----------------*/
+
+.fetch-from-wrap {
+  position: relative;
+
+  &-inner {
+    position: absolute;
+    right: 0;
+    top: -49px;
+    
+  }
+}

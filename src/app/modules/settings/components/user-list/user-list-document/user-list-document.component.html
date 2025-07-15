@@ -1,0 +1,130 @@
+<div class="uploaded_document_list_table">
+  <p-table
+    #dt1
+    [value]="userDocumentList"
+    
+    [rows]="10"
+   
+    [rowHover]="true"
+    styleClass="p-datatable-gridlines"
+    [paginator]="true"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="max-w-150" pSortableColumn="Type">
+          Type <p-sortIcon field="Type"></p-sortIcon>
+        </th>
+        <th class="max-w-110" pSortableColumn="Format">
+          Format <p-sortIcon field="Format"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Title">
+          Title <p-sortIcon field="Title"></p-sortIcon>
+        </th>
+        <th
+        
+          class="max-w-160"
+        >
+          Action
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-userDocumentList>
+      <tr>
+        <td class="max-w-150">
+          {{ userDocumentList.Type }}
+        </td>
+        <td class="max-w-110">
+          <div class="flex justify-content-center align-items-center">
+            <i
+              class="mr-2"      [ngClass]="
+              userDocumentList.Format === 'pdf'
+                ? 'pi pi-file-pdf'
+                : 'pi pi-image'
+            "
+             
+            ></i>
+            <span>({{ userDocumentList.Format }})</span>
+          </div>
+        </td>
+        <td class="td-min-w">
+          {{ userDocumentList.Title }}
+        </td>
+        <td
+  
+          class="max-w-160"
+        >
+          <button
+            pButton
+            type="button"
+            icon="pi pi-eye"
+            title="Preview the document"
+            class="p-button-rounded mr-2"
+            
+
+            (click)="previewUserDocument(userDocumentList)"
+          ></button>
+          <button
+           
+            pButton
+            type="button"
+            icon="fa fa-regular fa-download"
+            title="Download the document"
+            class="p-button-rounded mr-2"
+            (click)="downloadUserDocument(userDocumentList.EmpId)"
+          ></button>            
+          <!-- <button
+           
+            pButton
+            type="button"
+            icon="fa fa-regular fa-trash"
+            title="Delete the document"
+            class="p-button-danger p-button-rounded"
+          
+          ></button> -->
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center">No data found.</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+      <tr>
+        <td colspan="4" class="text-center">
+          Loading uploaded document data. Please wait.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Preview User Document Dialog -->
+<p-dialog
+  header="Document view"
+  [(visible)]="displayPreviewuserDocumentDialog"
+  [modal]="true"
+  [responsive]="true"
+  [minY]="70"
+  [maximizable]="false"
+  [style]="{ width: '80vw', height: '95vh' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  [draggable]="false"
+>
+  <div class="text-center document-img">
+    <img
+      *ngIf="documentFormatWiseView === 'img'"
+      [src]="docSafeURL"
+      alt="Document"
+      class="shadow-2 my-3 mx-3"
+    />
+  </div>
+  <iframe
+    *ngIf="documentFormatWiseView === 'pdf'"
+    [src]="docSafeURL"
+    class="ssrs-reportviewer"
+    style="width: 100%; height: 100vh; border: none; overflow-y: hidden"
+  ></iframe>
+</p-dialog>
+<!-- Preview User Document Dialog -->

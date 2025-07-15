@@ -1,0 +1,265 @@
+<div class="custom-card">
+    <form [formGroup]="jobTypeForm">
+        <div style="min-height: 200px">
+            <div class="p-fluid p-formgrid grid">            
+      
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeId" class="col-12 mb-2 md:col-4 md:mb-0">Job Type <span class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" (onChange)="getJobTypeLevelByJobTypeId()" formControlName="JobTypeId" optionLabel="JobTypeName" optionValue="JobTypeId"
+                        [options]="jobTypeList" placeholder="Select a Job Type">
+                      </p-dropdown>
+                      <div *ngIf="
+                      !jobTypeForm.get('JobTypeId').valid &&
+                      jobTypeForm.get('JobTypeId').errors?.['required'] &&
+                      (jobTypeForm.get('JobTypeId').dirty ||
+                      jobTypeForm.get('JobTypeId').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+                    <label htmlfor="JobTypeLevelId" class="col-12 mb-2 md:col-4 md:mb-0">Level <span *ngIf="!jobTypeForm.get('JobTypeLevelId').valid" class="red">*</span></label>
+                    <div class="col-12 md:col-8">
+                        <p-dropdown appendTo="body" formControlName="JobTypeLevelId" optionLabel="JobTypeLevelName" optionValue="JobTypeLevelId"
+                        [options]="jobTypeLevelList" placeholder="Select a Job Level">
+                      </p-dropdown>
+                      <div *ngIf="
+                      !jobTypeForm.get('JobTypeLevelId').valid &&
+                      jobTypeForm.get('JobTypeLevelId').errors?.['required'] &&
+                      (jobTypeForm.get('JobTypeLevelId').dirty ||
+                      jobTypeForm.get('JobTypeLevelId').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-2"></div>
+      
+     
+                <div class="col-12 md:col-1"></div>
+                <div class="col-12 md:col-4">
+                  <div class="field grid">
+  
+                    <label htmlfor="IsActive" class="col-12 mb-2 md:col-4 md:mb-0">Active?</label>
+                    <div class="col-12 md:col-8">
+                      <p-checkbox formControlName="IsActive"  [binary]="true"></p-checkbox>
+                    
+                      <div *ngIf="
+                      !jobTypeForm.get('IsActive').valid &&
+                      jobTypeForm.get('IsActive').errors?.['required'] &&
+                      (jobTypeForm.get('IsActive').dirty ||
+                      jobTypeForm.get('IsActive').touched)
+                    " class="ui-message ui-messages-error ui-corner-all">
+                        This field is required
+                      </div>
+                  </div>
+                
+                  </div>
+                </div>
+                <div class="col-12 md:col-1"></div>
+      
+                <div class="col-12 md:col-4">
+              
+                </div>
+                <div class="col-12 md:col-2"></div>
+      
+              </div>
+              <p-panel styleClass="patient-information-panel" header="Study">
+                <div class="grid">        
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-3">
+                    <div class="field grid">
+  
+                      <label htmlfor="StudyFinalizeAllow" class="col-12 mb-2 md:col-6 md:mb-0">Finalize?</label>
+                      <div class="col-12 md:col-6">
+                        <p-checkbox formControlName="StudyFinalizeAllow" (onChange)="studyaddendum()" [binary]="true"></p-checkbox>
+                      
+                        <div *ngIf="
+                        !jobTypeForm.get('StudyFinalizeAllow').valid &&
+                        jobTypeForm.get('StudyFinalizeAllow').errors?.['required'] &&
+                        (jobTypeForm.get('StudyFinalizeAllow').dirty ||
+                        jobTypeForm.get('StudyFinalizeAllow').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                    </div>
+                  
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyAssignAllow" class="col-12 mb-2 md:col-6 md:mb-0">Self Assign?</label>
+                      <div class="col-12 md:col-6">
+                          <p-checkbox formControlName="StudyAssignAllow" [binary]="true"></p-checkbox>
+                        
+                          <div *ngIf="
+                          !jobTypeForm.get('StudyAssignAllow').valid &&
+                          jobTypeForm.get('StudyAssignAllow').errors?.['required'] &&
+                          (jobTypeForm.get('StudyAssignAllow').dirty ||
+                          jobTypeForm.get('StudyAssignAllow').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                      </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyUnAssignAllow" class="col-12 mb-2 md:col-6 md:mb-0">Self UnAssign?</label>
+                      <div class="col-12 md:col-6">
+                          <p-checkbox formControlName="StudyUnAssignAllow" [binary]="true"></p-checkbox>
+                        
+                          <div *ngIf="
+                          !jobTypeForm.get('StudyUnAssignAllow').valid &&
+                          jobTypeForm.get('StudyUnAssignAllow').errors?.['required'] &&
+                          (jobTypeForm.get('StudyUnAssignAllow').dirty ||
+                          jobTypeForm.get('StudyUnAssignAllow').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                      </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyResetAllow" class="col-12 mb-2 md:col-6 md:mb-0">Reset Self?</label>
+                      <div class="col-12 md:col-6">
+                       <p-checkbox formControlName="StudyResetAllow" (onChange)="showResetHour()" [binary]="true"></p-checkbox>
+                        
+                        <div *ngIf="
+                        !jobTypeForm.get('StudyResetAllow').valid &&
+                        jobTypeForm.get('StudyResetAllow').errors?.['required'] &&
+                        (jobTypeForm.get('StudyResetAllow').dirty ||
+                        jobTypeForm.get('StudyResetAllow').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyResetWindowHour" class="col-12 mb-2 md:col-6 md:mb-0">Reset Window Hour</label>
+                      <div class="col-12 md:col-6">   
+                        <div *ngIf="isResetEnable">
+                          <input type="text" id="StudyResetWindowHour" 
+                          disabled
+                           pInputText placeholder="Reset Window Hour" name="StudyResetWindowHour"/>
+                        </div>
+                         <div *ngIf="!isResetEnable">
+                          <input type="text" id="StudyResetWindowHour" 
+                         
+                          formControlName="StudyResetWindowHour"
+                           pInputText placeholder="Reset Window Hour" name="StudyResetWindowHour"/>
+                         </div>
+                         <div *ngIf="
+                          !jobTypeForm.get('StudyResetWindowHour').valid &&
+                          jobTypeForm.get('StudyResetWindowHour').errors?.['required'] &&
+                          (jobTypeForm.get('StudyResetWindowHour').dirty ||
+                          jobTypeForm.get('StudyResetWindowHour').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                          <div *ngIf="jobTypeForm.get('StudyResetWindowHour').errors?.['pattern']" class="ui-message ui-messages-error ui-corner-all">
+                            only number is required
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+        
+                  <div class="col-12 md:col-3">
+                    <div class="field grid"  >
+                      <label htmlfor="StudyAddendumAllow" class="col-12 mb-2 md:col-4 md:mb-0">Addendum?</label>
+                      <div class="col-12 md:col-8">   
+                          <p-checkbox formControlName="StudyAddendumAllow" [disabled]="!jobTypeForm.get('StudyFinalizeAllow').value" [binary]="true"></p-checkbox>
+                        
+                          <div *ngIf="
+                          !jobTypeForm.get('StudyAddendumAllow').valid &&
+                          jobTypeForm.get('StudyAddendumAllow').errors?.['required'] &&
+                          (jobTypeForm.get('StudyAddendumAllow').dirty ||
+                          jobTypeForm.get('StudyAddendumAllow').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                      </div>
+                    </div>
+              
+                  </div>
+                  <div class="col-12 md:col-1"></div>
+                  <div class="col-12 md:col-3">
+                    <div class="field grid">
+                      <label htmlfor="StudyDraftAllow" class="col-12 mb-2 md:col-6 md:mb-0 text-left">Draft?</label>
+                      <div class="col-12 md:col-6">
+                        <p-checkbox formControlName="StudyDraftAllow" [binary]="true"></p-checkbox>
+                      
+                        <div *ngIf="
+                        !jobTypeForm.get('StudyDraftAllow').valid &&
+                        jobTypeForm.get('StudyDraftAllow').errors?.['required'] &&
+                        (jobTypeForm.get('StudyDraftAllow').dirty ||
+                        jobTypeForm.get('StudyDraftAllow').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                    </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyAssignAllowOthers" class="col-12 mb-2 md:col-6 md:mb-0">Assign To Others?</label>
+                      <div class="col-12 md:col-6">
+                          <p-checkbox formControlName="StudyAssignAllowOthers" [binary]="true"></p-checkbox>
+                        
+                          <div *ngIf="
+                          !jobTypeForm.get('StudyAssignAllowOthers').valid &&
+                          jobTypeForm.get('StudyAssignAllowOthers').errors?.['required'] &&
+                          (jobTypeForm.get('StudyAssignAllowOthers').dirty ||
+                          jobTypeForm.get('StudyAssignAllowOthers').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                      </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyUnAssignAllowOthers" class="col-12 mb-2 md:col-6 md:mb-0">UnAssign From Others?</label>
+                      <div class="col-12 md:col-6">
+                          <p-checkbox formControlName="StudyUnAssignAllowOthers" [binary]="true"></p-checkbox>
+                        
+                          <div *ngIf="
+                          !jobTypeForm.get('StudyUnAssignAllowOthers').valid &&
+                          jobTypeForm.get('StudyUnAssignAllowOthers').errors?.['required'] &&
+                          (jobTypeForm.get('StudyUnAssignAllowOthers').dirty ||
+                          jobTypeForm.get('StudyUnAssignAllowOthers').touched)
+                        " class="ui-message ui-messages-error ui-corner-all">
+                            This field is required
+                          </div>
+                      </div>
+                    </div>
+                    <div class="field grid">
+                      <label htmlfor="StudyResetAllowOthers" class="col-12 mb-2 md:col-6 md:mb-0">Reset Others?</label>
+                      <div class="col-12 md:col-6">
+                       <p-checkbox formControlName="StudyResetAllowOthers" (onChange)="showResetHour()" [binary]="true"></p-checkbox>
+                        
+                        <div *ngIf="
+                        !jobTypeForm.get('StudyResetAllowOthers').valid &&
+                        jobTypeForm.get('StudyResetAllowOthers').errors?.['required'] &&
+                        (jobTypeForm.get('StudyResetAllowOthers').dirty ||
+                        jobTypeForm.get('StudyResetAllowOthers').touched)
+                      " class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                </div>
+              </p-panel>
+        </div>
+        <br>
+        <div class="modal-footer-btn text-right">
+            <button style="margin-right: 5px" type="button" (click)="addUpdateJobTypePermission()" pButton icon="fa fa-floppy-o" label="{{btnText}}"
+              [disabled]="!jobTypeForm.valid"></button>     
+            <button type="button" pButton icon="fa fa-remove" (click)="cancel()" label="Cancel"
+              class="ui-button-default"></button>
+          </div>
+    </form>
+</div>

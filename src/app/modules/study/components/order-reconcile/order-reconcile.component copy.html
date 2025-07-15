@@ -1,0 +1,222 @@
+<div class="card base_card order-reconcile-form" *ngIf="orderRowData != null">
+    <form [formGroup]="_orderReconcileForm" novalidate autocomplete="off" (ngSubmit)="onSubmitOrderReconcile()">
+        <div class="grid">
+          <div class="col-12">
+            <p-tabView orientation="left">
+              <p-tabPanel header="Edit Study" class="line-height-3 m-0">
+                <div class="grid">
+                  <div class="col-12">
+                    <p-panel header="Patient Information">
+                      <div class="p-fluid">
+                          <div class="p-formgrid grid">
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="firstName">First Name
+                                <!-- <span class="p-error ml-1">*</span> -->
+                              </label>
+                              <input pInputText itemid="firstName" type="text" formControlName="Fname" placeholder="First Name" [ngClass]="(_orderReconcileForm.get('Fname').hasError('required') && (_orderReconcileForm.get('Fname').touched || _orderReconcileForm.get('Fname').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <small *ngIf="_orderReconcileForm.get('Fname').hasError('required') && (_orderReconcileForm.get('Fname').touched || _orderReconcileForm.get('Fname').dirty)" class="p-error">
+                                  This field is required!
+                              </small>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="lastName">Last Name
+                                <!-- <span class="p-error ml-1">*</span> -->
+                              </label>
+                              <input pInputText itemid="lastName" type="text" formControlName="Lname" placeholder="First Name" [ngClass]="(_orderReconcileForm.get('Lname').hasError('required') && (_orderReconcileForm.get('Lname').touched || _orderReconcileForm.get('Lname').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <small *ngIf="_orderReconcileForm.get('Lname').hasError('required') && (_orderReconcileForm.get('Lname').touched || _orderReconcileForm.get('Lname').dirty)" class="p-error">
+                                  This field is required!
+                              </small>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <div class="grid">
+                                <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+                                  <label htmlFor="Title">Title</label>
+                                  <input pInputText itemid="Title" type="text" formControlName="Title" placeholder="Title"  />
+                                </div>
+              
+                                <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+                                  <label htmlFor="Hn">HN
+                                    <!-- <span class="p-error ml-1">*</span> -->
+                                  </label>
+                                  <input pInputText itemid="Hn" type="text" formControlName="Hn" placeholder="HN"  [ngClass]="(_orderReconcileForm.get('Hn').hasError('required') && (_orderReconcileForm.get('Hn').touched || _orderReconcileForm.get('Hn').dirty)) ? 'ng-dirty ng-invalid' : ''"  />
+                                  <small *ngIf="_orderReconcileForm.get('Hn').hasError('required') && (_orderReconcileForm.get('Hn').touched || _orderReconcileForm.get('Hn').dirty)" class="p-error">
+                                    This field is required!
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+          
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="Gender">Gender
+                                <!-- <span class="p-error ml-1">*</span> -->
+                              </label>
+                              <p-dropdown appendTo="body" itemid="Gender" formControlName="Gender" placeholder="Select a Gender" optionLabel="value" [options]="genders" [(ngModel)]="selectedGender" [ngClass]="(_orderReconcileForm.get('Gender').hasError('required') && (_orderReconcileForm.get('Gender').touched || _orderReconcileForm.get('Gender').dirty)) ? 'ng-dirty ng-invalid' : ''" ></p-dropdown>
+                              <small *ngIf="_orderReconcileForm.get('Gender').hasError('required') && (_orderReconcileForm.get('Gender').touched || _orderReconcileForm.get('Gender').dirty)" class="p-error">
+                                This field is required!
+                              </small>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="firstNameEng">First Name (Thai)
+                                <!-- <span class="p-error ml-1">*</span> -->
+                              </label>
+                              <input pInputText itemid="firstNameEng" type="text" formControlName="FnameEng" placeholder="First Name (Thai)" [ngClass]="(_orderReconcileForm.get('FnameEng').hasError('required') && (_orderReconcileForm.get('FnameEng').touched || _orderReconcileForm.get('FnameEng').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <small *ngIf="_orderReconcileForm.get('FnameEng').hasError('required') && (_orderReconcileForm.get('FnameEng').touched || _orderReconcileForm.get('FnameEng').dirty)" class="p-error">
+                                  This field is required!
+                              </small>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="lastNameEng">Last Name (Thai)
+                                <!-- <span class="p-error ml-1">*</span> -->
+                              </label>
+                              <input pInputText itemid="lastNameEng" type="text" formControlName="LnameEng" placeholder="Last Name (Thai)" [ngClass]="(_orderReconcileForm.get('LnameEng').hasError('required') && (_orderReconcileForm.get('LnameEng').touched || _orderReconcileForm.get('LnameEng').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <small *ngIf="_orderReconcileForm.get('LnameEng').hasError('required') && (_orderReconcileForm.get('LnameEng').touched || _orderReconcileForm.get('LnameEng').dirty)" class="p-error">
+                                  This field is required!
+                              </small>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <div class="grid">
+                                <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+                                  <label htmlFor="TitleEng">Title (Thai)</label>
+                                  <input pInputText itemid="TitleEng" type="text" formControlName="TitleEng" placeholder="Title (Thai)"  />
+                                </div>
+              
+                                <div class="field col-12 sm:col-6 md:col-6 lg:col-6">
+                                  <label htmlFor="DOB">Date of Birth</label>
+                                  <p-calendar appendTo="body" itemid="DOB"
+                                    [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030" formControlName="Dob"
+                                    dateFormat="dd-mm-yy" [maxDate]="toDate" [(ngModel)]="selectedEditStudy.Dob">
+                                  </p-calendar>
+                                </div>
+                              </div>
+                            </div>
+    
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+                              <label htmlFor="SSN">SSN</label>
+                              <input pInputText itemid="SSN" type="text" formControlName="SSN" placeholder="SSN" />
+                            </div>
+                          </div>
+                      </div>
+                    </p-panel>
+                  </div>
+
+                  <div class="col-12 lg:col-6">
+                    <p-panel header="Order Information">
+                      <div class="p-fluid">
+                          <div class="p-formgrid grid">
+                              <div class="field col-12 sm:col-6 md:col-4 lg:col-4">
+                                  <label htmlFor="AccessionNo">Accession No.
+                                    <!-- <span class="p-error ml-1">*</span> -->
+                                  </label>
+                                  <input pInputText itemid="AccessionNo" type="text" formControlName="AccessionNo" placeholder="Accession No." [ngClass]="(_orderReconcileForm.get('AccessionNo').hasError('required') && (_orderReconcileForm.get('AccessionNo').touched || _orderReconcileForm.get('AccessionNo').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                                  <small *ngIf="_orderReconcileForm.get('AccessionNo').hasError('required') && (_orderReconcileForm.get('AccessionNo').touched || _orderReconcileForm.get('AccessionNo').dirty)" class="p-error">
+                                      This field is required!
+                                  </small>
+                              </div>
+          
+                              <div class="field col-12 sm:col-6 md:col-4 lg:col-4">
+                                  <label htmlFor="OrderDt">Order Date
+                                    <!-- <span class="p-error ml-1">*</span> -->
+                                  </label>
+                                  <p-calendar appendTo="body" htmlid="OrderDt" [monthNavigator]="true" [yearNavigator]="true"
+                                    yearRange="1900:2030" formControlName="OrderDt" [(ngModel)]="selectedEditStudy.OrderDt" dateFormat="dd-mm-yy">
+                                  </p-calendar>
+                              </div>
+          
+                              <div class="field col-12 sm:col-6 md:col-4 lg:col-4">
+                                  <label htmlFor="ExamName">Study
+                                    <!-- <span class="p-error ml-1">*</span> -->
+                                  </label>
+                                  <p-dropdown id="ExamName" appendTo="body" formControlName="ExamName" optionLabel="ExamName"
+                                    [options]="orgWiseExamList" [(ngModel)]="selectedEditExam" placeholder="Select a Study"
+                                    [filter]="true"></p-dropdown>
+  
+                                  <small *ngIf="_orderReconcileForm.get('ExamName').hasError('required') && (_orderReconcileForm.get('ExamName').touched || _orderReconcileForm.get('ExamName').dirty)" class="p-error">
+                                      This field is required!
+                                  </small>
+                              </div>
+                          </div>
+                      </div>
+                    </p-panel>
+                  </div>
+  
+                  <div class="col-12 lg:col-6">
+                    <p-panel header="Imaging Hospital - {{orderRowData.OrgRefertoName}}">
+                      <div class="p-fluid">
+                          <div class="p-formgrid grid">
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-4">
+                              <label htmlFor="HospitalHn">HN
+                                <!-- <span *ngIf="client.IsImaging" class="p-error ml-1">*</span> -->
+                              </label>
+                              <input [readonly]="client.IsReferring" pInputText itemid="HospitalHn" type="text" formControlName="HospitalHn" placeholder="HN" [ngClass]="(_orderReconcileForm.get('HospitalHn').hasError('required') && (_orderReconcileForm.get('HospitalHn').touched || _orderReconcileForm.get('HospitalHn').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <div *ngIf="client.IsImaging">
+                                <small *ngIf="_orderReconcileForm.get('HospitalHn').hasError('required') && (_orderReconcileForm.get('HospitalHn').touched || _orderReconcileForm.get('HospitalHn').dirty)" class="p-error">
+                                  This field is required!
+                                </small>
+                              </div>
+                            </div>
+          
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-4">
+                              <label htmlFor="HospitalAccessionNo">Accession No.
+                                <!-- <span *ngIf="client.IsImaging" class="p-error ml-1">*</span> -->
+                              </label>
+                              <input [readonly]="client.IsReferring" pInputText itemid="HospitalAccessionNo" type="text" formControlName="HospitalAccessionNo" placeholder="Accession No." [ngClass]="(_orderReconcileForm.get('HospitalAccessionNo').hasError('required') && (_orderReconcileForm.get('HospitalAccessionNo').touched || _orderReconcileForm.get('HospitalAccessionNo').dirty)) ? 'ng-dirty ng-invalid' : ''" />
+                              <div>
+                                <small *ngIf="_orderReconcileForm.get('HospitalAccessionNo').hasError('required') && (_orderReconcileForm.get('HospitalAccessionNo').touched || _orderReconcileForm.get('HospitalAccessionNo').dirty)" class="p-error">
+                                  This field is required!
+                                </small>
+                              </div>
+                            </div>
+          
+                            <div class="field col-12 sm:col-6 md:col-4 lg:col-3" style="padding-top: 0.9rem !important;">
+                              <label htmlFor="HospitalExamName">Study
+                                <!-- <span *ngIf="client.IsImaging" class="p-error ml-1">*</span> -->
+                              </label>
+                              <p-dropdown [readonly]="client.IsReferring" id="HospitalExamName" appendTo="body" formControlName="HospitalExamName" optionLabel="ExamName"
+                                [options]="orgWiseExamListExamHospitalImaging" [(ngModel)]="selectedEditExamHospitalImaging" placeholder="Select a Study"
+                                [filter]="true" [ngClass]="(_orderReconcileForm.get('HospitalExamName').hasError('required') && (_orderReconcileForm.get('HospitalExamName').touched || _orderReconcileForm.get('HospitalExamName').dirty)) ? 'ng-dirty ng-invalid' : ''"></p-dropdown>
+                                <div *ngIf="client.IsImaging">
+                                  <small *ngIf="_orderReconcileForm.get('HospitalExamName').hasError('required') && (_orderReconcileForm.get('HospitalExamName').touched || _orderReconcileForm.get('HospitalExamName').dirty)" class="p-error">
+                                    This field is required!
+                                  </small>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                    </p-panel>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="text-right">
+                        <button pButton type="submit" class="mat-submit-btn mr-2" label="Save & Submit" *ngIf="client.IsReferring" [disabled]="!_orderReconcileForm.valid"></button>
+                        <button pButton type="submit" class="mat-submit-btn mr-2" label="Save & Accept" *ngIf="client.IsImaging" [disabled]="!_orderReconcileForm.valid"></button>
+                        <button pButton type="submit" class="mat-submit-btn mr-2" label="Save" [disabled]="!_orderReconcileForm.valid"></button>
+                        <button pButton type="button" (click)="closeOrderReconcileDialogFromChild()" label="Cancel" class="mat-cancel-btn"></button>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+              <p-tabPanel header="Documents" class="line-height-3 m-0">
+                  <app-order-documents [studyWorklistData]="studyWorklistData"></app-order-documents>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+    </form>
+</div>
+
+<p-confirmDialog header="Confirmation" key="saveStudyExam" icon="pi pi-exclamation-triangle"
+  message="Do you want to save?" styleClass="order-reconcile-confirm-dialog" [style]="{ width: '350px' }" acceptButtonStyleClass="p-button-text"
+  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- PRELOADER START -->
+<div *ngIf="isVisiblePreLoader" class="layout-preloader-container">
+  <div class="layout-preloader">
+      <span></span>
+  </div>
+</div>
+<!-- PRELOADER END -->
