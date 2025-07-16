@@ -15,8 +15,8 @@ const routes: Routes = [
             { path: 'settings', data: { breadcrumb: 'Settings' }, loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule) },
         ]
     },
-    { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
-    { path: '**', redirectTo: '/imagerefer' },
+    { path: 'imagerefer', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
+    { path: '**', redirectTo: '/imagerefer/login' },
 ]
 
 @NgModule({
